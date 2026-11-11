@@ -1,6 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.4.7/schema.json",
-  "files": { "includes": ["**", "!convex/_generated", "!dist", "!.checks"] },
+  "files": {
+    "includes": ["**", "!convex/_generated", "!dist", "!.checks", "!.vercel", "!node_modules"]
+  },
   "formatter": { "indentStyle": "space", "lineWidth": 100 },
   "linter": {
     "enabled": true,

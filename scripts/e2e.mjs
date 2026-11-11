@@ -175,12 +175,39 @@ try {
     (await phones[1].locator(".name-card").count()) === 0,
     "the name is optional: Pular dismisses it",
   );
-  await phones[1].getByRole("button", { name: "Fazer pergunta" }).click();
-  await phones[1].locator(".ask-anytime textarea").fill("Pergunta feita no meio da talk");
-  await phones[1].locator(".ask-anytime").getByRole("button", { name: "Mandar pergunta" }).click();
-  await phones[1].locator(".ask-anytime").getByText("Pergunta enviada").waitFor();
-  await phones[1].locator(".ask-anytime").waitFor({ state: "detached" });
-  assert(true, "a question can be sent from any slide through Fazer pergunta");
+  await phones[1].locator(".questions-bar").click();
+  const sheet = phones[1].locator(".questions-sheet[open]");
+  await sheet.locator("textarea").fill("Pergunta feita no meio da talk");
+  await sheet.getByRole("button", { name: "Mandar pergunta" }).click();
+  await sheet.getByText("Pergunta enviada").waitFor();
+  await sheet.locator(".question-list li", { hasText: "Pergunta feita no meio da talk" }).waitFor();
+  await sheet.getByRole("button", { name: "Fechar" }).click();
+  await phones[1].locator(".questions-sheet[open]").waitFor({ state: "detached" });
+  await phones[0]
+    .locator(".questions-bar-latest", { hasText: "Pergunta feita no meio da talk" })
+    .waitFor();
+  assert(
+    true,
+    "any slide: the questions bar opens a sheet to ask, and other phones see it in the ticker",
+  );
+
+  const scrollPhone = phones[2];
+  const before = await scrollPhone.evaluate(() => window.scrollY);
+  const cdp = await scrollPhone.context().newCDPSession(scrollPhone);
+  await cdp.send("Input.synthesizeScrollGesture", {
+    x: 180,
+    y: 420,
+    yDistance: -400,
+    gestureSourceType: "touch",
+  });
+  const after = await scrollPhone.evaluate(() => window.scrollY);
+  const scrollable = await scrollPhone.evaluate(
+    () => document.documentElement.scrollHeight > window.innerHeight + 1,
+  );
+  assert(
+    !scrollable || after > before,
+    `a touch swipe scrolls the phone page (${before} -> ${after})`,
+  );
 
   await stage.locator(".v-join-qr img").waitFor();
   await stage.waitForFunction(
@@ -223,13 +250,13 @@ try {
   );
 
   await phones[0]
-    .locator(".caption-dock-text")
+    .locator(".caption-strip-text")
     .filter({ hasText: spoken })
     .waitFor({ timeout: 8000 });
   assert(true, "final speech reaches the phone caption dock");
   await presenter.evaluate(() => window.__voiceFeed("legenda parcial enquanto falo", false));
   await phones[0]
-    .locator(".caption-dock .caption-draft", { hasText: "legenda parcial enquanto falo" })
+    .locator(".caption-strip .caption-draft", { hasText: "legenda parcial enquanto falo" })
     .waitFor({ timeout: 8000 });
   assert(true, "interim speech shows on the phone as a draft before the sentence ends");
   const captionsPage = await phones[1].context().newPage();
@@ -244,7 +271,7 @@ try {
   await captionsPage.close();
   await phones[2].getByRole("button", { name: "Legendas" }).click();
   assert(
-    (await phones[2].locator(".caption-dock").count()) === 0,
+    (await phones[2].locator(".caption-strip").count()) === 0,
     "the Legendas toggle hides the dock",
   );
   await phones[2].getByRole("button", { name: "Legendas" }).click();
@@ -548,6 +575,17 @@ try {
       `navigation clamps at the last slide (${theme} theme)`,
     );
   }
+
+  const keylessContext = await browser.newContext();
+  const keyless = await keylessContext.newPage();
+  let keylessCrashed = false;
+  keyless.on("crash", () => {
+    keylessCrashed = true;
+  });
+  await keyless.goto(`${base}/presenter`);
+  await keyless.getByText("Sem chave de apresentador neste navegador").waitFor();
+  assert(!keylessCrashed, "a presenter page without a key shows a hint instead of crashing");
+  await keylessContext.close();
 
   const adminContext = await browser.newContext();
   const admin = await adminContext.newPage();

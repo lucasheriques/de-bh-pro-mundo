@@ -1,6 +1,7 @@
 import { useMutation } from "convex/react";
-import { type KeyboardEvent, useState } from "react";
+import { type KeyboardEvent, useMemo, useState } from "react";
 import { api } from "../../convex/_generated/api";
+import type { Id } from "../../convex/_generated/dataModel";
 import { QUESTION_MAX_LENGTH } from "../../convex/validators";
 import { clientId } from "../live/env";
 import { QuestionList } from "./QuestionList";
@@ -19,8 +20,29 @@ function submitOnEnter(event: KeyboardEvent<HTMLTextAreaElement>): void {
   event.currentTarget.form?.requestSubmit();
 }
 
+function useAsk() {
+  const rawAsk = useMutation(api.questions.ask);
+  return useMemo(
+    () =>
+      rawAsk.withOptimisticUpdate((store, args) => {
+        const list = store.getQuery(api.questions.list, { clientId });
+        if (!list) return;
+        const pending = {
+          _id: `pending-${Date.now()}` as Id<"questions">,
+          text: args.text,
+          voteCount: 0,
+          createdAt: Date.now(),
+          authorName: store.getQuery(api.audience.me, { clientId }) ?? null,
+          mine: true,
+        };
+        store.setQuery(api.questions.list, { clientId }, [...list, pending]);
+      }),
+    [rawAsk],
+  );
+}
+
 export function AskForm({ onSent }: { onSent?: () => void }) {
-  const ask = useMutation(api.questions.ask);
+  const ask = useAsk();
   const [text, setText] = useState("");
   const [status, setStatus] = useState<AskStatus>("idle");
   const trimmed = text.trim();

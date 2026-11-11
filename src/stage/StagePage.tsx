@@ -38,7 +38,7 @@ export function StagePage() {
         <SlideCanvas slide={deck.slide} />
         <ReactionsLayer />
         {captions === "on" ? <CaptionLine /> : null}
-        {cues === "on" && deck.session.voiceEnabled ? <CueHint slide={deck.slide} /> : null}
+        {cues === "on" ? <CueHint slide={deck.slide} /> : null}
         <ProgressBar index={deck.index} />
       </Scaled>
       <div className="stage-status">

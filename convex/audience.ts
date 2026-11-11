@@ -2,7 +2,7 @@ import { ConvexError, v } from "convex/values";
 import type { QueryCtx } from "./_generated/server";
 import { mutation, query } from "./_generated/server";
 import { checkDisplayName } from "./displayName";
-import { assertPresenter } from "./presenter";
+import { isPresenterKey } from "./presenter";
 import { parseClientId } from "./validators";
 
 const AUDIENCE_COUNT_CAP = 5000;
@@ -66,7 +66,7 @@ export const me = query({
 export const roster = query({
   args: { key: v.string() },
   handler: async (ctx, { key }) => {
-    assertPresenter(key);
+    if (!isPresenterKey(key)) return null;
     const members = await ctx.db.query("audience").order("desc").take(AUDIENCE_COUNT_CAP);
     const names = members.flatMap((member) => (member.name ? [member.name] : []));
     return { count: members.length, names };

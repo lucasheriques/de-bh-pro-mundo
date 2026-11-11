@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.7",
+    "@types/node": "24.13.2",
     "@types/qrcode": "1.5.6",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",

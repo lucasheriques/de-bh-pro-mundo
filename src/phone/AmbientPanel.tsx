@@ -4,6 +4,8 @@ import { api } from "../../convex/_generated/api";
 import { REACTION_KINDS, type ReactionKind } from "../../convex/validators";
 import { clientId } from "../live/env";
 import { REACTIONS } from "../live/reactions";
+import { Scaled } from "../stage/Scaled";
+import { SlideCanvas } from "../stage/SlideCanvas";
 import type { Slide, Visual } from "../talk/types";
 
 const COOLDOWN_MS = 1500;
@@ -41,10 +43,11 @@ export function AmbientPanel({ slide }: { slide: Slide }) {
 
   return (
     <section className="panel panel-ambient">
-      {"eyebrow" in slide.visual && slide.visual.eyebrow ? (
-        <p className="eyebrow">{slide.visual.eyebrow}</p>
-      ) : null}
-      <h1 className="ambient-headline">{headlineOf(slide.visual)}</h1>
+      <h1 className="sr-only">{headlineOf(slide.visual)}</h1>
+      <Scaled theme="dark" className="thumb ambient-slide">
+        <SlideCanvas slide={slide} />
+      </Scaled>
+      <p className="reaction-hint">Reaja ao que o Lucas está falando. Aparece no telão.</p>
       <div className="reaction-bar">
         {REACTION_KINDS.map((kind) => (
           <button

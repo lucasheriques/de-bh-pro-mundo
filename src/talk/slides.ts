@@ -39,7 +39,7 @@ export const slides: Slide[] = [
     visual: {
       kind: "list",
       eyebrow: "Quem está falando",
-      title: "De BH pro mundo, sem sair de BH.",
+      title: "Formei aqui. Trabalho pro mundo daqui.",
       items: [
         { title: "PUC Minas, 2019", body: "Engenharia de Software" },
         { title: "Coinbase e Brex", body: "Times globais, remoto daqui" },

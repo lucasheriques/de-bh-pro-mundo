@@ -1,19 +1,17 @@
 import { useMutation } from "convex/react";
 import { type ReactNode, useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
-import { LiveCaption } from "../captions/LiveCaption";
 import { ConnectionDot } from "../live/ConnectionDot";
 import { clientId } from "../live/env";
 import { slideAt, useSession } from "../live/useDeck";
 import { useStoredToggle } from "../live/useStoredToggle";
-import { slides } from "../talk/slides";
 import type { Interaction } from "../talk/types";
 import { AmbientPanel } from "./AmbientPanel";
 import { ChoicePanel } from "./ChoicePanel";
 import { GuessPanel } from "./GuessPanel";
 import { NameChip, NameForm, useMyName } from "./NameCard";
-import { QuestionList } from "./QuestionList";
-import { AskForm, QuestionsPanel } from "./QuestionsPanel";
+import { PhoneDock, QuestionsSheet } from "./PhoneDock";
+import { QuestionsPanel } from "./QuestionsPanel";
 
 const CAPTION_STATES = ["on", "off"] as const;
 
@@ -54,65 +52,6 @@ function PhoneHeader({
   );
 }
 
-function AskAnytime({ onClose }: { onClose: () => void }) {
-  return (
-    <section className="ask-anytime" aria-label="Fazer uma pergunta">
-      <header className="ask-anytime-head">
-        <p className="eyebrow">Pergunta pro Lucas</p>
-        <button type="button" className="ghost" onClick={onClose}>
-          Fechar
-        </button>
-      </header>
-      <AskForm onSent={() => window.setTimeout(onClose, 1200)} />
-    </section>
-  );
-}
-
-function PhoneFooter({
-  index,
-  onAsk,
-  canAsk,
-}: {
-  index: number;
-  onAsk: () => void;
-  canAsk: boolean;
-}) {
-  return (
-    <footer className="phone-footer">
-      {canAsk ? (
-        <button type="button" className="ask-button" onClick={onAsk}>
-          Fazer pergunta
-        </button>
-      ) : null}
-      <span className="mono">
-        {String(index + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
-      </span>
-    </footer>
-  );
-}
-
-const FEED_LIMIT = 5;
-
-function QuestionsFeed() {
-  return (
-    <section className="phone-questions" aria-label="Perguntas da sala">
-      <p className="eyebrow">Perguntas da sala</p>
-      <QuestionList limit={FEED_LIMIT} />
-    </section>
-  );
-}
-
-function CaptionDock() {
-  return (
-    <div className="caption-dock">
-      <LiveCaption className="caption-dock-text" />
-      <a href="/legendas" className="caption-dock-link">
-        Tela cheia
-      </a>
-    </div>
-  );
-}
-
 export function PhonePage() {
   const session = useSession();
   const slide = slideAt(session.slideIndex);
@@ -121,7 +60,7 @@ export function PhonePage() {
   const myName = useMyName();
   const [nameOpen, setNameOpen] = useState<boolean | null>(null);
   const showNameForm = nameOpen ?? (myName === null && session.slideIndex === 0);
-  const [asking, setAsking] = useState(false);
+  const [questionsOpen, setQuestionsOpen] = useState(false);
   const onQuestionsSlide = slide.interaction?.kind === "questions";
 
   useEffect(() => {
@@ -142,7 +81,6 @@ export function PhonePage() {
         onToggleCaptions={toggleCaptions}
       />
       {showNameForm ? <NameForm current={myName} onDone={() => setNameOpen(false)} /> : null}
-      {asking && !onQuestionsSlide ? <AskAnytime onClose={() => setAsking(false)} /> : null}
       <div className="phone-body" key={slide.id}>
         {Panel && interaction ? (
           <Panel interaction={interaction} />
@@ -150,12 +88,14 @@ export function PhonePage() {
           <AmbientPanel slide={slide} />
         )}
       </div>
-      {onQuestionsSlide ? null : <QuestionsFeed />}
-      {captions === "on" ? <CaptionDock /> : null}
-      <PhoneFooter
-        index={session.slideIndex}
-        canAsk={!asking && !onQuestionsSlide}
-        onAsk={() => setAsking(true)}
+      <PhoneDock
+        captions={captions === "on"}
+        showQuestions={!onQuestionsSlide}
+        onOpenQuestions={() => setQuestionsOpen(true)}
+      />
+      <QuestionsSheet
+        open={questionsOpen && !onQuestionsSlide}
+        onClose={() => setQuestionsOpen(false)}
       />
     </main>
   );
