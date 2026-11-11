@@ -1,26 +1,27 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { nameOf } from "./audience";
 import { rateLimiter } from "./rateLimits";
-import { parseClientId, reactionKind } from "./validators";
+import { parseClientId, REACTION_COOLDOWN_MS, reactionKind } from "./validators";
 
-const MIN_INTERVAL_MS = 1500;
 const RECENT_LIMIT = 30;
 
+/** Sends a reaction, at most one per person every REACTION_COOLDOWN_MS. */
 export const send = mutation({
   args: { clientId: v.string(), kind: reactionKind },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{ sent: boolean; retryAt: number }> => {
     const clientId = parseClientId(args.clientId);
     const now = Date.now();
     const recent = await ctx.db
       .query("reactions")
       .withIndex("by_clientId_and_createdAt", (q) =>
-        q.eq("clientId", clientId).gt("createdAt", now - MIN_INTERVAL_MS),
+        q.eq("clientId", clientId).gt("createdAt", now - REACTION_COOLDOWN_MS),
       )
       .first();
-    if (recent) return false;
-    if (!(await rateLimiter.limit(ctx, "reactionRoom")).ok) return false;
+    if (recent) return { sent: false, retryAt: recent.createdAt + REACTION_COOLDOWN_MS };
+    if (!(await rateLimiter.limit(ctx, "reactionRoom")).ok) return { sent: false, retryAt: now };
     await ctx.db.insert("reactions", { kind: args.kind, clientId, createdAt: now });
-    return true;
+    return { sent: true, retryAt: now + REACTION_COOLDOWN_MS };
   },
 });
 
@@ -28,6 +29,13 @@ export const recent = query({
   args: {},
   handler: async (ctx) => {
     const reactions = await ctx.db.query("reactions").order("desc").take(RECENT_LIMIT);
-    return reactions.map(({ _id, kind, createdAt }) => ({ _id, kind, createdAt }));
+    return await Promise.all(
+      reactions.map(async ({ _id, kind, createdAt, clientId }) => ({
+        _id,
+        kind,
+        createdAt,
+        name: (await nameOf(ctx, clientId)) ?? null,
+      })),
+    );
   },
 });

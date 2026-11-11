@@ -712,8 +712,12 @@ html input:focus-visible {
     transition-duration: 1ms;
   }
 
-  .reaction-float {
-    animation: fade-only 2600ms linear forwards;
+  .reaction-bubble {
+    animation: fade-only 3600ms linear forwards;
+  }
+
+  .reaction-bubble-body {
+    animation: none;
   }
 
   @keyframes fade-only {
@@ -724,7 +728,7 @@ html input:focus-visible {
     15%,
     80% {
       opacity: 1;
-      transform: translate(-50%, -240px);
+      transform: translateY(-240px);
     }
   }
 }
@@ -1531,4 +1535,12 @@ html input:focus-visible {
 .caption-status.is-unavailable,
 .caption-status.is-retrying {
   color: var(--warning);
+}
+
+.reaction:disabled:not(.is-sent) {
+  color: var(--muted);
+}
+
+.reaction:disabled:not(.is-sent) svg {
+  color: var(--rule-strong);
 }

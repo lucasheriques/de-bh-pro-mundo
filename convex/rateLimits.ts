@@ -10,6 +10,6 @@ export const rateLimiter = new RateLimiter(components.rateLimiter, {
   questionRoom: { kind: "token bucket", rate: 40, period: MINUTE, capacity: 20 },
   vote: { kind: "token bucket", rate: 30, period: MINUTE, capacity: 10 },
   name: { kind: "token bucket", rate: 6, period: MINUTE, capacity: 3 },
-  reactionRoom: { kind: "token bucket", rate: 6, period: SECOND, capacity: 12 },
+  reactionRoom: { kind: "token bucket", rate: 3, period: SECOND, capacity: 8 },
   questionVote: { kind: "token bucket", rate: 30, period: MINUTE, capacity: 10 },
 });

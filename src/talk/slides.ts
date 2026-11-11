@@ -96,7 +96,7 @@ export const slides: Slide[] = [
       kind: "section",
       number: "1",
       title: "Mercado global",
-      lead: "Carreira internacional é escolher em que mercado você compete. Não é sair do país.",
+      lead: "O que mais mexe no seu salário é o mercado em que a empresa compete. E dá pra escolher isso daqui.",
     },
     notes: [
       "A tese: carreira internacional é escolher em que mercado você compete",
@@ -133,8 +133,8 @@ export const slides: Slide[] = [
       eyebrow: "Engenheiro de software sênior no Brasil, mediana mensal por mercado",
       title: "Três mercados, três salários.",
       bars: [
-        { label: "Tier 1 · empresa que compete localmente", value: 13.5, display: "R$ 13,5 mil" },
-        { label: "Tier 2 · compete no Brasil inteiro", value: 21.3, display: "R$ 21,3 mil" },
+        { label: "Tier 1 · compete na cidade", value: 13.5, display: "R$ 13,5 mil" },
+        { label: "Tier 2 · compete no Brasil", value: 21.3, display: "R$ 21,3 mil" },
         {
           label: "Tier 3 · compete com o mundo",
           value: 65.3,
@@ -233,7 +233,7 @@ export const slides: Slide[] = [
       kind: "section",
       number: "2",
       title: "O que a IA mudou",
-      lead: "Escrever software ficou barato. Julgamento, não.",
+      lead: "Escrever código ficou barato. Saber o que construir, não.",
     },
     notes: ["Parte dois: o que a IA mudou"],
     cues: ["parte dois", "parte 2"],
@@ -264,7 +264,7 @@ export const slides: Slide[] = [
     visual: {
       kind: "bars",
       eyebrow: "Meus PRs mergeados na PostHog",
-      title: "Mesmo engenheiro, outra ferramenta.",
+      title: "Com IA, eu entrego o dobro.",
       bars: [
         { label: "Jan a mar de 2025 · 90 dias", value: 101, display: "101 PRs · 11 mil linhas" },
         {
@@ -289,15 +289,15 @@ export const slides: Slide[] = [
     section: "2. O que a IA mudou",
     visual: {
       kind: "compare",
-      eyebrow: "Quando algo fica barato",
-      title: "O escasso muda de lugar.",
+      eyebrow: "Escrever código ficou barato",
+      title: "O que continua sendo com você.",
       left: {
-        label: "Ficou barato",
+        label: "A IA já faz",
         items: ["Escrever código", "Aprender uma stack nova", "Fazer um protótipo"],
       },
       right: {
-        label: "Ficou caro, e dá pra treinar agora",
-        items: ["Saber o que construir", "Ter gosto pra saber se está bom", "Fazer alguém usar"],
+        label: "Ainda é com você, e dá pra treinar agora",
+        items: ["Saber o que construir", "Saber se ficou bom", "Fazer alguém usar"],
       },
     },
     notes: [
@@ -335,7 +335,7 @@ export const slides: Slide[] = [
         ],
       },
       right: {
-        label: "Como um product engineer se apresenta",
+        label: "Como quem cuida do negócio se apresenta",
         items: [
           "Construo produtos de pagamento que milhares usam",
           "Problemas resolvidos e o resultado",
@@ -377,7 +377,7 @@ export const slides: Slide[] = [
       kind: "section",
       number: "4",
       title: "Como chegar lá",
-      lead: "As portas de entrada, todas a partir de BH.",
+      lead: "Três caminhos que eu fiz, todos daqui de BH.",
     },
     notes: ["Parte quatro: como chegar lá"],
     cues: ["parte quatro", "parte 4"],
@@ -387,7 +387,7 @@ export const slides: Slide[] = [
     section: "4. Como chegar lá",
     visual: {
       kind: "bigNumber",
-      eyebrow: "A porta de entrada",
+      eyebrow: "Vaga pra quem está começando",
       value: "1 em 6",
       label: "vagas abertas no NaGringa com nível informado é pra júnior ou pleno.",
       source:
@@ -405,28 +405,28 @@ export const slides: Slide[] = [
     section: "4. Como chegar lá",
     visual: {
       kind: "list",
-      eyebrow: "Três portas, todas a partir de BH. Eu passei pelas três",
-      title: "Escolha a porta pelo que ela te ensina.",
+      eyebrow: "Três caminhos, todos daqui de BH. Eu fiz os três",
+      title: "Comece onde você aprende mais rápido.",
       items: [
         {
-          title: "Trampolim local ou nacional",
+          title: "Empresa local ou nacional",
           body: "Onde você aprende rápido. Eu: Rock Content e ioasys",
         },
         {
-          title: "Contractor, direto ou por marketplace",
+          title: "Contractor pra empresa de fora",
           body: "Paga em dólar, sem 13º nem FGTS. Eu: Coinbase pela G2i e PostHog direto",
         },
         {
-          title: "CLT numa empresa global",
-          body: "Padrão de fora sem sair do país. Eu: Brex",
+          title: "CLT numa empresa de fora",
+          body: "Salário de fora sem sair do país. Eu: Brex",
         },
       ],
     },
     notes: [
-      "Primeira porta não é prêmio de consolação",
+      "O primeiro emprego aqui não é prêmio de consolação",
       "Minha história: WordPress CLT, consultoria PJ, G2i em 2020 com inglês longe de perfeito",
-      "Contractor não é informal, é vender confiança profissional",
-      "Cada degrau foi porta aberta por quem já tinha trabalhado comigo",
+      "Contractor é trabalho sério: você vende confiança profissional",
+      "Cada emprego veio de alguém que já tinha trabalhado comigo",
     ],
     cues: ["já tinha trabalhado comigo", "trabalhado comigo"],
   },
@@ -436,9 +436,9 @@ export const slides: Slide[] = [
     visual: {
       kind: "compare",
       eyebrow: "As dúvidas de sempre",
-      title: "O que trava, e o que realmente pesa.",
+      title: "O que pesa de verdade na contratação.",
       left: {
-        label: "O que parece que trava",
+        label: "O que todo mundo acha",
         items: ["Inglês perfeito, sem sotaque", "Só FAANG vale a pena", "Decorar LeetCode"],
       },
       right: {
@@ -500,11 +500,11 @@ export const slides: Slide[] = [
       title: "Fale direto com quem decide.",
       items: [
         {
-          title: "Gancho específico",
+          title: "Um motivo específico",
           body: "Por que essa empresa, por que agora",
         },
         {
-          title: "Valor antes de pedir",
+          title: "Mostre algo antes de pedir",
           body: "Use o produto e mande uma melhoria real",
         },
         {

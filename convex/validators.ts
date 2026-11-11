@@ -3,6 +3,8 @@ import { ConvexError, v } from "convex/values";
 export const REACTION_KINDS = ["sense", "spicy", "more", "wow"] as const;
 export type ReactionKind = (typeof REACTION_KINDS)[number];
 export const reactionKind = v.union(...REACTION_KINDS.map((kind) => v.literal(kind)));
+/** One reaction per person this often, so the stage never fills up. */
+export const REACTION_COOLDOWN_MS = 10_000;
 
 export const DEFAULT_SESSION = {
   slideIndex: 0,

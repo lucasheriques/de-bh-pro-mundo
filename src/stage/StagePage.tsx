@@ -1,9 +1,11 @@
 import { toggleFullscreen, useDeck, useDeckKeys } from "../live/useDeck";
 import { useStageTheme, useStoredToggle } from "../live/useStoredToggle";
+import { slides } from "../talk/slides";
 import { ReactionsLayer } from "./Reactions";
 import { Scaled } from "./Scaled";
 import { SlideCanvas } from "./SlideCanvas";
 import { CaptionLine, CornerQr, ProgressBar, SectionLabel } from "./StageChrome";
+import { useSlideHash, useSlidePreview } from "./useSlideUrl";
 
 const CAPTION_STATES = ["off", "on"] as const;
 
@@ -11,10 +13,14 @@ export function StagePage() {
   const deck = useDeck();
   const [captions, toggleCaptions] = useStoredToggle("puc-ia-2026:stage-captions", CAPTION_STATES);
   const [theme, toggleTheme] = useStageTheme("stage");
+  const preview = useSlidePreview();
+  const index = preview?.index ?? deck.index;
+  const slide = slides[index] ?? deck.slide;
+  useSlideHash(slide.id, preview === null);
 
   useDeckKeys({
-    next: deck.next,
-    prev: deck.prev,
+    next: preview?.next ?? deck.next,
+    prev: preview?.prev ?? deck.prev,
     reveal: deck.toggleReveal,
     voice: deck.toggleVoice,
     fullscreen: toggleFullscreen,
@@ -23,21 +29,19 @@ export function StagePage() {
   });
 
   return (
-    <main
-      className="stage"
-      data-theme={theme}
-      data-slide-index={deck.index}
-      data-slide-id={deck.slide.id}
-    >
+    <main className="stage" data-theme={theme} data-slide-index={index} data-slide-id={slide.id}>
       <Scaled theme={theme}>
-        <SectionLabel slide={deck.slide} />
-        <SlideCanvas slide={deck.slide} />
+        <SectionLabel slide={slide} />
+        <SlideCanvas slide={slide} />
         <ReactionsLayer />
         {captions === "on" ? <CaptionLine /> : null}
-        <CornerQr slide={deck.slide} />
-        <ProgressBar index={deck.index} />
+        <CornerQr slide={slide} />
+        <ProgressBar index={index} />
       </Scaled>
       <div className="stage-status">
+        {preview ? (
+          <span className="status-warning">Prévia: {slide.id} · ← → navegam, a sala não muda</span>
+        ) : null}
         {deck.keyValid === false ? (
           <span className="status-warning">Chave de apresentador inválida</span>
         ) : null}

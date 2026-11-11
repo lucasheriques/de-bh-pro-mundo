@@ -1048,9 +1048,13 @@
   }
 
   .choice-list {
-    --dot: 12px !important;
-    --dot-gap: 3px !important;
     gap: 6px;
+  }
+
+  /* The list sets the dot size inline; the dot row redefines it for short screens */
+  .choice-list .vote-dots {
+    --dot: 12px;
+    --dot-gap: 3px;
   }
 
   .match-target {
@@ -1099,5 +1103,43 @@
   .reaction-hint {
     padding-bottom: 6px;
     font-size: 13px;
+  }
+}
+
+/* Compact header on phones: smaller chips, the touch areas stay 44px through their ::before */
+@media (max-width: 1023px) {
+  .phone {
+    padding-top: max(10px, env(safe-area-inset-top));
+  }
+
+  .phone-header {
+    padding-bottom: 8px;
+  }
+
+  .phone-header .name-chip,
+  .phone-header .theme-toggle {
+    min-height: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+
+  .phone-header .name-chip {
+    padding: 0 10px;
+  }
+
+  .phone-header .name-chip::before {
+    inset: -8px -2px;
+  }
+
+  .phone-header .theme-toggle {
+    width: 28px;
+  }
+
+  .phone-header .theme-toggle::before {
+    inset: -8px;
+  }
+
+  .phone-position {
+    font-size: 11px;
   }
 }
