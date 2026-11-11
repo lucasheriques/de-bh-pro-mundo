@@ -246,13 +246,15 @@ describe("clearHeard", () => {
 
 const WORD_MS = 250;
 const UTTERANCE_WORDS = 7;
+const COMMAND_PAUSE_MS = 3000;
 
 type Chunk = { slide: number; words: string[] };
 type Replay = { visited: number[]; aheadOfSpeaker: boolean };
 
 function scriptOf(skippedCueOf?: number): Chunk[] {
   return slides.map((slide, index) => {
-    const spoken = index === skippedCueOf ? slide.notes : `${slide.notes} ${slide.cues?.[0] ?? ""}`;
+    const notes = slide.notes.join(". ");
+    const spoken = index === skippedCueOf ? notes : `${notes} ${slide.cues?.[0] ?? ""}`;
     return { slide: index, words: spoken.split(/\s+/).filter(Boolean) };
   });
 }
@@ -318,7 +320,11 @@ function replay(chunks: Chunk[]): Replay {
       }
       hear(utterance.join(" "), true, slide);
     }
-    if (!slides[slide]?.cues?.length && slide < slides.length - 1) moveTo(index + 1, slide);
+    // A missed cue is what "próximo slide" is for: the speaker pauses, then says it.
+    if (index === slide && slide < slides.length - 1) {
+      now += COMMAND_PAUSE_MS;
+      hear("próximo slide", true, slide);
+    }
   }
   return { visited, aheadOfSpeaker };
 }

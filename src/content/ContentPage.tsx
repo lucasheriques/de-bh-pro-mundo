@@ -3,6 +3,7 @@ import { ThemeToggle } from "../live/ThemeToggle";
 import { formatBrl } from "../talk/format";
 import { slides } from "../talk/slides";
 import type { Interaction, Slide, Visual } from "../talk/types";
+import { NoteList } from "../live/NoteList";
 
 type Render<K extends Visual["kind"]> = (visual: Extract<Visual, { kind: K }>) => ReactNode;
 
@@ -159,7 +160,7 @@ function SlideSection({ slide }: { slide: Slide }) {
     <section className="content-slide" id={slide.id}>
       {body}
       {slide.interaction && !body ? <InteractionText interaction={slide.interaction} /> : null}
-      {showsNotes(slide) ? <p className="content-notes">{slide.notes}</p> : null}
+      {showsNotes(slide) ? <NoteList notes={slide.notes} className="content-notes" /> : null}
     </section>
   );
 }

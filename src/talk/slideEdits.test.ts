@@ -12,7 +12,7 @@ const slide: Slide = {
     question: "Qual?",
     options: [{ id: "a", label: "A" }],
   },
-  notes: "Notas",
+  notes: ["Notas"],
   cues: ["fala isso"],
 };
 
@@ -25,7 +25,7 @@ describe("editableFields", () => {
       "visual.items.0.body",
       "interaction.question",
       "interaction.options.0.label",
-      "notes",
+      "notes.0",
       "cues.0",
     ]);
   });

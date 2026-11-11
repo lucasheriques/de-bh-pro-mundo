@@ -1502,3 +1502,17 @@ html input:focus-visible {
   font-size: 13px;
   line-height: 1.45;
 }
+
+/* Speaker notes as bullets: one point per line, square markers */
+
+.note-list {
+  display: grid;
+  gap: 0.45em;
+  margin: 0;
+  padding-left: 1.1em;
+  list-style: square;
+}
+
+.note-list li::marker {
+  color: var(--accent);
+}

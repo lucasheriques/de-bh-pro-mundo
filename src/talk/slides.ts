@@ -10,13 +10,15 @@ export const slides: Slide[] = [
       question: "Enquanto a gente começa: de onde você vem?",
       options: [
         { id: "es", label: "Engenharia de Software" },
-        { id: "it", label: "Outro curso de computação" },
+        { id: "it", label: "Outro curso do ICEI" },
         { id: "other", label: "Outro curso da PUC" },
         { id: "market", label: "Já trabalho ou vim de fora" },
       ],
     },
-    notes:
-      "Tela aberta enquanto o pessoal chega. Peça pra todo mundo apontar o celular pro QR. Não precisa instalar nada nem criar conta.",
+    notes: [
+      "Tela aberta enquanto o pessoal chega",
+      "Peça pra todo mundo apontar o celular pro QR: sem app, sem conta",
+    ],
     cues: ["bora começar"],
   },
   {
@@ -29,8 +31,10 @@ export const slides: Slide[] = [
       subtitle:
         "O que eu aprendi trabalhando daqui pra empresas de fora, e o que a IA mudou nisso.",
     },
-    notes:
-      "Eu sentei nessas cadeiras. Formei aqui em 2019 e nunca saí de BH, mas trabalho pra empresas de fora há anos. Hoje eu quero mostrar com dados como funciona esse mercado, o que a IA mudou nele, e o que eu faria se estivesse no lugar de vocês.",
+    notes: [
+      "Eu sentei nessas cadeiras: PUC 2019, nunca saí de BH",
+      "Promessa: dados de mercado, o que a IA mudou, e o que eu faria no lugar de vocês",
+    ],
     cues: ["no lugar de vocês"],
   },
   {
@@ -47,8 +51,11 @@ export const slides: Slide[] = [
         { title: "NaGringa", body: "Comunidade e dados de carreira pra dev brasileiro" },
       ],
     },
-    notes:
-      "Rápido, sem currículo. O ponto: geografia não é destino. E o NaGringa me dá uma coisa que pouca gente tem, que é dado de salário e vaga de milhares de devs brasileiros. Vou usar isso hoje.",
+    notes: [
+      "Rápido, sem currículo",
+      "Geografia não é destino",
+      "NaGringa: dados de salário e vaga de milhares de devs brasileiros, é daí que vêm os números",
+    ],
     cues: ["vou usar isso hoje"],
   },
   {
@@ -66,16 +73,20 @@ export const slides: Slide[] = [
         { id: "never", label: "Nunca tinha pensado nisso" },
       ],
     },
-    notes:
-      "Deixa votar uns 20 segundos e aperta R. Se a maioria estiver no 'quero, mas não sei por onde', é pra essa pessoa que eu fiz esta talk.",
+    notes: [
+      "O timer revela sozinho",
+      "Se a maioria for 'quero, mas não sei por onde': é pra essa pessoa que eu fiz esta talk",
+    ],
   },
   {
     id: "doubts",
     section: "Abertura",
     visual: { kind: "questionsWall" },
     interaction: { kind: "questions" },
-    notes:
-      "Antes de começar: manda pelo celular a sua maior dúvida sobre carreira internacional, e vota nas dos outros. Eu vou olhar as mais votadas no meio da talk e respondo as que sobrarem no final.",
+    notes: [
+      "Mandem a maior dúvida pelo celular, a qualquer momento, e votem nas dos outros",
+      "As mais votadas eu respondo no final",
+    ],
     cues: ["respondo as que sobrarem"],
   },
   {
@@ -87,8 +98,11 @@ export const slides: Slide[] = [
       title: "Mercado global",
       lead: "Carreira internacional é escolher em que mercado você compete. Não é sair do país.",
     },
-    notes:
-      "A tese da noite: não é convencer ninguém a trabalhar pra fora. É mostrar que quanto mais empresas podem te contratar, mais opção você tem, e o mercado global é o maior conjunto delas. A mesma pessoa, morando em BH, pode estar no mercado local, no nacional ou no global. O que muda é contra quem a empresa compete por talento. Vou mostrar com salário.",
+    notes: [
+      "A tese: carreira internacional é escolher em que mercado você compete",
+      "Objetivo não é sair do país, é ter mais empresas que podem te contratar",
+      "Mesma pessoa, em BH, pode estar no mercado local, nacional ou global",
+    ],
     cues: ["mostrar com salário"],
   },
   {
@@ -105,8 +119,11 @@ export const slides: Slide[] = [
       answer: 20000,
       format: "brl-month",
     },
-    notes:
-      "Deixa chutar uns 20 segundos e revela com R. Resposta: uns R$ 20 mil por mês de remuneração total, que inclui bônus e ações. Metade ganha mais que isso, e 12% ganham mais de R$ 40 mil. Dado autodeclarado, 597 sêniores nos últimos 12 meses.",
+    notes: [
+      "Deixa o timer correr, é chute mesmo",
+      "Resposta: uns R$ 20 mil por mês, remuneração total com bônus e ações",
+      "Comentar o chute da sala contra o número real",
+    ],
   },
   {
     id: "by-tier",
@@ -128,8 +145,11 @@ export const slides: Slide[] = [
       source:
         "Bases públicas de salários + NaGringa: 687 salários de engenheiro de software sênior no Brasil, desde ago/2024, nos tiers do modelo trimodal de Gergely Orosz (The Pragmatic Engineer). Remuneração total.",
     },
-    notes:
-      "Esse é o modelo trimodal, do Gergely Orosz. Tier 1 é a empresa que compete por talento na cidade, como consultoria. Tier 2 compete no Brasil inteiro. Tier 3 compete com o mundo. Só sênior, pra comparar igual com igual: a mesma pessoa, com a mesma stack, ganha quase cinco vezes mais dependendo de contra quem a empresa compete. A linguagem que você usa mexe uns 50% no salário. O mercado mexe cinco vezes.",
+    notes: [
+      "Modelo trimodal do Gergely Orosz: tier 1 compete na cidade, tier 2 no Brasil, tier 3 com o mundo",
+      "Só sênior, igual com igual: R$ 13,5 mil, 21,3 mil, 65,3 mil",
+      "Momento: a stack mexe uns 50% no salário. O mercado mexe cinco vezes",
+    ],
     cues: ["o mercado mexe cinco vezes", "mexe cinco vezes"],
   },
   {
@@ -151,8 +171,11 @@ export const slides: Slide[] = [
         { id: "google", name: "Google", logo: "/logos/google.com.webp", answer: "3" },
       ],
     },
-    notes:
-      "Uma daqui de BH, uma brasileira gigante e uma global. Liga cada uma no tier dela. Deixa uns 20 segundos e fala mostra o resultado. A dti compete por talento aqui, o Nubank no Brasil inteiro, o Google com o mundo. Pelos nossos dados, sênior na dti fica perto de 14 mil por mês, no Nubank perto de 31 mil, e no Google bem acima de 50 mil.",
+    notes: [
+      "Uma de BH, uma brasileira gigante, uma global",
+      "Revela: dti tier 1, Nubank tier 2, Google tier 3",
+      "Nubank é ótimo e paga bem, mas compete no Brasil",
+    ],
   },
   {
     id: "tier-top",
@@ -196,8 +219,11 @@ export const slides: Slide[] = [
       source:
         "Bases públicas de salários + NaGringa, engenheiro de software sênior no Brasil, desde ago/2024, remuneração total mensal. 687 salários; cada empresa com 11 ou mais.",
     },
-    notes:
-      "Os mesmos números, agora com empresas que vocês conhecem. Nubank, BTG e Itaú pagam bem, e ainda assim ficam a um terço de quem compete com o mundo. Do tier 1 pro tier 2 são uns sessenta por cento. Do 2 pro 3, três vezes. Mesma pessoa, mesmo código, outra liga.",
+    notes: [
+      "Os mesmos números, com empresas que vocês conhecem",
+      "Nubank, BTG e Itaú pagam bem e ainda ficam a um terço de quem compete com o mundo",
+      "Do tier 1 pro 2, uns 60%. Do 2 pro 3, três vezes. Mesma pessoa, outra liga",
+    ],
     cues: ["outra liga"],
   },
   {
@@ -209,8 +235,9 @@ export const slides: Slide[] = [
       title: "O que a IA mudou",
       lead: "Escrever software ficou barato. Julgamento, não.",
     },
-    notes:
-      'Pausa curta. Anuncie a parte: "Parte dois: o que a IA mudou." Dizer "parte dois" avança.',
+    notes: [
+      "Parte dois: o que a IA mudou",
+    ],
     cues: ["parte dois", "parte 2"],
   },
   {
@@ -228,8 +255,10 @@ export const slides: Slide[] = [
         { id: "all", label: "A IA faz, eu reviso" },
       ],
     },
-    notes:
-      "Parte 2. Escrever software deixou de ser o gargalo, e isso muda o que as empresas de fora procuram. Deixa votar uns 20 segundos e aperta R.",
+    notes: [
+      "Escrever software deixou de ser o gargalo",
+      "Comentar quanto da sala já usa IA no dia a dia",
+    ],
   },
   {
     id: "posthog-output",
@@ -250,8 +279,11 @@ export const slides: Slide[] = [
       source:
         "GitHub, PRs mergeados de lucasheriques na org PostHog. Entrei em dez/2024. Só novembro de 2026 já tem 88 PRs em 10 dias.",
     },
-    notes:
-      "Entrei na PostHog no fim de 2024. No primeiro trimestre eu fiz 101 PRs. Nos últimos 71 dias, 211, com quase oito vezes mais código. No NaGringa, fora do emprego, foram 395 PRs só em outubro. E esta apresentação que está no celular de vocês foi feita ontem, por agentes. Eu não virei mais rápido digitando. Eu passei a escrever menos código à mão e a decidir mais.",
+    notes: [
+      "Momento: 101 PRs no primeiro trimestre, 211 nos últimos 71 dias, oito vezes mais código",
+      "Esta apresentação foi feita ontem, por agentes",
+      "Não fiquei mais rápido digitando: escrevo menos à mão e decido mais",
+    ],
     cues: ["decidir mais"],
   },
   {
@@ -270,8 +302,11 @@ export const slides: Slide[] = [
         items: ["Saber o que construir", "Ter gosto pra saber se está bom", "Fazer alguém usar"],
       },
     },
-    notes:
-      "Economia básica. Quando o custo de uma coisa cai, o valor vai pra o que é complementar a ela. O complemento do código é julgamento.",
+    notes: [
+      "Quando algo fica barato, o valor vai pro que é complementar a ele",
+      "O complemento do código é julgamento",
+      "E isso dá pra treinar agora, na faculdade",
+    ],
     cues: ["complemento do código é julgamento"],
   },
   {
@@ -283,8 +318,9 @@ export const slides: Slide[] = [
       title: "O que o mundo compra",
       lead: "Gente responsável pelo negócio, não pelo ticket.",
     },
-    notes:
-      'Pausa curta. Anuncie a parte: "Parte três: o que o mundo compra." Dizer "parte três" avança.',
+    notes: [
+      "Parte três: o que o mundo compra",
+    ],
     cues: ["parte três", "parte 3"],
   },
   {
@@ -311,8 +347,11 @@ export const slides: Slide[] = [
         ],
       },
     },
-    notes:
-      "Lembra do dado: a linguagem é o menor dos fatores de salário. Então não faz sentido se vender pela stack. Quem contrata lá fora quer saber que problema você resolve e que resultado gerou. E isso vale pra quem não é dev: a designer que reduziu o abandono do cadastro, o analista que achou onde o dinheiro vazava. Estudante também tem isso: um projeto com usuário de verdade e um número que mudou. Esse é o posicionamento que vence o mercado global.",
+    notes: [
+      "A stack é o menor fator de salário: não se venda por ela",
+      "Quem contrata quer saber que problema você resolveu e que número mudou",
+      "Vale pra estudante: um projeto com usuário de verdade já conta",
+    ],
     cues: ["vence o mercado global"],
   },
   {
@@ -330,8 +369,10 @@ export const slides: Slide[] = [
         { id: "write", label: "Escrever bem" },
       ],
     },
-    notes:
-      "Revela com R. A faculdade treina quase só a parte técnica. As outras três vocês treinam por conta própria.",
+    notes: [
+      "A faculdade treina quase só a parte técnica",
+      "As outras três vocês treinam por conta própria",
+    ],
   },
   {
     id: "part-4",
@@ -342,8 +383,9 @@ export const slides: Slide[] = [
       title: "Como chegar lá",
       lead: "As portas de entrada, todas a partir de BH.",
     },
-    notes:
-      'Pausa curta. Anuncie a parte: "Parte quatro: como chegar lá." Dizer "parte quatro" avança.',
+    notes: [
+      "Parte quatro: como chegar lá",
+    ],
     cues: ["parte quatro", "parte 4"],
   },
   {
@@ -357,8 +399,11 @@ export const slides: Slide[] = [
       source:
         "Vagas ativas em 10/11/2026: 52 júnior + 125 pleno de 1.064 com nível informado (1.111 sem nível).",
     },
-    notes:
-      "Tá, mas como sai de BH e chega lá? Começo com um dado que pouca gente fala pra estudante: o mercado global contrata quem já provou. Isso não é pra desanimar. É pra vocês não aplicarem só pra vaga tier 3 e acharem que o problema é vocês. O caminho honesto é começar onde se aprende rápido, acumular prova e subir de tier.",
+    notes: [
+      "O mercado global contrata quem já provou",
+      "Não é pra desanimar: é pra não aplicar só pra tier 3 e achar que o problema é você",
+      "Caminho honesto: começa onde aprende rápido, acumula prova, sobe de tier",
+    ],
     cues: ["acumular prova e subir de tier", "subir de tier"],
   },
   {
@@ -383,8 +428,12 @@ export const slides: Slide[] = [
         },
       ],
     },
-    notes:
-      "Lembrando: o objetivo não é trabalhar pra fora. É ter mais empresas pra escolher, e trabalhar pra fora é um meio. Comecei com WordPress em CLT local, depois PJ em consultoria. Primeira porta não é prêmio de consolação, muitas vezes é a melhor jogada pra estudante. Em 2020 entrei na G2i, um marketplace, com medo de nem passar na entrevista e com inglês longe de perfeito. Contractor não é informal: é vender confiança profissional. Quando teve layoff na Coinbase em 2022, quem me salvou foi o relacionamento com a Increment. Cada degrau foi porta aberta por gente que já tinha trabalhado comigo.",
+    notes: [
+      "Primeira porta não é prêmio de consolação",
+      "Minha história: WordPress CLT, consultoria PJ, G2i em 2020 com inglês longe de perfeito",
+      "Contractor não é informal, é vender confiança profissional",
+      "Cada degrau foi porta aberta por quem já tinha trabalhado comigo",
+    ],
     cues: ["já tinha trabalhado comigo", "trabalhado comigo"],
   },
   {
@@ -407,8 +456,11 @@ export const slides: Slide[] = [
         ],
       },
     },
-    notes:
-      "Isso vem das minhas mentorias: as dúvidas que mais aparecem são entrevista, salário e indicação. Sotaque ninguém liga, mas escrever bem em inglês pesa muito, porque trabalho remoto é escrito. Indicação vem de quem já trabalhou com você, então todo trabalho de agora conta. E projeto no ar, texto e contribuição contam mais que currículo: prova pública ganha de currículo.",
+    notes: [
+      "Sotaque ninguém liga; escrever bem em inglês pesa, porque remoto é escrito",
+      "Indicação vem de quem trabalhou com você: todo trabalho de agora conta",
+      "Prova pública ganha de currículo",
+    ],
     cues: ["prova pública ganha de currículo", "ganha de currículo"],
   },
   {
@@ -437,8 +489,12 @@ export const slides: Slide[] = [
         },
       ],
     },
-    notes:
-      "Aplicar online é loteria: na PostHog foram mais de 9 mil aplicações em 12 meses. Com o mesmo currículo, indicação dá 11 vezes mais chance (Gem, 165 milhões de aplicações; na Ashby, indicação é 1% das aplicações e quase um quinto das contratações). Quem trabalhou com você e gostou de você é seu melhor recurso: no layoff da Coinbase, quem me salvou foi a Increment. Cada trabalho em grupo daqui é a sua rede começando. E professor é atalho.",
+    notes: [
+      "Aplicar online é loteria: 9 mil aplicações em 12 meses na PostHog",
+      "Momento: indicação dá 11 vezes mais chance com o mesmo currículo",
+      "Layoff da Coinbase: quem me salvou foi a Increment",
+      "Trabalho em grupo daqui já é rede. Professor é atalho",
+    ],
     cues: ["professor é atalho"],
   },
   {
@@ -467,8 +523,11 @@ export const slides: Slide[] = [
         },
       ],
     },
-    notes:
-      "Em 2019, júnior, eu queria trabalhar na Microsoft. Li um post de um engenheiro principal de lá e mandei uma mensagem contando a minha história de verdade, desde o servidor de Ragnarok aos 12 anos. Ele respondeu: love it, me manda um email. Founder de startup pequena lê o próprio LinkedIn. Quem usou o produto e chegou com feedback real vale mais que qualquer currículo.",
+    notes: [
+      "2019, júnior: mensagem pra um principal da Microsoft, ele respondeu 'love it'",
+      "Founder de startup pequena lê o próprio LinkedIn",
+      "Usar o produto e chegar com feedback real vale mais que currículo",
+    ],
     cues: ["vale mais que qualquer currículo"],
   },
   {
@@ -486,8 +545,11 @@ export const slides: Slide[] = [
         { id: "write", label: "Escrever em público" },
       ],
     },
-    notes:
-      "Quatro coisas concretas, nenhuma depende de sair de BH. Colocar algo no ar com usuários de verdade, nem que sejam dez. Mandar uma mensagem por semana, pra um colega, um professor ou um founder, e pedir indicação antes de aplicar. Aumentar as opções: local, nacional ou global. E escrever em público, em inglês também. Escolhe uma e começa essa semana.",
+    notes: [
+      "Quatro coisas concretas, nenhuma depende de sair de BH",
+      "Peça pra cada um escolher uma e começar essa semana",
+      "Comentar o que a sala escolheu",
+    ],
     cues: ["começa essa semana"],
   },
   {
@@ -499,8 +561,10 @@ export const slides: Slide[] = [
       sub: "De BH pro mundo · nagringa.dev",
     },
     presenterOnlyNotes: true,
-    notes:
-      "Frase final, devagar. Pausa. Depois: Obrigado! Agora eu quero ouvir as perguntas de vocês.",
+    notes: [
+      "Frase final, devagar. Pausa",
+      "Obrigado! Agora quero ouvir as perguntas de vocês",
+    ],
     cues: ["perguntas de vocês", "ouvir as perguntas"],
   },
   {
@@ -508,6 +572,8 @@ export const slides: Slide[] = [
     section: "Perguntas",
     visual: { kind: "questionsWall" },
     interaction: { kind: "questions" },
-    notes: "As mais votadas sobem. Esconde as que não fizerem sentido.",
+    notes: [
+      "As mais votadas sobem; esconde as que não fizerem sentido",
+    ],
   },
 ];

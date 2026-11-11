@@ -28,6 +28,7 @@ const LEAF_LABEL: Record<string, string> = {
 };
 
 const GROUP_LABEL: Record<string, string> = {
+  notes: "Nota",
   items: "Item",
   bars: "Barra",
   options: "Opção",

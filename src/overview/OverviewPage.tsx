@@ -6,6 +6,7 @@ import { Scaled } from "../stage/Scaled";
 import { SlideCanvas } from "../stage/SlideCanvas";
 import { slides } from "../talk/slides";
 import type { Slide } from "../talk/types";
+import { NoteList } from "../live/NoteList";
 
 const canJump = presenterKey.length > 0;
 
@@ -39,7 +40,7 @@ function SlideCard({
         {number} · {slide.section ?? "Sem seção"}
         {current ? " · no telão agora" : ""}
       </p>
-      <p className="overview-notes">{slide.notes}</p>
+      <NoteList notes={slide.notes} className="overview-notes" />
       <p className="overview-cues mono">
         {slide.cues?.length
           ? `Voz: ${slide.cues.map((cue) => `"${cue}"`).join(" ou ")}`

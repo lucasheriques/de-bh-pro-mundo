@@ -23,6 +23,7 @@ import { countChoices, median, numericValues } from "../talk/stats";
 import type { Interaction, Slide } from "../talk/types";
 import { Timer } from "./Timer";
 import { VoiceHud } from "./VoiceHud";
+import { NoteList } from "../live/NoteList";
 
 function PollSummary({ slide }: { slide: Slide }) {
   const pollId = pollIdOf(slide) ?? "";
@@ -203,7 +204,7 @@ function Notes({ slide }: { slide: Slide }) {
     <section className="presenter-notes">
       <CueBanner slide={slide} />
       <p className="eyebrow">Notas</p>
-      <p className="notes">{slide.notes}</p>
+      <NoteList notes={slide.notes} className="notes" />
     </section>
   );
 }

@@ -78,7 +78,8 @@ export type Slide = {
   section?: string;
   visual: Visual;
   interaction?: Interaction;
-  notes: string;
+  /** Speaker notes: the points to make on this slide, one per bullet. */
+  notes: string[];
   presenterOnlyNotes?: true;
   cues?: string[];
 };

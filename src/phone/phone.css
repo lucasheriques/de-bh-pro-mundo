@@ -881,3 +881,66 @@
   clip-path: inset(0 calc((1 - var(--share)) * 100%) 0 0);
   transition: clip-path 250ms linear;
 }
+
+/* Desktop: the slide on the left, captions and questions in a sticky column on the right */
+
+@media (min-width: 1024px) {
+  .phone {
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 400px;
+    grid-template-rows: auto auto 1fr;
+    column-gap: 56px;
+    align-items: start;
+    padding: 32px 40px 48px;
+  }
+
+  .phone-header {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .name-card {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .phone-body {
+    grid-column: 1;
+    grid-row: 3;
+    max-width: 680px;
+    padding-top: 40px;
+  }
+
+  .phone-dock {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    position: sticky;
+    top: 24px;
+    gap: 24px;
+    max-height: calc(100dvh - 180px);
+    margin: 0;
+    padding-top: 40px;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 28px;
+    overflow-y: auto;
+    background: none;
+    box-shadow: inset 1px 0 0 var(--rule);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .caption-strip {
+    height: calc(9 * 1.45em);
+  }
+
+  .dock-questions {
+    display: grid;
+    gap: 14px;
+  }
+
+  .panel-question {
+    font-size: 32px;
+  }
+}

@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { api } from "../../convex/_generated/api";
 import { LiveCaption } from "../captions/LiveCaption";
 import { clientId } from "../live/env";
+import { DESKTOP_QUERY, useMediaQuery } from "../live/useMediaQuery";
 import { QuestionList } from "./QuestionList";
 import { AskForm } from "./QuestionsPanel";
 
@@ -77,11 +78,19 @@ export function PhoneDock({
   showQuestions: boolean;
   onOpenQuestions: () => void;
 }) {
+  const desktop = useMediaQuery(DESKTOP_QUERY);
   if (!captions && !showQuestions) return null;
   return (
     <div className="phone-dock">
       {captions ? <LiveCaption className="caption-strip" history={8} /> : null}
-      {showQuestions ? <QuestionsBar onOpen={onOpenQuestions} /> : null}
+      {showQuestions && desktop ? (
+        <section className="dock-questions" aria-label="Perguntas da sala">
+          <p className="eyebrow">Perguntas da sala</p>
+          <AskForm />
+          <QuestionList />
+        </section>
+      ) : null}
+      {showQuestions && !desktop ? <QuestionsBar onOpen={onOpenQuestions} /> : null}
     </div>
   );
 }

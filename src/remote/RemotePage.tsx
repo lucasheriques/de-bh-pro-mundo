@@ -1,6 +1,7 @@
 import { CueBanner } from "../live/CueBanner";
 import { pollIdOf, slideAt, useDeck } from "../live/useDeck";
 import { slides } from "../talk/slides";
+import { NoteList } from "../live/NoteList";
 
 function headline(index: number): string {
   const visual = slideAt(index).visual;
@@ -51,7 +52,7 @@ export function RemotePage() {
           Próximo
         </button>
       </div>
-      <p className="remote-notes">{deck.slide.notes}</p>
+      <NoteList notes={deck.slide.notes} className="remote-notes" />
     </main>
   );
 }
