@@ -1,3 +1,4 @@
+import { presenterKey } from "../live/env";
 import { toggleFullscreen, useDeck, useDeckKeys } from "../live/useDeck";
 import { useStageTheme, useStoredToggle } from "../live/useStoredToggle";
 import { slides } from "../talk/slides";
@@ -42,7 +43,8 @@ export function StagePage() {
         {preview ? (
           <span className="status-warning">Prévia: {slide.id} · ← → navegam, a sala não muda</span>
         ) : null}
-        {deck.keyValid === false ? (
+        {/* A stage without a key is a display-only mirror, not an error worth projecting */}
+        {presenterKey && deck.keyValid === false ? (
           <span className="status-warning">Chave de apresentador inválida</span>
         ) : null}
         {deck.error && deck.keyValid !== false ? (
