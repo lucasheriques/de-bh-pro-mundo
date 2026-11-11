@@ -5,7 +5,7 @@ import "./styles.css";
 import "./stage/stage.css";
 import "./phone/phone.css";
 import { ConvexProvider } from "convex/react";
-import { lazy, StrictMode, Suspense } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { AdminPage } from "./admin/AdminPage";
 import { CaptionsPage } from "./captions/CaptionsPage";
@@ -30,7 +30,6 @@ const routes = {
   "/conteudo": ContentPage,
   "/editor": EditorPage,
   "/remote": RemotePage,
-  ...(import.meta.env.DEV ? { "/proto": lazy(() => import("./proto/ProtoPage")) } : {}),
 } as const;
 const path = window.location.pathname.replace(/\/+$/, "") || "/";
 
@@ -44,13 +43,7 @@ if (!root) throw new Error("Missing #root element");
 createRoot(root).render(
   <StrictMode>
     <ConvexProvider client={convex}>
-      <LiveSlides
-        render={() => (
-          <Suspense>
-            <Page />
-          </Suspense>
-        )}
-      />
+      <LiveSlides render={() => <Page />} />
     </ConvexProvider>
   </StrictMode>,
 );

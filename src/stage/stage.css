@@ -1309,3 +1309,15 @@
 .section-map li[data-state="current"] span {
   color: var(--accent-ink);
 }
+
+/* Statements read as one sentence in two tones: the claim, then its support in grey */
+
+.v-statement .v-sub {
+  max-width: 1600px;
+  margin-top: 16px;
+  font-size: 88px;
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  text-wrap: pretty;
+}
