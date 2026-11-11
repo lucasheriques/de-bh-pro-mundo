@@ -98,7 +98,14 @@ const NO_MOVE: VoiceMove = { steps: 0, reveal: false };
  */
 const COMMANDS: readonly { phrases: readonly string[]; move: VoiceMove }[] = [
   {
-    phrases: ["proximo slide", "pra frente", "slide seguinte", "passa slide", "avanca slide"],
+    phrases: [
+      "proximo slide",
+      "pra frente",
+      "segue em frente",
+      "slide seguinte",
+      "passa slide",
+      "avanca slide",
+    ],
     move: { steps: 1, reveal: false },
   },
   { phrases: ["volta um", "volta slide", "slide anterior"], move: { steps: -1, reveal: false } },

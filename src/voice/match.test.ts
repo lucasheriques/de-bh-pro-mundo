@@ -399,6 +399,8 @@ describe("spoken commands", () => {
     ["ordinary speech", "a frente de trabalho voltou", 0, false],
     ["ordinary speech about results", "o resultado do negócio é o que importa", 0, false],
     ["ordinary speech with próximo", "o próximo passo é mandar mensagem", 0, false],
+    ["segue em frente", "beleza, segue em frente", 1, false],
+    ["próximo alone stays speech", "e aí o próximo", 0, false],
   ])("%s", (_label, spoken, steps, reveal) => {
     const move = moveFor(spoken);
     expect({ steps: move.steps, reveal: move.reveal }).toEqual({ steps, reveal });

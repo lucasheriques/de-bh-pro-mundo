@@ -174,7 +174,7 @@ export function VoiceHud({ deck }: { deck: Deck }) {
         Legendas: {CAPTION_STATUS_LABEL[captionStatus]}
       </p>
       <p className="voice-commands">
-        Em qualquer slide: "próximo slide" (ou "passa o slide"), "volta um" (ou "slide anterior"),
+        Em qualquer slide: "próximo slide" (ou "segue em frente"), "volta um" (ou "slide anterior"),
         "mostra o resultado".
       </p>
     </section>

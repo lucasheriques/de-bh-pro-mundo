@@ -24,6 +24,7 @@ const TALK_TERMS = [
   "PUC Minas",
   "Coração Eucarístico",
   "próximo slide",
+  "segue em frente",
   "slide seguinte",
   "passa o slide",
   "volta um",
