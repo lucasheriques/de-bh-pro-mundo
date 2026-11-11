@@ -55,7 +55,7 @@ export const slides: Slide[] = [
           name: "UFMG",
           logo: "/logos/ufmg.br.png",
           tag: "2020",
-          body: "Mestrado que larguei",
+          body: "Mestrado, acabei saindo",
         },
         {
           name: "Coinbase",
