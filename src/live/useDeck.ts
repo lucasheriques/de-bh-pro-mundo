@@ -95,7 +95,15 @@ export function useDeck() {
 
 export type Deck = ReturnType<typeof useDeck>;
 
-export type DeckAction = "next" | "prev" | "reveal" | "voice" | "captions" | "fullscreen" | "theme";
+export type DeckAction =
+  | "next"
+  | "prev"
+  | "reveal"
+  | "voice"
+  | "captions"
+  | "fullscreen"
+  | "theme"
+  | "cues";
 
 export const KEYMAP: Record<string, DeckAction> = {
   ArrowRight: "next",
@@ -110,6 +118,7 @@ export const KEYMAP: Record<string, DeckAction> = {
   c: "captions",
   f: "fullscreen",
   t: "theme",
+  d: "cues",
 };
 
 const REPEATABLE: ReadonlySet<DeckAction> = new Set(["next", "prev"]);

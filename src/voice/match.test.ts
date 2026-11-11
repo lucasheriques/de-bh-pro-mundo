@@ -423,3 +423,56 @@ describe("spoken commands", () => {
     expect(after.steps).toBe(1);
   });
 });
+
+/** Visible slide text in reading order, minus labels nobody reads aloud. */
+function readingOrder(slide: (typeof slides)[number]): string[] {
+  const unread = new Set(["kind", "logo", "id", "pollId", "section", "answer", "tier", "source"]);
+  const lines: string[] = [];
+  const walk = (value: unknown, key: string) => {
+    if (typeof value === "string") {
+      if (!unread.has(key)) lines.push(value);
+    } else if (value && typeof value === "object") {
+      for (const [next, child] of Object.entries(value)) walk(child, next);
+    }
+  };
+  walk(slide.visual, "");
+  walk(slide.interaction, "");
+  return lines;
+}
+
+const cuedSlides = slides.filter((slide) => slide.cues?.length);
+
+describe("slide cues", () => {
+  it.each(
+    cuedSlides.map((slide) => [slide.id, slide] as const),
+  )("reading %s top to bottom never fires its cue before the last line", (_id, slide) => {
+    const lines = readingOrder(slide);
+    let state: VoiceState = initialVoiceState;
+    const firedAt = lines.findIndex((text, i) => {
+      const result = voiceStep(state, {
+        text,
+        isFinal: true,
+        now: i * 5000,
+        slideIndex: 0,
+        cues: slide.cues,
+        nextCues: undefined,
+      });
+      state = result.state;
+      return result.steps !== 0;
+    });
+    expect(firedAt === -1 || firedAt === lines.length - 1).toBe(true);
+  });
+
+  const misheard = cuedSlides.flatMap((slide) =>
+    (slide.cues ?? []).flatMap((cue) => {
+      const words = normalize(cue);
+      const longest = words.reduce((a, b) => (b.length > a.length ? b : a));
+      if (longest.length < 5) return [];
+      const typo = words.map((w) => (w === longest ? `${w.slice(0, -1)}x` : w)).join(" ");
+      return [[cue, typo] as const];
+    }),
+  );
+  it.each(misheard)('"%s" still fires as "%s"', (cue, typo) => {
+    expect(stepsFor(typo, { cues: [cue], nextCues: undefined })).toBe(1);
+  });
+});

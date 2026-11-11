@@ -6,17 +6,20 @@ import { slides } from "../talk/slides";
 import { ReactionsLayer } from "./Reactions";
 import { Scaled } from "./Scaled";
 import { SlideCanvas } from "./SlideCanvas";
-import { CaptionLine, CornerQr, ProgressBar, SectionLabel } from "./StageChrome";
+import { CaptionLine, CornerQr, CueHint, ProgressBar, SectionLabel } from "./StageChrome";
 import { useSlideHash, useSlidePreview } from "./useSlideUrl";
 
 const CAPTION_STATES = ["off", "on"] as const;
+const CUE_STATES = ["on", "off"] as const;
 
 export function StagePage() {
   const deck = useDeck();
   const [captions, toggleCaptions] = useStoredToggle("puc-ia-2026:stage-captions", CAPTION_STATES);
   const [theme, toggleTheme] = useStageTheme("stage");
+  const [cues, toggleCues] = useStoredToggle("puc-ia-2026:stage-cues", CUE_STATES);
   const preview = useSlidePreview();
   const captionsOn = useCaptionsEnabled();
+  const showCaptions = captionsOn && captions === "on";
   const index = preview?.index ?? deck.index;
   const slide = slides[index] ?? deck.slide;
   useSlideHash(slide.id, preview === null);
@@ -29,6 +32,7 @@ export function StagePage() {
     fullscreen: toggleFullscreen,
     captions: toggleCaptions,
     theme: toggleTheme,
+    cues: toggleCues,
   });
 
   return (
@@ -37,7 +41,11 @@ export function StagePage() {
         <SectionLabel slide={slide} />
         <SlideCanvas slide={slide} />
         <ReactionsLayer />
-        {captionsOn && captions === "on" ? <CaptionLine /> : null}
+        {showCaptions ? <CaptionLine /> : null}
+        {/* The caption box covers the bottom-left corner, so the cue steps aside for it */}
+        {cues === "on" && deck.session.voiceEnabled && !showCaptions ? (
+          <CueHint slide={slide} isLast={index === slides.length - 1} />
+        ) : null}
         <CornerQr slide={slide} />
         <ProgressBar index={index} />
       </Scaled>

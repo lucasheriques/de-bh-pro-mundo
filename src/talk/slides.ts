@@ -35,7 +35,7 @@ export const slides: Slide[] = [
       "Eu sentei nessas cadeiras: PUC 2019, nunca saí de BH",
       "Promessa: dados de mercado, o que a IA mudou, e o que eu faria no lugar de vocês",
     ],
-    cues: ["no lugar de vocês"],
+    cues: ["deixa eu me apresentar"],
   },
   {
     id: "me",
@@ -88,7 +88,7 @@ export const slides: Slide[] = [
       "Geografia não é destino",
       "NaGringa: dados de salário e vaga de milhares de devs brasileiros, é daí que vêm os números",
     ],
-    cues: ["vou usar isso hoje"],
+    cues: ["os números vêm da NaGringa"],
   },
   {
     id: "poll-abroad",
@@ -119,7 +119,7 @@ export const slides: Slide[] = [
       "Mandem a maior dúvida pelo celular, a qualquer momento, e votem nas dos outros",
       "As mais votadas eu respondo no final",
     ],
-    cues: ["respondo as que sobrarem"],
+    cues: ["respondo as mais votadas no final"],
   },
   {
     id: "agenda",
@@ -168,7 +168,7 @@ export const slides: Slide[] = [
       "Objetivo não é sair do país, é ter mais empresas que podem te contratar",
       "Mesma pessoa, em BH, pode estar no mercado local, nacional ou global",
     ],
-    cues: ["mostrar com salário"],
+    cues: ["escolher isso daqui"],
   },
   {
     id: "guess",
@@ -289,7 +289,7 @@ export const slides: Slide[] = [
       "Nubank, BTG e Itaú pagam bem e ainda ficam a um terço de quem compete com o mundo",
       "Do tier 1 pro 2, uns 60%. Do 2 pro 3, três vezes. Mesma pessoa, outra liga",
     ],
-    cues: ["outra liga"],
+    cues: ["mesma pessoa, outra liga", "outra liga"],
   },
   {
     id: "part-2",
@@ -301,7 +301,7 @@ export const slides: Slide[] = [
       lead: "Escrever código ficou barato. Saber o que construir, não.",
     },
     notes: ["Parte dois: o que a IA mudou"],
-    cues: ["parte dois", "parte 2"],
+    cues: ["o que construir, não"],
   },
   {
     id: "poll-ai",
@@ -371,7 +371,7 @@ export const slides: Slide[] = [
       "O complemento do código é julgamento",
       "E isso dá pra treinar agora, na faculdade",
     ],
-    cues: ["complemento do código é julgamento"],
+    cues: ["fazer alguém usar"],
   },
   {
     id: "part-3",
@@ -383,7 +383,7 @@ export const slides: Slide[] = [
       lead: "Gente responsável pelo negócio, não pelo ticket.",
     },
     notes: ["Parte três: o que o mundo compra"],
-    cues: ["parte três", "parte 3"],
+    cues: ["não pelo ticket"],
   },
   {
     id: "positioning",
@@ -414,7 +414,7 @@ export const slides: Slide[] = [
       "Quem contrata quer saber que problema você resolveu e que número mudou",
       "Vale pra estudante: um projeto com usuário de verdade já conta",
     ],
-    cues: ["vence o mercado global"],
+    cues: ["mudou pro negócio"],
   },
   {
     id: "poll-skill",
@@ -446,7 +446,7 @@ export const slides: Slide[] = [
       lead: "Três caminhos que eu fiz, todos daqui de BH.",
     },
     notes: ["Parte quatro: como chegar lá"],
-    cues: ["parte quatro", "parte 4"],
+    cues: ["todos daqui de BH"],
   },
   {
     id: "junior",
@@ -464,7 +464,7 @@ export const slides: Slide[] = [
       "Não é pra desanimar: é pra não aplicar só pra tier 3 e achar que o problema é você",
       "Caminho honesto: começa onde aprende rápido, acumula prova, sobe de tier",
     ],
-    cues: ["acumular prova e subir de tier", "subir de tier"],
+    cues: ["acumula prova e sobe de tier", "sobe de tier", "subir de tier"],
   },
   {
     id: "paths",
@@ -494,7 +494,7 @@ export const slides: Slide[] = [
       "Contractor é trabalho sério: você vende confiança profissional",
       "Cada emprego veio de alguém que já tinha trabalhado comigo",
     ],
-    cues: ["já tinha trabalhado comigo", "trabalhado comigo"],
+    cues: ["sem sair do país", "já tinha trabalhado comigo"],
   },
   {
     id: "myths",
@@ -555,7 +555,7 @@ export const slides: Slide[] = [
       "Layoff da Coinbase: quem me salvou foi a Increment",
       "Trabalho em grupo daqui já é rede. Professor é atalho",
     ],
-    cues: ["professor é atalho"],
+    cues: ["ex-aluno responde ex-aluno", "professor é atalho"],
   },
   {
     id: "cold-founder",
@@ -588,7 +588,7 @@ export const slides: Slide[] = [
       "Founder de startup pequena lê o próprio LinkedIn",
       "Usar o produto e chegar com feedback real vale mais que currículo",
     ],
-    cues: ["vale mais que qualquer currículo"],
+    cues: ["follow-up educado funciona", "vale mais que qualquer currículo"],
   },
   {
     id: "recap",
@@ -620,7 +620,7 @@ export const slides: Slide[] = [
       "Uma frase por parte, sem repetir a talk inteira",
       "Fecha perguntando qual delas cada um quer tentar primeiro",
     ],
-    cues: ["quatro coisas pra levar"],
+    cues: ["sua rede começa aqui"],
   },
   {
     id: "commit",
@@ -644,7 +644,7 @@ export const slides: Slide[] = [
       "Vagas de fora: só olhar já muda o que você acha possível",
       "Comentar o que a sala escolheu",
     ],
-    cues: ["começa essa semana"],
+    cues: ["uma frase pra fechar"],
   },
   {
     id: "close",

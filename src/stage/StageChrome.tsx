@@ -1,3 +1,4 @@
+import { Microphone } from "@phosphor-icons/react";
 import type { CSSProperties } from "react";
 import { LiveCaption } from "../captions/LiveCaption";
 import { StageCountdown, usePollCountdown } from "../live/PollCountdown";
@@ -20,6 +21,21 @@ export function ProgressBar({ index }: { index: number }) {
 export function SectionLabel({ slide }: { slide: Slide }) {
   if (!slide.section || slide.visual.kind === "section") return null;
   return <p className="section-label">{slide.section}</p>;
+}
+
+const POLL_COMMANDS = "mostra o resultado · próximo slide";
+
+/** What to say to move on: the slide's closing phrase, or the spoken commands. */
+export function CueHint({ slide, isLast }: { slide: Slide; isLast: boolean }) {
+  const cue = slide.cues?.[0];
+  const text = cue ?? (slide.interaction ? POLL_COMMANDS : isLast ? null : "próximo slide");
+  if (!text) return null;
+  return (
+    <p className="cue-hint" aria-hidden="true">
+      <Microphone weight="bold" />
+      <span>{text}</span>
+    </p>
+  );
 }
 
 export function CaptionLine() {

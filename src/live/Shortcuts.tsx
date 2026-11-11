@@ -8,6 +8,7 @@ const LABELS: Record<DeckAction, string> = {
   captions: "Legendas no telão (só no /stage)",
   fullscreen: "Tela cheia",
   theme: "Tema claro ou escuro (cada tela guarda o seu)",
+  cues: "Frase que passa o slide, no canto do telão",
 };
 
 const KEY_NAMES: Record<string, string> = {
