@@ -21,7 +21,7 @@ export const all = mutation({
       const docs = await ctx.db.query(table).take(DOCS_PER_TABLE_CAP);
       await Promise.all(docs.map((doc) => ctx.db.delete(table, doc._id)));
     }
-    await patchSession(ctx, { slideIndex: 0, revealed: {}, voiceEnabled: false });
+    await patchSession(ctx, { slideIndex: 0, revealed: {}, voiceEnabled: false, pollOpenedAt: {} });
     return null;
   },
 });

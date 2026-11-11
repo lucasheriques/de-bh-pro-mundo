@@ -31,9 +31,24 @@ describe("acceptVote", () => {
     { name: "a guess inside the slider", pollId: "senior-guess", value: 20000, expected: 20000 },
     { name: "a guess above the slider", pollId: "senior-guess", value: 1e12, expected: null },
     { name: "a text guess", pollId: "senior-guess", value: "20000", expected: null },
-    { name: "a full match", pollId: "connect-dots", value: "dti=1;nubank=2;google=3", expected: "dti=1;nubank=2;google=3" },
-    { name: "a match with an unknown company", pollId: "connect-dots", value: "evil=1", expected: null },
-    { name: "a match with an unknown tier", pollId: "connect-dots", value: "dti=9", expected: null },
+    {
+      name: "a full match",
+      pollId: "connect-dots",
+      value: "dti=1;nubank=2;google=3",
+      expected: "dti=1;nubank=2;google=3",
+    },
+    {
+      name: "a match with an unknown company",
+      pollId: "connect-dots",
+      value: "evil=1",
+      expected: null,
+    },
+    {
+      name: "a match with an unknown tier",
+      pollId: "connect-dots",
+      value: "dti=9",
+      expected: null,
+    },
   ])("$name", ({ pollId, value, expected }) => {
     expect(acceptVote(pollId, value)).toEqual(expected);
   });

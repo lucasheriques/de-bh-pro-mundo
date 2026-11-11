@@ -3,9 +3,9 @@ import { useState } from "react";
 import { api } from "../../convex/_generated/api";
 import { forgetPresenterKey, presenterKey, savePresenterKey } from "../live/env";
 import { Roster } from "../live/Roster";
+import { Shortcuts } from "../live/Shortcuts";
 import { pollIdOf, useDeck } from "../live/useDeck";
 import { slides } from "../talk/slides";
-import { Shortcuts } from "../live/Shortcuts";
 
 const polls = slides.flatMap((slide) => {
   const pollId = pollIdOf(slide);

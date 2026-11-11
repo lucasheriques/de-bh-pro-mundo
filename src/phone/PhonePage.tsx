@@ -5,6 +5,7 @@ import { api } from "../../convex/_generated/api";
 import { PRESENCE_ROOM } from "../../convex/validators";
 import { ConnectionDot } from "../live/ConnectionDot";
 import { clientId } from "../live/env";
+import { PhoneCountdown } from "../live/PollCountdown";
 import { ThemeToggle } from "../live/ThemeToggle";
 import { slideAt, useSession } from "../live/useDeck";
 import { useStoredToggle } from "../live/useStoredToggle";
@@ -94,6 +95,9 @@ export function PhonePage() {
       />
       {showNameForm ? <NameForm current={myName} onDone={() => setNameOpen(false)} /> : null}
       <div className="phone-body" key={slide.id}>
+        {interaction && interaction.kind !== "questions" ? (
+          <PhoneCountdown pollId={interaction.pollId} />
+        ) : null}
         {Panel && interaction ? (
           <Panel interaction={interaction} />
         ) : (

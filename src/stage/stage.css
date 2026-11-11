@@ -1457,3 +1457,71 @@
 .tier-letter {
   flex: none;
 }
+
+/* While a poll counts down, the corner card grows: bigger QR, the URL and the timer */
+
+.corner-qr[data-voting] {
+  gap: 22px;
+  padding: 14px 26px 14px 14px;
+}
+
+.corner-qr[data-voting] .qr {
+  width: 172px;
+  height: 172px;
+}
+
+.corner-qr[data-voting] .corner-qr-copy strong {
+  font-size: 30px;
+}
+
+.stage-countdown {
+  --cell: 12px;
+  --cell-gap: 3px;
+  --hue: var(--accent);
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.stage-countdown-label {
+  font-size: 15px;
+  color: #50585c;
+}
+
+.stage-countdown-clock {
+  font-family: var(--font-mono);
+  font-size: 56px;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: #14141f;
+  text-transform: none;
+}
+
+.stage-countdown-bar {
+  position: relative;
+  height: 12px;
+  background: repeating-linear-gradient(
+    90deg,
+    #dde1e3 0 calc(var(--cell) - var(--cell-gap)),
+    transparent 0 var(--cell)
+  );
+}
+
+.stage-countdown-fill {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    #13804f 0 calc(var(--cell) - var(--cell-gap)),
+    transparent 0 var(--cell)
+  );
+  clip-path: inset(0 calc((1 - var(--share)) * 100%) 0 0);
+  transition: clip-path 250ms linear;
+}
+
+/* The voting card is wider than the plain QR; keep the question clear of it */
+.slide-results .results-head {
+  max-width: 1180px;
+}

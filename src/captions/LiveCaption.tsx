@@ -45,8 +45,7 @@ function useFollowBottom(changed: unknown) {
   }, [changed]);
   const onScroll = () => {
     const box = ref.current;
-    if (box)
-      pinned.current = box.scrollHeight - box.scrollTop - box.clientHeight < PINNED_SLACK_PX;
+    if (box) pinned.current = box.scrollHeight - box.scrollTop - box.clientHeight < PINNED_SLACK_PX;
   };
   return { ref, onScroll };
 }

@@ -79,49 +79,16 @@ export const slides: Slide[] = [
     cues: ["respondo as que sobrarem"],
   },
   {
-    id: "outline",
-    section: "Abertura",
-    visual: {
-      kind: "list",
-      eyebrow: "O roteiro de hoje",
-      title: "Quatro partes, uns 25 minutos.",
-      items: [
-        {
-          title: "Mercado global",
-          body: "Contra quem a empresa compete por talento define o seu teto",
-        },
-        { title: "O que a IA mudou", body: "Escrever software ficou barato. Julgamento, não" },
-        { title: "O que o mundo compra", body: "Gente responsável pelo negócio, não pelo ticket" },
-        { title: "Como chegar lá", body: "As portas de entrada, todas a partir de BH" },
-      ],
-    },
-    notes:
-      "Esse é o roteiro. Primeiro o mercado, com dados de salário de verdade. Depois o que a IA mudou nesse jogo, o que as empresas de fora compram agora, e por fim como sair daqui e chegar lá. Começando pelo mercado.",
-    cues: ["começando pelo mercado"],
-  },
-  {
     id: "part-1",
     section: "1. Mercado global",
     visual: {
       kind: "section",
       number: "1",
       title: "Mercado global",
-      lead: "Contra quem a empresa compete por talento define o seu teto.",
-    },
-    notes: 'Pausa curta. Anuncie a parte: "Parte um: mercado global." Dizer "parte um" avança.',
-    cues: ["parte um", "parte 1"],
-  },
-  {
-    id: "s2",
-    section: "1. Mercado global",
-    visual: {
-      kind: "statement",
-      eyebrow: "A tese",
-      text: "Carreira internacional é escolher em que mercado você compete.",
-      sub: "Não é sobre sair do país. É sobre aumentar as empresas que podem te contratar.",
+      lead: "Carreira internacional é escolher em que mercado você compete. Não é sair do país.",
     },
     notes:
-      "O objetivo desta noite não é convencer ninguém a trabalhar pra fora. É mostrar que quanto mais empresas podem te contratar, mais opção você tem, e o mercado global é o maior conjunto delas. A mesma pessoa, morando em BH, pode estar no mercado local, no nacional ou no global. O que muda é contra quem a empresa compete por talento. Vou mostrar com salário.",
+      "A tese da noite: não é convencer ninguém a trabalhar pra fora. É mostrar que quanto mais empresas podem te contratar, mais opção você tem, e o mercado global é o maior conjunto delas. A mesma pessoa, morando em BH, pode estar no mercado local, no nacional ou no global. O que muda é contra quem a empresa compete por talento. Vou mostrar com salário.",
     cues: ["mostrar com salário"],
   },
   {
@@ -186,65 +153,6 @@ export const slides: Slide[] = [
     },
     notes:
       "Uma daqui de BH, uma brasileira gigante e uma global. Liga cada uma no tier dela. Deixa uns 20 segundos e fala mostra o resultado. A dti compete por talento aqui, o Nubank no Brasil inteiro, o Google com o mundo. Pelos nossos dados, sênior na dti fica perto de 14 mil por mês, no Nubank perto de 31 mil, e no Google bem acima de 50 mil.",
-  },
-  {
-    id: "tier-list",
-    section: "1. Mercado global",
-    visual: {
-      kind: "tierList",
-      eyebrow: "Exemplos pela remuneração de sênior no NaGringa",
-      title: "Nubank compete no Brasil. Uber, com o mundo.",
-      rows: [
-        {
-          tier: "3",
-          label: "Compete com o mundo",
-          companies: [
-            { name: "Uber", logo: "/logos/uber.com.webp" },
-            { name: "Google", logo: "/logos/google.com.webp" },
-            { name: "Coinbase", logo: "/logos/coinbase.com.webp" },
-            { name: "Spotify", logo: "/logos/spotify.com.webp" },
-            { name: "Brex", logo: "/logos/brex.com.webp" },
-            { name: "GitHub", logo: "/logos/github.com.webp" },
-            { name: "Airbnb", logo: "/logos/airbnb.com.webp" },
-            { name: "PostHog", logo: "/logos/posthog.com.webp" },
-          ],
-        },
-        {
-          tier: "2",
-          label: "Compete no Brasil",
-          companies: [
-            { name: "Nubank", logo: "/logos/nubank.com.br.webp" },
-            { name: "Mercado Livre", logo: "/logos/mercadolivre.com.br.webp" },
-            { name: "iFood", logo: "/logos/ifood.com.br.webp" },
-            { name: "Itaú", logo: "/logos/itau.com.br.webp" },
-            { name: "Bradesco", logo: "/logos/bradesco.com.br.webp" },
-            { name: "Stone", logo: "/logos/stone.com.br.webp" },
-            { name: "QuintoAndar", logo: "/logos/quintoandar.com.br.webp" },
-            { name: "VTEX", logo: "/logos/vtex.com.webp" },
-          ],
-        },
-        {
-          tier: "1",
-          label: "Compete na cidade",
-          companies: [
-            { name: "CI&T", logo: "/logos/ciandt.com.webp" },
-            { name: "Accenture", logo: "/logos/accenture.com.webp" },
-            { name: "Avanade", logo: "/logos/avanade.com.webp" },
-            { name: "ThoughtWorks", logo: "/logos/thoughtworks.com.webp" },
-            { name: "Zup", logo: "/logos/zup.com.br.webp" },
-            { name: "Compass UOL", logo: "/logos/compass.uol.webp" },
-            { name: "NTT DATA", logo: "/logos/nttdata.com.webp" },
-            { name: "dti digital", logo: "/logos/dtidigital.com.br.webp" },
-          ],
-        },
-      ],
-      highlight: "Nubank",
-      source:
-        "Sênior, mediana mensal, dez/2025 a nov/2026: consultorias R$ 11 a 19 mil, bancos e grandes nacionais R$ 23 a 31 mil, globais R$ 50 a 66 mil.",
-    },
-    notes:
-      "O Nubank é ótimo e paga bem, mas compete com o mercado brasileiro: tier 2. Consultoria compete na cidade: tier 1. E as globais competem com o mundo inteiro, e várias contratam quem mora aqui. Marca não é tier: tem empresa famosa pagando mercado local. E isso dá pra fazer morando em Belo Horizonte.",
-    cues: ["morando em belo horizonte"],
   },
   {
     id: "tier-top",
@@ -358,7 +266,7 @@ export const slides: Slide[] = [
         items: ["Escrever código", "Aprender uma stack nova", "Fazer um protótipo"],
       },
       right: {
-        label: "Ficou caro",
+        label: "Ficou caro, e dá pra treinar agora",
         items: ["Saber o que construir", "Ter gosto pra saber se está bom", "Fazer alguém usar"],
       },
     },
@@ -378,30 +286,6 @@ export const slides: Slide[] = [
     notes:
       'Pausa curta. Anuncie a parte: "Parte três: o que o mundo compra." Dizer "parte três" avança.',
     cues: ["parte três", "parte 3"],
-  },
-  {
-    id: "pe-def",
-    section: "3. O que o mundo compra",
-    visual: {
-      kind: "compare",
-      eyebrow: "Product engineer",
-      title: "Responsável pelo negócio, não pelo ticket.",
-      left: {
-        label: "Engenheiro de ticket",
-        items: ["Recebe a especificação", "Entrega o que pediram", "Mede por código entregue"],
-      },
-      right: {
-        label: "Product engineer",
-        items: [
-          "Conversa com o usuário",
-          "Decide o que vale construir",
-          "Mede pelo resultado do negócio",
-        ],
-      },
-    },
-    notes:
-      "Se escrever código ficou barato, a empresa lá fora paga por quem sabe o que construir. No meu cargo isso tem nome: product engineer. Na PostHog, cada time pequeno de engenheiros é dono de um produto: fala com cliente, olha os dados de uso, decide o que construir e responde pelo resultado. Quem mais contrata product engineer são justamente as empresas tier 3. Com IA, quem só executa ticket compete com a máquina. Quem é responsável pelo negócio fica mais valioso.",
-    cues: ["responsável pelo negócio fica mais valioso", "negócio fica mais valioso"],
   },
   {
     id: "positioning",
@@ -528,26 +412,11 @@ export const slides: Slide[] = [
     cues: ["prova pública ganha de currículo", "ganha de currículo"],
   },
   {
-    id: "referral",
-    section: "4. Como chegar lá",
-    visual: {
-      kind: "bigNumber",
-      eyebrow: "Indicação vs. aplicar online, com o mesmo currículo",
-      value: "11x",
-      label: "mais chance de ser contratado quando alguém te indica.",
-      source:
-        "Gem, 165 milhões de aplicações (2021 a 2025). Na Ashby, indicação é 1% das aplicações e 17 a 18% das contratações.",
-    },
-    notes:
-      "Aplicar online é jogar na loteria. Na PostHog foram mais de 9 mil aplicações em 12 meses, uns 460 candidatos por vaga. Indicação é 1% das aplicações e quase um quinto das contratações. Então a pergunta não é onde aplicar. É quem pode te indicar.",
-    cues: ["quem pode te indicar"],
-  },
-  {
     id: "who-refers",
     section: "4. Como chegar lá",
     visual: {
       kind: "list",
-      eyebrow: "Quem pode te indicar, do mais forte pro mais fraco",
+      eyebrow: "Indicação dá 11x mais chance que aplicar online",
       title: "Sua rede já começou aqui na PUC.",
       items: [
         {
@@ -569,7 +438,7 @@ export const slides: Slide[] = [
       ],
     },
     notes:
-      "Quem trabalhou com você e gostou de você é seu melhor recurso pras próximas oportunidades. Foi assim comigo: no layoff da Coinbase, quem me salvou foi a Increment. Cada trabalho em grupo daqui é a sua rede começando. E professor é atalho: eles conhecem gente do mercado inteiro.",
+      "Aplicar online é loteria: na PostHog foram mais de 9 mil aplicações em 12 meses. Com o mesmo currículo, indicação dá 11 vezes mais chance (Gem, 165 milhões de aplicações; na Ashby, indicação é 1% das aplicações e quase um quinto das contratações). Quem trabalhou com você e gostou de você é seu melhor recurso: no layoff da Coinbase, quem me salvou foi a Increment. Cada trabalho em grupo daqui é a sua rede começando. E professor é atalho.",
     cues: ["professor é atalho"],
   },
   {
@@ -603,30 +472,23 @@ export const slides: Slide[] = [
     cues: ["vale mais que qualquer currículo"],
   },
   {
-    id: "homework",
+    id: "commit",
     section: "Fechamento",
-    visual: {
-      kind: "list",
-      eyebrow: "Se eu estivesse no seu lugar",
-      title: "O que eu faria este semestre.",
-      items: [
-        { title: "Coloque algo no ar", body: "Com usuários de verdade, nem que sejam dez" },
-        {
-          title: "Mande uma mensagem por semana",
-          body: "Pra um colega, um professor ou um founder. Peça indicação antes de aplicar",
-        },
-        {
-          title: "Aumente suas opções",
-          body: "Local, nacional ou global: quanto mais empresas podem te contratar, melhor",
-        },
-        {
-          title: "Escreva em público, em inglês também",
-          body: "O que aprendeu, o que errou, o que mediu",
-        },
+    visual: { kind: "results", eyebrow: "Se eu estivesse no seu lugar, este semestre" },
+    interaction: {
+      kind: "choice",
+      pollId: "commit",
+      question: "Qual destes você começa essa semana?",
+      options: [
+        { id: "ship", label: "Colocar algo no ar, com usuários" },
+        { id: "message", label: "Uma mensagem por semana" },
+        { id: "options", label: "Aumentar minhas opções" },
+        { id: "write", label: "Escrever em público" },
       ],
     },
-    notes: "Quatro coisas concretas. Nenhuma depende de sair de BH.",
-    cues: ["nenhuma depende de sair de bh"],
+    notes:
+      "Quatro coisas concretas, nenhuma depende de sair de BH. Colocar algo no ar com usuários de verdade, nem que sejam dez. Mandar uma mensagem por semana, pra um colega, um professor ou um founder, e pedir indicação antes de aplicar. Aumentar as opções: local, nacional ou global. E escrever em público, em inglês também. Escolhe uma e começa essa semana.",
+    cues: ["começa essa semana"],
   },
   {
     id: "close",

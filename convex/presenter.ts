@@ -18,7 +18,7 @@ export async function readSession(ctx: QueryCtx): Promise<Doc<"session"> | null>
 
 export async function patchSession(
   ctx: MutationCtx,
-  patch: Partial<Pick<Doc<"session">, "slideIndex" | "revealed" | "voiceEnabled">>,
+  patch: Partial<Pick<Doc<"session">, "slideIndex" | "revealed" | "voiceEnabled" | "pollOpenedAt">>,
 ): Promise<void> {
   const current = await readSession(ctx);
   if (current) await ctx.db.patch("session", current._id, patch);

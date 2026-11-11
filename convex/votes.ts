@@ -56,8 +56,11 @@ export const resetPoll = mutation({
       .withIndex("by_pollId_and_clientId", (q) => q.eq("pollId", parsePollId(pollId)))
       .take(VOTES_PER_POLL_CAP);
     await Promise.all(votes.map((vote) => ctx.db.delete("votes", vote._id)));
-    const revealed = (await readSession(ctx))?.revealed ?? {};
-    await patchSession(ctx, { revealed: { ...revealed, [pollId]: false } });
+    // Forget the poll entirely, so its countdown and auto-reveal run again next time.
+    const session = await readSession(ctx);
+    const { [pollId]: _revealed, ...revealed } = session?.revealed ?? {};
+    const { [pollId]: _opened, ...pollOpenedAt } = session?.pollOpenedAt ?? {};
+    await patchSession(ctx, { revealed, pollOpenedAt });
     return null;
   },
 });

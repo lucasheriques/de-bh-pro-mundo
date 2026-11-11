@@ -842,3 +842,42 @@
   position: absolute;
   inset: -6px -2px;
 }
+
+/* Poll countdown above the options */
+
+.phone-countdown {
+  --cell: 8px;
+  --cell-gap: 2px;
+  display: grid;
+  gap: 6px;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-ink);
+}
+
+.phone-countdown-bar {
+  position: relative;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--surface-2) 0 calc(var(--cell) - var(--cell-gap)),
+    transparent 0 var(--cell)
+  );
+}
+
+.phone-countdown-fill {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0 calc(var(--cell) - var(--cell-gap)),
+    transparent 0 var(--cell)
+  );
+  clip-path: inset(0 calc((1 - var(--share)) * 100%) 0 0);
+  transition: clip-path 250ms linear;
+}

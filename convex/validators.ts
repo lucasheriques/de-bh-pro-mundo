@@ -8,6 +8,7 @@ export const DEFAULT_SESSION = {
   slideIndex: 0,
   revealed: {} as Record<string, boolean>,
   voiceEnabled: false,
+  pollOpenedAt: {} as Record<string, number>,
 };
 
 export { QUESTION_MAX_LENGTH } from "./moderation";

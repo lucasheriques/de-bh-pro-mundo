@@ -4,6 +4,7 @@ import { ConnectionDot } from "../live/ConnectionDot";
 import { CueBanner } from "../live/CueBanner";
 import { presenterKey } from "../live/env";
 import { Roster } from "../live/Roster";
+import { Shortcuts } from "../live/Shortcuts";
 import {
   type Deck,
   pollIdOf,
@@ -12,7 +13,6 @@ import {
   useDeck,
   useDeckKeys,
 } from "../live/useDeck";
-import { Shortcuts } from "../live/Shortcuts";
 import { type StageTheme, useStageTheme } from "../live/useStoredToggle";
 import { Scaled } from "../stage/Scaled";
 import { SlideCanvas } from "../stage/SlideCanvas";

@@ -7,6 +7,8 @@ export default defineSchema({
     slideIndex: v.number(),
     revealed: v.record(v.string(), v.boolean()),
     voiceEnabled: v.boolean(),
+    /** When each poll's results slide was first shown; its countdown starts there. */
+    pollOpenedAt: v.optional(v.record(v.string(), v.number())),
   }),
   audience: defineTable({
     clientId: v.string(),
