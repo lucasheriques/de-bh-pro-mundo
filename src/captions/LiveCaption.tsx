@@ -54,10 +54,24 @@ function useFollowBottom(changed: unknown) {
  * The newest speech at the bottom: older text dims above it and stays scrollable, a long
  * pause starts a new line, and the words still being recognised end in a cursor.
  */
-export function LiveCaption({ className, history = 2 }: { className: string; history?: number }) {
+export function LiveCaption({
+  className,
+  history = 2,
+  emptyText,
+}: {
+  className: string;
+  history?: number;
+  /** Shown while nothing has been said yet; without it, an empty caption renders nothing. */
+  emptyText?: string;
+}) {
   const { lines, draft, draftBreak } = useLiveCaptions();
   const paragraphs = toParagraphs(lines.slice(-history), draft, draftBreak);
   const follow = useFollowBottom(`${lines.at(-1)?._id}:${draft}`);
+  if (paragraphs.length === 0) {
+    return emptyText ? (
+      <p className={`live-caption caption-empty ${className}`}>{emptyText}</p>
+    ) : null;
+  }
   return (
     <div
       ref={follow.ref}

@@ -108,7 +108,13 @@ export function PhoneDock({
   return (
     <div className="phone-dock">
       {captionsOn ? <CaptionsHead on={captions} onToggle={onToggleCaptions} /> : null}
-      {captionsOn && captions ? <LiveCaption className="caption-strip" history={8} /> : null}
+      {captionsOn && captions ? (
+        <LiveCaption
+          className="caption-strip"
+          history={8}
+          emptyText="As legendas aparecem aqui quando o Lucas começar a falar."
+        />
+      ) : null}
       {showQuestions && desktop ? (
         <section className="dock-questions" aria-label="Perguntas da sala">
           <p className="eyebrow">Perguntas da sala</p>

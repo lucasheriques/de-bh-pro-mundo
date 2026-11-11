@@ -1199,3 +1199,13 @@
 .phone-link:active {
   transform: scale(0.98);
 }
+
+.caption-strip.caption-empty {
+  justify-content: center;
+  height: auto;
+  min-height: 2.9em;
+  font-size: 15px;
+  color: var(--muted);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
