@@ -263,26 +263,27 @@ export const slides: Slide[] = [
     section: "2. O que a IA mudou",
     visual: {
       kind: "bars",
-      eyebrow: "Meus PRs mergeados na PostHog",
-      title: "Com IA, eu entrego o dobro.",
+      eyebrow: "Meus PRs mergeados, em todos os projetos",
+      title: "Dá pra fazer 10x mais. A\u00a0ambição tem que subir junto.",
       bars: [
-        { label: "Jan a mar de 2025 · 90 dias", value: 101, display: "101 PRs · 11 mil linhas" },
+        { label: "Jan a mar de 2025 · 90 dias", value: 101, display: "101 PRs · 1 por dia" },
         {
           label: "Set a nov de 2026 · 71 dias",
-          value: 211,
-          display: "211 PRs · 87 mil linhas",
+          value: 928,
+          display: "928 PRs · 13 por dia",
           highlight: true,
         },
       ],
       source:
-        "GitHub, PRs mergeados de lucasheriques na org PostHog. Entrei em dez/2024. Só novembro de 2026 já tem 88 PRs em 10 dias.",
+        "GitHub, PRs mergeados de lucasheriques: em 2025 só PostHog; em 2026 PostHog, NaGringa e projetos pessoais.",
     },
     notes: [
-      "Momento: 101 PRs no primeiro trimestre, 211 nos últimos 71 dias, oito vezes mais código",
+      "Momento: 1 PR por dia no começo de 2025, 13 por dia agora",
       "Esta apresentação foi feita ontem, por agentes",
-      "Não fiquei mais rápido digitando: escrevo menos à mão e decido mais",
+      "Dá pra fazer muito mais, então a ambição tem que subir junto",
+      "Fazer mais só vale se for a coisa certa: por isso o gosto pesa mais",
     ],
-    cues: ["decidir mais"],
+    cues: ["o gosto pesa mais"],
   },
   {
     id: "scarce",
