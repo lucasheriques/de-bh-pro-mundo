@@ -526,6 +526,38 @@ export const slides: Slide[] = [
     cues: ["vale mais que qualquer currículo"],
   },
   {
+    id: "recap",
+    section: "Fechamento",
+    visual: {
+      kind: "list",
+      eyebrow: "Resumo da noite",
+      title: "Quatro coisas pra levar daqui.",
+      items: [
+        {
+          title: "O mercado define o seu salário",
+          body: "Contra quem a empresa compete pesa mais que a stack: quase 5x",
+        },
+        {
+          title: "Escrever código ficou barato",
+          body: "Dá pra fazer 10x mais. Saber o que construir é a parte cara",
+        },
+        {
+          title: "Mostre o problema que você resolveu",
+          body: "Se apresente pelo resultado, não pela lista de tecnologias",
+        },
+        {
+          title: "Indicação ganha de aplicação",
+          body: "Sua rede começa aqui: colegas, professores, ex-alunos",
+        },
+      ],
+    },
+    notes: [
+      "Uma frase por parte, sem repetir a talk inteira",
+      "Fecha perguntando qual delas cada um quer tentar primeiro",
+    ],
+    cues: ["quatro coisas pra levar"],
+  },
+  {
     id: "commit",
     section: "Fechamento",
     visual: { kind: "results", eyebrow: "Se eu estivesse no seu lugar, este semestre" },
