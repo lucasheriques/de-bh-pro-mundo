@@ -1,0 +1,124 @@
+/*
+ * Dark is the default everywhere. The light theme only applies inside a stage root
+ * (the projector canvas and the presenter thumbnails) carrying data-theme="light".
+ * Dark hues sit at L >= 0.72 so they survive a projector lifting black to gray.
+ */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: oklch(0.17 0.03 285);
+  --glow-a: oklch(0.32 0.09 295 / 0.45);
+  --glow-b: oklch(0.3 0.06 200 / 0.3);
+  --surface: oklch(0.22 0.035 285);
+  --surface-2: oklch(0.27 0.04 285);
+  --ink: oklch(0.97 0.01 285);
+  --muted: oklch(0.8 0.03 285);
+  --rule: oklch(0.33 0.04 285);
+  --rule-strong: oklch(0.45 0.045 285);
+  --on-hue: oklch(0.17 0.03 285);
+  --qr-ground: oklch(0.97 0.01 285);
+  --warning: oklch(0.84 0.15 80);
+
+  --hue-1: oklch(0.73 0.16 27);
+  --hue-1-ink: oklch(0.82 0.12 27);
+  --hue-1-soft: oklch(0.29 0.07 27);
+  --hue-2: oklch(0.84 0.15 82);
+  --hue-2-ink: oklch(0.88 0.12 85);
+  --hue-2-soft: oklch(0.3 0.06 82);
+  --hue-3: oklch(0.72 0.17 295);
+  --hue-3-ink: oklch(0.81 0.12 295);
+  --hue-3-soft: oklch(0.3 0.08 295);
+  --hue-4: oklch(0.8 0.13 182);
+  --hue-4-ink: oklch(0.86 0.11 182);
+  --hue-4-soft: oklch(0.29 0.05 185);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --ground: oklch(0.975 0.008 260);
+  --glow-a: oklch(0.93 0.05 300 / 0.7);
+  --glow-b: oklch(0.94 0.045 190 / 0.7);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.94 0.012 260);
+  --ink: oklch(0.24 0.035 275);
+  --muted: oklch(0.45 0.03 275);
+  --rule: oklch(0.86 0.015 265);
+  --rule-strong: oklch(0.74 0.02 265);
+  --on-hue: oklch(0.99 0 0);
+  --qr-ground: oklch(1 0 0);
+  --warning: oklch(0.55 0.13 70);
+
+  --hue-1: oklch(0.68 0.19 22);
+  --hue-1-ink: oklch(0.5 0.17 22);
+  --hue-1-soft: oklch(0.94 0.04 22);
+  --hue-2: oklch(0.79 0.16 78);
+  --hue-2-ink: oklch(0.52 0.12 70);
+  --hue-2-soft: oklch(0.95 0.05 85);
+  --hue-3: oklch(0.6 0.21 290);
+  --hue-3-ink: oklch(0.48 0.2 290);
+  --hue-3-soft: oklch(0.94 0.04 290);
+  --hue-4: oklch(0.7 0.13 185);
+  --hue-4-ink: oklch(0.47 0.09 190);
+  --hue-4-soft: oklch(0.94 0.04 185);
+}
+
+/* Aliases resolve per theme root, so each root re-declares them. */
+:root,
+[data-theme] {
+  --accent: var(--hue-1);
+  --accent-ink: var(--hue-1-ink);
+  --accent-soft: var(--hue-1-soft);
+}
+
+[data-hue="1"] {
+  --hue: var(--hue-1);
+  --hue-ink: var(--hue-1-ink);
+  --hue-soft: var(--hue-1-soft);
+}
+
+[data-hue="2"] {
+  --hue: var(--hue-2);
+  --hue-ink: var(--hue-2-ink);
+  --hue-soft: var(--hue-2-soft);
+}
+
+[data-hue="3"] {
+  --hue: var(--hue-3);
+  --hue-ink: var(--hue-3-ink);
+  --hue-soft: var(--hue-3-soft);
+}
+
+[data-hue="4"] {
+  --hue: var(--hue-4);
+  --hue-ink: var(--hue-4-ink);
+  --hue-soft: var(--hue-4-soft);
+}
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drop: linear(
+    0,
+    0.06 8%,
+    0.25 17%,
+    0.56 27%,
+    1 37%,
+    0.9 45%,
+    0.86 49%,
+    0.9 54%,
+    1 62%,
+    0.97 68%,
+    0.965 71%,
+    0.97 74%,
+    1 80%,
+    1
+  );
+  --font-body: "Open Runde", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+[data-theme-switching] *,
+[data-theme-switching] *::before,
+[data-theme-switching] *::after {
+  transition: none;
+}

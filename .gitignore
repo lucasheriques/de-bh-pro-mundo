@@ -1,0 +1,7 @@
+node_modules
+dist
+.checks
+.env.local
+.vercel
+*.local.md
+*.local.*

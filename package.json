@@ -1,0 +1,42 @@
+{
+  "name": "de-bh-pro-mundo",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Live deck for the talk De BH pro mundo (PUC Minas, Nov 2026): the room votes and asks on the phone, results sync live through Convex",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasheriques/de-bh-pro-mundo.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite --port 3051 --strictPort",
+    "convex": "convex dev",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit -p .",
+    "lint": "biome check .",
+    "test": "vitest run",
+    "e2e": "node scripts/e2e.mjs"
+  },
+  "dependencies": {
+    "@fontsource/open-runde": "5.2.1",
+    "convex": "1.46.0",
+    "qrcode": "1.5.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.7",
+    "@types/qrcode": "1.5.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.0.2",
+    "playwright-chromium": "1.63.0",
+    "typescript": "6.0.2",
+    "vite": "8.3.1",
+    "vitest": "5.0.1"
+  }
+}
