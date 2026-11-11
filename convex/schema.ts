@@ -1,6 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
-import { reactionKind } from "./validators";
+import { storedReactionKind } from "./validators";
 
 export default defineSchema({
   session: defineTable({
@@ -38,7 +38,7 @@ export default defineSchema({
     .index("by_questionId_and_clientId", ["questionId", "clientId"])
     .index("by_clientId", ["clientId"]),
   reactions: defineTable({
-    kind: reactionKind,
+    kind: storedReactionKind,
     clientId: v.string(),
     createdAt: v.number(),
   }).index("by_clientId_and_createdAt", ["clientId", "createdAt"]),

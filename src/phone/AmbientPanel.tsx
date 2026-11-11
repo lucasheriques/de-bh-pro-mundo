@@ -1,5 +1,5 @@
 import { useMutation } from "convex/react";
-import { useEffect, useState } from "react";
+import { type CSSProperties, useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import { REACTION_COOLDOWN_MS, REACTION_KINDS, type ReactionKind } from "../../convex/validators";
 import { SlideText } from "../content/ContentPage";
@@ -74,6 +74,7 @@ export function AmbientPanel({ slide }: { slide: Slide }) {
             key={kind}
             type="button"
             className={`reaction ${wait > 0 && cooldown.kind === kind ? "is-sent" : ""}`}
+            style={{ "--reaction": REACTIONS[kind].color } as CSSProperties}
             disabled={wait > 0}
             onClick={() => react(kind)}
           >

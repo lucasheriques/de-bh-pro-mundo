@@ -6,7 +6,7 @@ import { components } from "./_generated/api";
  * fake phones can push onto the projector.
  */
 export const rateLimiter = new RateLimiter(components.rateLimiter, {
-  question: { kind: "token bucket", rate: 3, period: MINUTE, capacity: 3 },
+  question: { kind: "token bucket", rate: 5, period: MINUTE, capacity: 5 },
   questionRoom: { kind: "token bucket", rate: 40, period: MINUTE, capacity: 20 },
   vote: { kind: "token bucket", rate: 30, period: MINUTE, capacity: 10 },
   name: { kind: "token bucket", rate: 6, period: MINUTE, capacity: 3 },

@@ -8,7 +8,7 @@ import { parseClientId } from "./validators";
 
 const LIST_LIMIT = 50;
 
-const QUESTIONS_PER_PERSON = 8;
+const QUESTIONS_PER_PERSON = 20;
 
 export const ask = mutation({
   args: { clientId: v.string(), text: v.string() },

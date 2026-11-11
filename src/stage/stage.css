@@ -898,18 +898,25 @@
   overflow: hidden;
 }
 
+/*
+ * Reactions rise from the bottom edge in one smooth decelerating move. Rise, fade and the
+ * icon's pop are separate tracks: easing per keyframe segment made the old rise stutter.
+ */
 .reaction-bubble {
   position: absolute;
-  bottom: 140px;
+  bottom: 24px;
   translate: -50% 0;
-  animation: bubble-rise 3600ms cubic-bezier(0.2, 0.6, 0.3, 1) both;
+  will-change: transform, opacity;
+  animation:
+    bubble-rise var(--rise, 3200ms) cubic-bezier(0.22, 0.61, 0.36, 1) both,
+    bubble-fade var(--rise, 3200ms) linear both;
 }
 
 .reaction-bubble-body {
   display: grid;
   justify-items: center;
   gap: 6px;
-  animation: bubble-sway 1300ms ease-in-out infinite alternate;
+  animation: bubble-sway 1600ms ease-in-out infinite alternate;
 }
 
 .reaction-bubble-icon {
@@ -920,14 +927,16 @@
   border-radius: 50%;
   background: var(--surface);
   box-shadow:
-    inset 0 0 0 3px var(--accent),
+    inset 0 0 0 3px var(--reaction),
     0 10px 28px oklch(0 0 0 / 0.3);
-  color: var(--accent-ink);
+  color: var(--reaction);
+  animation: bubble-pop 250ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  animation-delay: inherit;
 }
 
 .reaction-bubble-icon svg {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
 }
 
 .reaction-bubble-name {
@@ -944,23 +953,30 @@
 }
 
 @keyframes bubble-rise {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-620px);
+  }
+}
+
+@keyframes bubble-fade {
   0% {
     opacity: 0;
-    transform: translateY(0) scale(0.6);
   }
-  10% {
-    opacity: 1;
-    transform: translateY(-40px) scale(1.06);
-  }
-  18% {
-    transform: translateY(-80px) scale(1);
-  }
-  78% {
+  8%,
+  72% {
     opacity: 1;
   }
   100% {
     opacity: 0;
-    transform: translateY(-560px) scale(0.96);
+  }
+}
+
+@keyframes bubble-pop {
+  from {
+    transform: scale(0.9);
   }
 }
 

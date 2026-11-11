@@ -7,6 +7,9 @@ import { QUESTION_MAX_LENGTH } from "../../convex/validators";
 import { clientId } from "../live/env";
 import { QuestionList } from "./QuestionList";
 
+/** The length counter only shows up once a question gets long. */
+const COUNTER_FROM = QUESTION_MAX_LENGTH - 80;
+
 type AskStatus = "idle" | "sending" | "sent" | "error";
 
 const STATUS_NOTE: Partial<Record<AskStatus, string>> = {
@@ -90,7 +93,7 @@ export function AskForm({ onSent }: { onSent?: () => void }) {
         <span className="mono muted">
           {(status === "error" && reason) ||
             STATUS_NOTE[status] ||
-            `${trimmed.length}/${QUESTION_MAX_LENGTH}`}
+            (trimmed.length >= COUNTER_FROM ? `${trimmed.length}/${QUESTION_MAX_LENGTH}` : "")}
         </span>
         <button type="submit" className="primary" disabled={!trimmed || sending}>
           {sending ? "Mandando…" : "Mandar pergunta"}

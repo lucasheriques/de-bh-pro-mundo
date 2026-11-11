@@ -12,9 +12,10 @@ type Bubble = {
   x: number;
   sway: number;
   delay: number;
+  rise: number;
 };
 
-const RISE_MS = 3600;
+const RISE_MS = 3200;
 const MAX_BUBBLES = 10;
 /** Bubbles rise inside the slide's empty right margin, so they never cover content. */
 const LANE_FROM = 94;
@@ -45,12 +46,13 @@ export function ReactionsLayer() {
       x: LANE_FROM + Math.random() * LANE_WIDTH,
       sway: 6 + Math.random() * 10,
       delay: i * STAGGER_MS,
+      rise: RISE_MS * (0.9 + Math.random() * 0.2),
     }));
     setBubbles((current) => [...current, ...added].slice(-MAX_BUBBLES));
     const ids = new Set(added.map((bubble) => bubble.id));
     window.setTimeout(
       () => setBubbles((current) => current.filter((bubble) => !ids.has(bubble.id))),
-      RISE_MS + added.length * STAGGER_MS,
+      RISE_MS * 1.1 + added.length * STAGGER_MS,
     );
   }, [recent]);
 
@@ -64,6 +66,8 @@ export function ReactionsLayer() {
             {
               left: `${bubble.x}%`,
               "--sway": `${bubble.sway}px`,
+              "--rise": `${bubble.rise}ms`,
+              "--reaction": REACTIONS[bubble.kind].color,
               animationDelay: `${bubble.delay}ms`,
             } as CSSProperties
           }

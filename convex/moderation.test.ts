@@ -13,7 +13,7 @@ describe("checkQuestion", () => {
     { input: "kkkkkkkkkkkkkkkk", ok: false },
     { input: "que porra é essa", ok: false },
     { input: "c a r a l h o", ok: false },
-    { input: "a".repeat(3) + " ".repeat(2) + "b".repeat(250), ok: false },
+    { input: `${"palavra ".repeat(40)}`, ok: false },
     { input: "pergunta​ invisível\u0007", ok: true, text: "pergunta invisível" },
   ])("$input -> ok: $ok", ({ input, ok, text }) => {
     const check = checkQuestion(input);

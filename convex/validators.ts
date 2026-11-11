@@ -1,8 +1,16 @@
 import { ConvexError, v } from "convex/values";
 
-export const REACTION_KINDS = ["sense", "spicy", "more", "wow"] as const;
+/** The reactions people know from Meet and Zoom. */
+export const REACTION_KINDS = ["clap", "love", "laugh", "wow"] as const;
 export type ReactionKind = (typeof REACTION_KINDS)[number];
 export const reactionKind = v.union(...REACTION_KINDS.map((kind) => v.literal(kind)));
+/** Kinds from the first reaction set; only stored rows carry them, nobody can send them. */
+const RETIRED_REACTION_KINDS = ["sense", "spicy", "more"] as const;
+export const storedReactionKind = v.union(
+  ...[...REACTION_KINDS, ...RETIRED_REACTION_KINDS].map((kind) => v.literal(kind)),
+);
+export const isReactionKind = (kind: string): kind is ReactionKind =>
+  (REACTION_KINDS as readonly string[]).includes(kind);
 /** One reaction per person this often, so the stage never fills up. */
 export const REACTION_COOLDOWN_MS = 10_000;
 

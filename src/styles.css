@@ -490,7 +490,7 @@ html input:focus-visible {
 .reaction svg {
   width: 26px;
   height: 26px;
-  color: var(--accent);
+  color: var(--reaction, var(--accent));
 }
 
 .reaction:active {

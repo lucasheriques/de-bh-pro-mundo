@@ -2,7 +2,7 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { nameOf } from "./audience";
 import { rateLimiter } from "./rateLimits";
-import { parseClientId, REACTION_COOLDOWN_MS, reactionKind } from "./validators";
+import { isReactionKind, parseClientId, REACTION_COOLDOWN_MS, reactionKind } from "./validators";
 
 const RECENT_LIMIT = 30;
 
@@ -29,8 +29,11 @@ export const recent = query({
   args: {},
   handler: async (ctx) => {
     const reactions = await ctx.db.query("reactions").order("desc").take(RECENT_LIMIT);
+    const current = reactions.flatMap((reaction) =>
+      isReactionKind(reaction.kind) ? [{ ...reaction, kind: reaction.kind }] : [],
+    );
     return await Promise.all(
-      reactions.map(async ({ _id, kind, createdAt, clientId }) => ({
+      current.map(async ({ _id, kind, createdAt, clientId }) => ({
         _id,
         kind,
         createdAt,

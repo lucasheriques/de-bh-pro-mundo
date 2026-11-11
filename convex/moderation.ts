@@ -56,7 +56,7 @@ export function isOffensive(text: string): boolean {
 }
 
 export const QUESTION_MIN_LETTERS = 3;
-export const QUESTION_MAX_LENGTH = 240;
+export const QUESTION_MAX_LENGTH = 280;
 
 const INVISIBLE = /[\p{Cc}\p{Cf}]/gu;
 const LINK = /(https?:\/\/|www\.|\b[\w-]+\.(com|net|org|io|br|xyz|ly|gg|me|co|app)\b)/i;
