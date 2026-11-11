@@ -76,6 +76,7 @@ export function AskForm({ onSent }: { onSent?: () => void }) {
         enterKeyHint="send"
         autoCapitalize="sentences"
         onKeyDown={submitOnEnter}
+        aria-label="Sua pergunta"
         placeholder="O que você quer perguntar?"
         onChange={(event) => {
           setText(event.target.value);

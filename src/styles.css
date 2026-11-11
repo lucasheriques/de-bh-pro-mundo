@@ -1013,6 +1013,7 @@ html input:focus-visible {
 .voice-log-kind {
   font-size: 11px;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 

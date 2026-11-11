@@ -33,6 +33,17 @@ const routes = {
   "/remote": RemotePage,
 } as const;
 const path = window.location.pathname.replace(/\/+$/, "") || "/";
+
+/** Phone and helper pages follow the system theme; stage and presenter keep their own T toggle. */
+const followsSystemTheme = path !== "/stage" && path !== "/presenter";
+if (followsSystemTheme) {
+  const light = window.matchMedia("(prefers-color-scheme: light)");
+  const apply = () => {
+    document.documentElement.dataset.theme = light.matches ? "light" : "dark";
+  };
+  apply();
+  light.addEventListener("change", apply);
+}
 const Page = routes[path as keyof typeof routes] ?? PhonePage;
 
 const root = document.getElementById("root");
