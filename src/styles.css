@@ -1435,20 +1435,8 @@ html input:focus-visible {
   margin-left: 0.12em;
   vertical-align: -0.14em;
   background: var(--accent);
-  animation: caret-blink 1s steps(1) infinite;
 }
 
-@keyframes caret-blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .caption-draft::after {
-    animation: none;
-  }
-}
 
 .overview-section {
   grid-column: 1 / -1;

@@ -29,6 +29,8 @@ export const push = mutation({
     const trimmed = text.trim().slice(0, CAPTION_MAX_LENGTH);
     if (trimmed.length === 0) return null;
     const previous = await ctx.db.query("captions").order("desc").first();
+    // Same transaction as the new line: the live draft never blanks out before the line lands.
+    await writeDraft(ctx, "", false);
     await ctx.db.insert("captions", {
       text: trimmed,
       slideIndex,

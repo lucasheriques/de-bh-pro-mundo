@@ -139,8 +139,10 @@ export function useCaptionStream(enabled: boolean, slideIndex: number): CaptionS
         consumed = 0;
         draftText = "";
         if (draftTimer !== null) window.clearTimeout(draftTimer);
-        flushDraft();
-        publish(rest);
+        draftTimer = null;
+        // Publishing clears the draft on the server in the same step, so nothing blinks.
+        if (rest) publish(rest);
+        else flushDraft();
       },
     };
 
