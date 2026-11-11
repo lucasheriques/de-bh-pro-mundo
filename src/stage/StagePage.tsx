@@ -1,4 +1,5 @@
 import { presenterKey } from "../live/env";
+import { useCaptionsEnabled } from "../live/features";
 import { toggleFullscreen, useDeck, useDeckKeys } from "../live/useDeck";
 import { useStageTheme, useStoredToggle } from "../live/useStoredToggle";
 import { slides } from "../talk/slides";
@@ -15,6 +16,7 @@ export function StagePage() {
   const [captions, toggleCaptions] = useStoredToggle("puc-ia-2026:stage-captions", CAPTION_STATES);
   const [theme, toggleTheme] = useStageTheme("stage");
   const preview = useSlidePreview();
+  const captionsOn = useCaptionsEnabled();
   const index = preview?.index ?? deck.index;
   const slide = slides[index] ?? deck.slide;
   useSlideHash(slide.id, preview === null);
@@ -35,7 +37,7 @@ export function StagePage() {
         <SectionLabel slide={slide} />
         <SlideCanvas slide={slide} />
         <ReactionsLayer />
-        {captions === "on" ? <CaptionLine /> : null}
+        {captionsOn && captions === "on" ? <CaptionLine /> : null}
         <CornerQr slide={slide} />
         <ProgressBar index={index} />
       </Scaled>

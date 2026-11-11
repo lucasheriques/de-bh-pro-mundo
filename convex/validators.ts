@@ -19,6 +19,7 @@ export const DEFAULT_SESSION = {
   revealed: {} as Record<string, boolean>,
   voiceEnabled: false,
   pollOpenedAt: {} as Record<string, number>,
+  captionsEnabled: false,
 };
 
 export { QUESTION_MAX_LENGTH } from "./moderation";

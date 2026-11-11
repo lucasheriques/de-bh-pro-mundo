@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "convex/react";
 import { useState } from "react";
 import { api } from "../../convex/_generated/api";
+import { CaptionsToggle } from "../live/CaptionsToggle";
 import { forgetPresenterKey, presenterKey, savePresenterKey } from "../live/env";
 import { Roster } from "../live/Roster";
 import { Shortcuts } from "../live/Shortcuts";
@@ -53,6 +54,15 @@ function RoomStats() {
           <PollCount key={poll.pollId} {...poll} />
         ))}
       </ul>
+    </section>
+  );
+}
+
+function CaptionsSwitch() {
+  return (
+    <section className="admin-card">
+      <h2>Legendas ao vivo</h2>
+      <CaptionsToggle />
     </section>
   );
 }
@@ -154,6 +164,7 @@ export function AdminPage() {
     <main className="admin">
       <h1>Admin</h1>
       <NewSession />
+      <CaptionsSwitch />
       <RoomStats />
       <Roster />
       <Links />

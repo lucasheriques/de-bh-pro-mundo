@@ -1,5 +1,6 @@
 import { type FormEvent, useState } from "react";
 import { type CaptionStreamStatus, useCaptionStream } from "../captions/useCaptionStream";
+import { CaptionsToggle } from "../live/CaptionsToggle";
 import { type Deck, pollIdOf } from "../live/useDeck";
 import { slides } from "../talk/slides";
 import type { VoiceMove } from "../voice/match";
@@ -116,6 +117,7 @@ const CAPTION_STATUS_LABEL: Record<CaptionStreamStatus, string> = {
   unavailable: "sem chave do AI Gateway no Convex",
   connecting: "conectando…",
   live: "ao vivo (Scribe v2)",
+  commands: "desligadas no /admin · Scribe ouvindo só os comandos",
   retrying: "reconectando…",
 };
 
@@ -173,6 +175,7 @@ export function VoiceHud({ deck }: { deck: Deck }) {
       <p className={`caption-status is-${captionStatus}`} data-caption-status={captionStatus}>
         Legendas: {CAPTION_STATUS_LABEL[captionStatus]}
       </p>
+      <CaptionsToggle />
       <p className="voice-commands">
         Em qualquer slide: "próximo slide" (ou "segue em frente"), "volta um" (ou "slide anterior"),
         "mostra o resultado".

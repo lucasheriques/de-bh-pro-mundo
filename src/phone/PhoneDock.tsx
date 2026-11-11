@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { api } from "../../convex/_generated/api";
 import { LiveCaption } from "../captions/LiveCaption";
 import { clientId } from "../live/env";
+import { useCaptionsEnabled } from "../live/features";
 import { DESKTOP_QUERY, useMediaQuery } from "../live/useMediaQuery";
 import { QuestionList } from "./QuestionList";
 import { AskForm } from "./QuestionsPanel";
@@ -103,10 +104,11 @@ export function PhoneDock({
   onToggleCaptions: () => void;
 }) {
   const desktop = useMediaQuery(DESKTOP_QUERY);
+  const captionsOn = useCaptionsEnabled();
   return (
     <div className="phone-dock">
-      <CaptionsHead on={captions} onToggle={onToggleCaptions} />
-      {captions ? <LiveCaption className="caption-strip" history={8} /> : null}
+      {captionsOn ? <CaptionsHead on={captions} onToggle={onToggleCaptions} /> : null}
+      {captionsOn && captions ? <LiveCaption className="caption-strip" history={8} /> : null}
       {showQuestions && desktop ? (
         <section className="dock-questions" aria-label="Perguntas da sala">
           <p className="eyebrow">Perguntas da sala</p>

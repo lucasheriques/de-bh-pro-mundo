@@ -9,6 +9,8 @@ export default defineSchema({
     voiceEnabled: v.boolean(),
     /** When each poll's results slide was first shown; its countdown starts there. */
     pollOpenedAt: v.optional(v.record(v.string(), v.number())),
+    /** Live captions on the stage and phones; off unless the presenter turns them on. */
+    captionsEnabled: v.optional(v.boolean()),
   }),
   audience: defineTable({
     clientId: v.string(),

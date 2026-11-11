@@ -2,6 +2,7 @@ import { useAction, useMutation, useQuery } from "convex/react";
 import { useEffect, useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import { presenterKey } from "../live/env";
+import { useCaptionsEnabled } from "../live/features";
 import { toPcm16 } from "./pcm";
 import { splitLongPartial } from "./segments";
 
@@ -28,7 +29,13 @@ const SCRIBE_OPTIONS = {
   },
 } as const;
 
-export type CaptionStreamStatus = "off" | "unavailable" | "connecting" | "live" | "retrying";
+export type CaptionStreamStatus =
+  | "off"
+  | "unavailable"
+  | "connecting"
+  | "live"
+  | "commands"
+  | "retrying";
 
 /** Streams mic audio as PCM chunks until stopped. */
 async function openMic(onChunk: (bytes: Uint8Array) => void): Promise<() => void> {
@@ -94,8 +101,9 @@ export function useCaptionStream(
   const pushCaption = useMutation(api.captions.push);
   const pushDraft = useMutation(api.captions.draft);
   const [status, setStatus] = useState<CaptionStreamStatus>("off");
-  const latest = useRef({ slideIndex, getToken, pushCaption, pushDraft, onPhrase });
-  latest.current = { slideIndex, getToken, pushCaption, pushDraft, onPhrase };
+  const captionsOn = useCaptionsEnabled();
+  const latest = useRef({ slideIndex, getToken, pushCaption, pushDraft, onPhrase, captionsOn });
+  latest.current = { slideIndex, getToken, pushCaption, pushDraft, onPhrase, captionsOn };
 
   useEffect(() => {
     if (!enabled) {
@@ -131,6 +139,7 @@ export function useCaptionStream(
     };
     const sink: Sink = {
       partial: (text) => {
+        if (!latest.current.captionsOn) return;
         phraseAfterPause ??= Date.now() - lastFinalAt > PAUSE_MS;
         const split = splitLongPartial(text, consumed);
         consumed = split.consumed;
@@ -140,6 +149,7 @@ export function useCaptionStream(
       },
       final: (text) => {
         latest.current.onPhrase?.(text);
+        if (!latest.current.captionsOn) return;
         const rest = text.slice(consumed).trim();
         consumed = 0;
         draftText = "";
@@ -182,5 +192,5 @@ export function useCaptionStream(
     };
   }, [enabled, available]);
 
-  return status;
+  return status === "live" && !captionsOn ? "commands" : status;
 }

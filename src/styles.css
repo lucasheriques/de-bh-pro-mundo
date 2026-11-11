@@ -1532,3 +1532,31 @@ html input:focus-visible {
 .reaction:disabled:not(.is-sent) svg {
   color: var(--rule-strong);
 }
+
+/* Room-wide captions switch (admin, presenter) */
+.captions-toggle-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.captions-toggle-row input {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--accent);
+  flex: none;
+}
+
+.captions-toggle-row span {
+  display: grid;
+  gap: 2px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.captions-toggle-row small {
+  font-size: 13px;
+  font-weight: 400;
+}

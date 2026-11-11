@@ -11,7 +11,13 @@ export const get = query({
     const session = await readSession(ctx);
     if (!session) return DEFAULT_SESSION;
     const { slideIndex, revealed, voiceEnabled } = session;
-    return { slideIndex, revealed, voiceEnabled, pollOpenedAt: session.pollOpenedAt ?? {} };
+    return {
+      slideIndex,
+      revealed,
+      voiceEnabled,
+      pollOpenedAt: session.pollOpenedAt ?? {},
+      captionsEnabled: session.captionsEnabled ?? false,
+    };
   },
 });
 
@@ -61,6 +67,15 @@ export const toggleReveal = mutation({
     await patchSession(ctx, {
       revealed: { ...revealed, [parsePollId(pollId)]: !revealed[pollId] },
     });
+    return null;
+  },
+});
+
+export const setCaptions = mutation({
+  args: { key: v.string(), captionsEnabled: v.boolean() },
+  handler: async (ctx, { key, captionsEnabled }) => {
+    assertPresenter(key);
+    await patchSession(ctx, { captionsEnabled });
     return null;
   },
 });
