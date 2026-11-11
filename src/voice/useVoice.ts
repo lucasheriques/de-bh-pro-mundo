@@ -44,6 +44,8 @@ const BLOCKED_ERRORS = new Set(["not-allowed", "service-not-allowed"]);
 
 const CAPTION_FLUSH_MS = 1200;
 const DRAFT_THROTTLE_MS = 400;
+/** Silence longer than this before a phrase starts a new caption line. */
+const CAPTION_PAUSE_MS = 1600;
 const TRANSCRIPT_CHARS = 220;
 const RESTART_DELAY_MS = 300;
 
@@ -132,7 +134,8 @@ function startRecognition(Constructor: RecognitionConstructor, ui: Ui): () => vo
     if (interim) ui.feed(interim, false);
   };
   recognition.onerror = (event) => {
-    if (event.error === "aborted") return;
+    // Silence ends a session with "no-speech"; onend restarts it, so it is not a fault.
+    if (event.error === "aborted" || event.error === "no-speech") return;
     if (event.error === "language-not-supported" && fallBackOnline()) return;
     if (event.error === "phrases-not-supported") {
       dropPhrases(recognition);
@@ -188,11 +191,24 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
   const captionTimer = useRef<number | null>(null);
   const draftText = useRef("");
   const draftTimer = useRef<number | null>(null);
+  const lastSpokeAt = useRef(0);
+  const phraseAfterPause = useRef<boolean | null>(null);
+  const bufferAfterPause = useRef(false);
+
+  /** Whether the phrase being spoken now began after a long silence; fixed at its first word. */
+  const notePhraseStart = (now: number): boolean => {
+    phraseAfterPause.current ??= now - lastSpokeAt.current > CAPTION_PAUSE_MS;
+    return phraseAfterPause.current;
+  };
 
   const flushDraft = () => {
     draftTimer.current = null;
     void latest.current
-      .pushDraft({ key: presenterKey, text: draftText.current })
+      .pushDraft({
+        key: presenterKey,
+        text: draftText.current,
+        afterPause: draftText.current !== "" && phraseAfterPause.current === true,
+      })
       .catch(() => undefined);
   };
 
@@ -207,7 +223,12 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
     captionBuffer.current = [];
     if (!text) return;
     const { pushCaption, slideIndex } = latest.current;
-    void pushCaption({ key: presenterKey, text, slideIndex }).catch(() => undefined);
+    void pushCaption({
+      key: presenterKey,
+      text,
+      slideIndex,
+      afterPause: bufferAfterPause.current,
+    }).catch(() => undefined);
   };
 
   const feed = useRef((heard: string, isFinal: boolean, caption = true) => {
@@ -236,11 +257,16 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
         : { ...current, interim: text },
     );
     if (!caption || !text.trim()) return;
+    const now = Date.now();
+    const afterPause = notePhraseStart(now);
     if (!isFinal) {
       queueDraft(text);
       return;
     }
+    lastSpokeAt.current = now;
+    phraseAfterPause.current = null;
     queueDraft("");
+    if (captionBuffer.current.length === 0) bufferAfterPause.current = afterPause;
     captionBuffer.current.push(text.trim());
     captionTimer.current ??= window.setTimeout(flushCaptions, CAPTION_FLUSH_MS);
   }).current;

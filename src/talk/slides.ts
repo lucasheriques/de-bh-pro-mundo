@@ -100,11 +100,23 @@ export const slides: Slide[] = [
     cues: ["começando pelo mercado"],
   },
   {
+    id: "part-1",
+    section: "1. Mercado global",
+    visual: {
+      kind: "section",
+      number: "1",
+      title: "Mercado global",
+      lead: "Contra quem a empresa compete por talento define o seu teto.",
+    },
+    notes: 'Pausa curta. Anuncie a parte: "Parte um: mercado global." Dizer "parte um" avança.',
+    cues: ["parte um", "parte 1"],
+  },
+  {
     id: "s2",
     section: "1. Mercado global",
     visual: {
       kind: "statement",
-      eyebrow: "Parte 1",
+      eyebrow: "A tese",
       text: "Carreira internacional é escolher em que mercado você compete.",
       sub: "Não é sobre sair do país. É sobre aumentar as empresas que podem te contratar.",
     },
@@ -235,9 +247,22 @@ export const slides: Slide[] = [
     cues: ["morando em belo horizonte"],
   },
   {
+    id: "part-2",
+    section: "2. O que a IA mudou",
+    visual: {
+      kind: "section",
+      number: "2",
+      title: "O que a IA mudou",
+      lead: "Escrever software ficou barato. Julgamento, não.",
+    },
+    notes:
+      'Pausa curta. Anuncie a parte: "Parte dois: o que a IA mudou." Dizer "parte dois" avança.',
+    cues: ["parte dois", "parte 2"],
+  },
+  {
     id: "poll-ai",
     section: "2. O que a IA mudou",
-    visual: { kind: "results", eyebrow: "Parte 2 · O que a IA mudou" },
+    visual: { kind: "results", eyebrow: "Pergunta pra vocês" },
     interaction: {
       kind: "choice",
       pollId: "ai-share",
@@ -296,11 +321,24 @@ export const slides: Slide[] = [
     cues: ["complemento do código é julgamento"],
   },
   {
+    id: "part-3",
+    section: "3. O que o mundo compra",
+    visual: {
+      kind: "section",
+      number: "3",
+      title: "O que o mundo compra",
+      lead: "Gente responsável pelo negócio, não pelo ticket.",
+    },
+    notes:
+      'Pausa curta. Anuncie a parte: "Parte três: o que o mundo compra." Dizer "parte três" avança.',
+    cues: ["parte três", "parte 3"],
+  },
+  {
     id: "pe-def",
     section: "3. O que o mundo compra",
     visual: {
       kind: "compare",
-      eyebrow: "Parte 3 · O que o mundo compra",
+      eyebrow: "Product engineer",
       title: "Responsável pelo negócio, não pelo ticket.",
       left: {
         label: "Engenheiro de ticket",
@@ -366,11 +404,24 @@ export const slides: Slide[] = [
       "Revela com R. A faculdade treina quase só a parte técnica. As outras três vocês treinam por conta própria.",
   },
   {
+    id: "part-4",
+    section: "4. Como chegar lá",
+    visual: {
+      kind: "section",
+      number: "4",
+      title: "Como chegar lá",
+      lead: "As portas de entrada, todas a partir de BH.",
+    },
+    notes:
+      'Pausa curta. Anuncie a parte: "Parte quatro: como chegar lá." Dizer "parte quatro" avança.',
+    cues: ["parte quatro", "parte 4"],
+  },
+  {
     id: "junior",
     section: "4. Como chegar lá",
     visual: {
       kind: "bigNumber",
-      eyebrow: "Parte 4 · Como chegar lá",
+      eyebrow: "A porta de entrada",
       value: "1 em 6",
       label: "vagas abertas no NaGringa com nível informado é pra júnior ou pleno.",
       source:

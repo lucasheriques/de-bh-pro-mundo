@@ -52,7 +52,10 @@ export function MatchResults({
                   >
                     <span className="match-bar-label">{target.label}</span>
                     <span className="match-bar-track">
-                      <span className="match-bar-fill" style={{ transform: `scaleX(${share})` }} />
+                      <span
+                        className="match-bar-fill"
+                        style={{ "--share": share } as CSSProperties}
+                      />
                     </span>
                     <span className="match-bar-value tabular">{count}</span>
                   </li>

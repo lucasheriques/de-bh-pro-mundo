@@ -18,6 +18,13 @@ const visuals: { [K in Visual["kind"]]: Render<K> } = {
       {visual.sub ? <p className="content-lead">{visual.sub}</p> : null}
     </>
   ),
+  section: (visual) => (
+    <>
+      <p className="content-kicker">Parte {visual.number}</p>
+      <h2>{visual.title}</h2>
+      {visual.lead ? <p className="content-lead">{visual.lead}</p> : null}
+    </>
+  ),
   bigNumber: (visual) => (
     <>
       <h2>

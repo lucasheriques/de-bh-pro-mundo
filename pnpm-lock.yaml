@@ -11,9 +11,12 @@ importers:
       '@convex-dev/presence':
         specifier: ^0.4.0
         version: 0.4.0(convex@1.46.0(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
-      '@fontsource/open-runde':
-        specifier: 5.2.1
-        version: 5.2.1
+      '@fontsource-variable/geist':
+        specifier: 5.3.0
+        version: 5.3.0
+      '@fontsource-variable/geist-mono':
+        specifier: 5.3.0
+        version: 5.3.0
       convex:
         specifier: 1.46.0
         version: 1.46.0(react@19.3.1)
@@ -293,8 +296,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource/open-runde@5.2.1':
-    resolution: {integrity: sha512-+Chu3ZSO8KrD5vAZfz+Z6CGoDWuMeZ+DezS14FjdnrPBg5SRqlM20aKgWDZBgcufNktBKLbKeaRRXoVeMXbuyQ==}
+  '@fontsource-variable/geist-mono@5.3.0':
+    resolution: {integrity: sha512-vBbuwDEo9AkrqADMXOrlAR3DFcJi4/JxeuU43FoiQERnNwsfXNnvxvReZG02cQKmyk4DZkZdBZX3oTDvy2zBAw==}
+
+  '@fontsource-variable/geist@5.3.0':
+    resolution: {integrity: sha512-j0m+vLQuG5XAYoHtGCVu0spvlGreR3EzpECUVzkFmI1mTVnAO38l/NEPDCFgZ177JxzYJCLSmTQibIiYPilGrA==}
 
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
@@ -1026,7 +1032,9 @@ snapshots:
   '@esbuild/win32-x64@0.27.0':
     optional: true
 
-  '@fontsource/open-runde@5.2.1': {}
+  '@fontsource-variable/geist-mono@5.3.0': {}
+
+  '@fontsource-variable/geist@5.3.0': {}
 
   '@jridgewell/resolve-uri@3.1.2': {}
 

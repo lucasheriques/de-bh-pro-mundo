@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { presenterKey } from "../live/env";
 import { useDeck } from "../live/useDeck";
 import { useStageTheme } from "../live/useStoredToggle";
@@ -62,13 +63,17 @@ export function OverviewPage() {
       </header>
       <ol className="overview-grid">
         {slides.map((slide, index) => (
-          <SlideCard
-            key={slide.id}
-            slide={slide}
-            index={index}
-            current={index === deck.index}
-            onJump={() => deck.goTo(index)}
-          />
+          <Fragment key={slide.id}>
+            {slide.section !== slides[index - 1]?.section ? (
+              <li className="overview-section mono">{slide.section ?? "Sem seção"}</li>
+            ) : null}
+            <SlideCard
+              slide={slide}
+              index={index}
+              current={index === deck.index}
+              onJump={() => deck.goTo(index)}
+            />
+          </Fragment>
         ))}
       </ol>
     </main>

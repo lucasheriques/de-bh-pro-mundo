@@ -1,0 +1,408 @@
+/* Throwaway: style directions for the stage. Terminal is the base stylesheet as shipped. */
+
+.proto {
+  display: grid;
+  gap: 32px;
+  padding: 32px 32px 120px;
+  background: #000;
+  min-height: 100dvh;
+}
+
+.proto-slide {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.proto-slide .scaled-frame {
+  height: 100%;
+}
+
+/* ---------- Editorial: type-led, two-tone headlines, colour only as a signal ---------- */
+
+.proto[data-variant="editorial"] .canvas {
+  --ground: oklch(0.14 0 0);
+  --surface: oklch(0.18 0 0);
+  --surface-2: oklch(0.22 0 0);
+  --ink: oklch(0.93 0 0);
+  --muted: oklch(0.6 0 0);
+  --rule: oklch(0.26 0 0);
+  --rule-strong: oklch(0.36 0 0);
+  --hue-1: oklch(0.72 0.14 10);
+  --hue-1-ink: oklch(0.78 0.12 10);
+  --hue-1-soft: oklch(0.26 0.05 10);
+  --accent: var(--hue-1);
+  --accent-ink: var(--hue-1-ink);
+  --accent-soft: var(--hue-1-soft);
+  background: var(--ground);
+}
+
+.proto[data-variant="editorial"] .slide .eyebrow {
+  color: var(--muted);
+  font-size: 26px;
+}
+
+.proto[data-variant="editorial"] .slide .eyebrow::after {
+  content: none;
+}
+
+.proto[data-variant="editorial"] .slide h1,
+.proto[data-variant="editorial"] .slide h2 {
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+
+.proto[data-variant="editorial"] .v-sub {
+  margin-top: 12px;
+  font-size: 88px;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+  color: var(--muted);
+}
+
+.proto[data-variant="editorial"] .v-title .v-sub {
+  font-size: 64px;
+  margin-top: 32px;
+}
+
+.proto[data-variant="editorial"] .hbar-track,
+.proto[data-variant="editorial"] .hbar-fill {
+  background: none;
+}
+
+.proto[data-variant="editorial"] .hbar-track {
+  height: 6px;
+  background: var(--rule);
+}
+
+.proto[data-variant="editorial"] .hbar-fill {
+  background: var(--ink);
+}
+
+.proto[data-variant="editorial"] .is-highlight .hbar-fill {
+  background: var(--accent);
+}
+
+.proto[data-variant="editorial"] .hbar-value {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 56px;
+  letter-spacing: -0.03em;
+}
+
+.proto[data-variant="editorial"] .v-compare section {
+  position: relative;
+  border-left: 0;
+  padding-left: 72px;
+}
+
+.proto[data-variant="editorial"] .v-compare section::before {
+  content: "#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A#\A";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: pre;
+  font-family: var(--font-mono);
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--rule-strong);
+}
+
+.proto[data-variant="editorial"] .v-compare-label,
+.proto[data-variant="editorial"] .v-compare .is-right .v-compare-label {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  font-family: var(--font-body);
+  font-size: 44px;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.proto[data-variant="editorial"] .v-compare li::before {
+  content: none;
+}
+
+.proto[data-variant="editorial"] .v-compare li {
+  color: var(--muted);
+}
+
+.proto[data-variant="editorial"] .v-compare .is-right li {
+  color: var(--ink);
+}
+
+.proto[data-variant="editorial"] .v-list-index {
+  background: none;
+  box-shadow: none;
+  color: var(--muted);
+  place-items: start;
+  padding-top: 18px;
+}
+
+.proto[data-variant="editorial"] .dot-body {
+  border-radius: 50%;
+}
+
+.proto[data-variant="editorial"] .progress {
+  --hue: var(--ink);
+  height: 4px;
+}
+
+/* ---------- Schematic: every slide is a framed panel on a line grid ---------- */
+
+.proto[data-variant="schematic"] .canvas {
+  --ground: oklch(0.17 0.012 240);
+  --texture: oklch(0.23 0.014 240);
+  --surface-2: oklch(0.26 0.014 240);
+  --rule-strong: oklch(0.42 0.014 240);
+  --hue-1: oklch(0.8 0.12 200);
+  --hue-1-ink: oklch(0.86 0.1 200);
+  --hue-1-soft: oklch(0.28 0.05 200);
+  --accent: var(--hue-1);
+  --accent-ink: var(--hue-1-ink);
+  --accent-soft: var(--hue-1-soft);
+  background:
+    linear-gradient(var(--texture) 1px, transparent 1px) 0 0 / 96px 96px,
+    linear-gradient(90deg, var(--texture) 1px, transparent 1px) 0 0 / 96px 96px,
+    var(--ground);
+}
+
+.proto[data-variant="schematic"] .slide::before {
+  content: "";
+  position: absolute;
+  inset: 112px 96px 72px;
+  border: 2px solid var(--rule-strong);
+  background:
+    linear-gradient(var(--accent), var(--accent)) top left / 40px 4px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top left / 4px 40px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 40px 4px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 4px 40px no-repeat,
+    oklch(0.165 0.012 240 / 0.92);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.proto[data-variant="schematic"] .slide {
+  isolation: isolate;
+}
+
+.proto[data-variant="schematic"] .section-label {
+  top: 92px;
+  left: 96px;
+  padding: 6px 16px;
+  background: var(--ground);
+  box-shadow: inset 0 0 0 2px var(--rule-strong);
+  color: var(--ink);
+}
+
+.proto[data-variant="schematic"] .hbar-track {
+  --cell: 24px;
+  --cell-gap: 4px;
+  box-shadow:
+    inset 0 2px 0 var(--rule-strong),
+    inset 0 -2px 0 var(--rule-strong);
+  background: repeating-linear-gradient(90deg, var(--rule-strong) 0 2px, transparent 0 var(--cell));
+}
+
+.proto[data-variant="schematic"] .hbar-fill {
+  inset: 10px 0;
+}
+
+.proto[data-variant="schematic"] .v-list-index,
+.proto[data-variant="schematic"] .tier-letter {
+  background: none;
+  border-radius: 0;
+}
+
+.proto[data-variant="schematic"] .v-compare section {
+  border-left: 0;
+  padding: 28px 36px;
+  box-shadow: inset 0 0 0 2px var(--rule);
+}
+
+.proto[data-variant="schematic"] .v-compare .is-right {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.proto[data-variant="schematic"] .dot-body {
+  border-radius: 0;
+  background: none;
+  box-shadow: inset 0 0 0 3px var(--hue);
+}
+
+/* ---------- Phosphor: one green, mono everything, a CRT's scanlines ---------- */
+
+.proto[data-variant="phosphor"] .canvas {
+  --ground: oklch(0.13 0.02 160);
+  --texture: oklch(0.2 0.03 160);
+  --surface: oklch(0.17 0.03 160);
+  --surface-2: oklch(0.22 0.04 160);
+  --ink: oklch(0.92 0.09 155);
+  --muted: oklch(0.66 0.08 158);
+  --rule: oklch(0.28 0.04 160);
+  --rule-strong: oklch(0.4 0.06 160);
+  --on-hue: oklch(0.13 0.02 160);
+  --hue-1: oklch(0.82 0.17 152);
+  --hue-1-ink: oklch(0.88 0.15 152);
+  --hue-1-soft: oklch(0.28 0.07 155);
+  --hue-2: oklch(0.7 0.13 152);
+  --hue-2-ink: oklch(0.78 0.11 152);
+  --hue-2-soft: oklch(0.25 0.05 155);
+  --hue-3: oklch(0.58 0.1 155);
+  --hue-3-ink: oklch(0.7 0.09 155);
+  --hue-3-soft: oklch(0.23 0.04 155);
+  --hue-4: oklch(0.47 0.08 158);
+  --hue-4-ink: oklch(0.62 0.08 158);
+  --hue-4-soft: oklch(0.21 0.03 158);
+  --accent: var(--hue-1);
+  --accent-ink: var(--hue-1-ink);
+  --accent-soft: var(--hue-1-soft);
+  --font-body: var(--font-mono);
+  font-family: var(--font-mono);
+  background:
+    repeating-linear-gradient(0deg, oklch(0 0 0 / 0.22) 0 2px, transparent 2px 5px),
+    radial-gradient(circle at 1px 1px, var(--texture) 1.5px, transparent 2px) 0 0 / 40px 40px,
+    var(--ground);
+}
+
+.proto[data-variant="phosphor"] .slide h1 {
+  font-size: 120px;
+  letter-spacing: -0.04em;
+}
+
+.proto[data-variant="phosphor"] .slide h2 {
+  font-size: 76px;
+  letter-spacing: -0.04em;
+}
+
+.proto[data-variant="phosphor"] .v-sub {
+  font-size: 46px;
+  letter-spacing: -0.02em;
+}
+
+.proto[data-variant="phosphor"] .slide h1::after,
+.proto[data-variant="phosphor"] .slide h2::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.9em;
+  margin-left: 0.15em;
+  vertical-align: -0.05em;
+  background: var(--accent);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+.proto[data-variant="phosphor"] .v-compare section {
+  border-left-style: solid;
+}
+
+.proto[data-variant="phosphor"] .v-compare li::before {
+  content: ">";
+  width: auto;
+  height: auto;
+  margin-top: 0;
+  background: none;
+  color: var(--muted);
+}
+
+.proto[data-variant="phosphor"] .v-compare .is-right li::before {
+  color: var(--accent);
+}
+
+/* ---------- Picker (harness chrome, verbatim) ---------- */
+
+.proto-picker {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.82);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 8px 24px rgba(0, 0, 0, 0.24),
+    0 2px 6px rgba(0, 0, 0, 0.12);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.proto-picker-highlight {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  will-change: transform;
+}
+
+.proto-picker[data-ready] .proto-picker-highlight {
+  transition:
+    transform 250ms cubic-bezier(0.23, 1, 0.32, 1),
+    width 250ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proto-picker[data-ready] .proto-picker-highlight {
+    transition: none;
+  }
+}
+
+.proto-picker-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  font: inherit;
+  cursor: pointer;
+  transition: color 150ms ease-out;
+}
+
+.proto-picker-item:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.proto-picker-item:active {
+  transform: scale(0.97);
+}
+
+.proto-picker-item:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.4);
+  outline-offset: 2px;
+}
+
+.proto-picker-item[data-active] {
+  color: #fff;
+}
+
+.proto-picker-divider {
+  width: 1px;
+  height: 16px;
+  margin: 0 4px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.proto-picker-replay {
+  padding: 0 10px;
+  font-size: 14px;
+}

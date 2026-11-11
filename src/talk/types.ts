@@ -34,6 +34,7 @@ export type TierRow = { tier: Tier; label: string; companies: TierCompany[] };
 export type Visual =
   | { kind: "title"; eyebrow?: string; title: string; subtitle?: string }
   | { kind: "statement"; eyebrow?: string; text: string; sub?: string }
+  | { kind: "section"; number: string; title: string; lead?: string }
   | { kind: "bigNumber"; eyebrow?: string; value: string; label: string; source?: string }
   | { kind: "bars"; eyebrow?: string; title: string; bars: Bar[]; source?: string }
   | { kind: "list"; eyebrow?: string; title: string; items: { title: string; body?: string }[] }

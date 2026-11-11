@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { useLiveCaptions } from "./LiveCaption";
+import { toParagraphs, useLiveCaptions } from "./LiveCaption";
 
 const SIZES = [24, 32, 44, 60] as const;
 
 export function CaptionsPage() {
-  const { lines, draft } = useLiveCaptions();
+  const { lines, draft, draftBreak } = useLiveCaptions();
+  const paragraphs = toParagraphs(lines, draft, draftBreak);
   const [size, setSize] = useState(1);
   const endRef = useRef<HTMLDivElement>(null);
   const lastId = lines.at(-1)?._id;
@@ -42,11 +43,18 @@ export function CaptionsPage() {
         {lines.length === 0 && !draft ? (
           <p className="muted">As legendas aparecem aqui quando o Lucas começar a falar.</p>
         ) : null}
-        {lines.map((line) => (
-          <p key={line._id}>{line.text}</p>
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph.key}>
+            {paragraph.finals.join(" ")}
+            {paragraph.draft ? (
+              <span className="caption-draft">
+                {paragraph.finals.length > 0 ? " " : ""}
+                {paragraph.draft}
+              </span>
+            ) : null}
+          </p>
         ))}
       </div>
-      {draft ? <p className="captions-draft">{draft}</p> : null}
       <div ref={endRef} />
       <p className="captions-note muted">
         Gerada automaticamente pelo reconhecimento de voz. Pode ter erros.

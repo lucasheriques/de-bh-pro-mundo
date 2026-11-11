@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { hueOf } from "../../dots/dotGrid";
+import { slides } from "../../talk/slides";
 import type { VisualProps } from "../SlideCanvas";
 
 export function Eyebrow({ children }: { children?: string }) {
@@ -22,6 +23,31 @@ export function StatementVisual({ visual }: VisualProps<"statement">) {
       <Eyebrow>{visual.eyebrow}</Eyebrow>
       <h2>{visual.text}</h2>
       {visual.sub ? <p className="v-sub">{visual.sub}</p> : null}
+    </div>
+  );
+}
+
+const parts = slides.flatMap((slide) => (slide.visual.kind === "section" ? [slide.visual] : []));
+
+/** A part opener: the part's number and name, and where it sits among all of them. */
+export function SectionVisual({ visual }: VisualProps<"section">) {
+  const current = parts.findIndex((part) => part.number === visual.number);
+  return (
+    <div className="v-section">
+      <p className="v-section-number">{visual.number.padStart(2, "0")}</p>
+      <h1>{visual.title}</h1>
+      {visual.lead ? <p className="v-sub">{visual.lead}</p> : null}
+      <ol className="section-map">
+        {parts.map((part, i) => (
+          <li
+            key={part.number}
+            data-state={i < current ? "done" : i === current ? "current" : "next"}
+          >
+            <span>{part.number.padStart(2, "0")}</span>
+            {part.title}
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }
@@ -72,7 +98,7 @@ export function ListVisual({ visual }: VisualProps<"list">) {
         {visual.items.map((item, i) => (
           <li key={item.title} style={{ "--i": i } as CSSProperties}>
             <span className="v-list-index" data-hue={hueOf(i)}>
-              {i + 1}
+              {String(i + 1).padStart(2, "0")}
             </span>
             <div>
               <p className="v-list-title">{item.title}</p>

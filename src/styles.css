@@ -93,8 +93,12 @@ html input:focus-visible {
 
 .primary,
 .ghost {
-  border-radius: 999px;
-  font-weight: 600;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   transition:
     transform 150ms var(--ease-out),
     background-color 150ms var(--ease-out),
@@ -116,7 +120,17 @@ html input:focus-visible {
 
 .primary:active,
 .ghost:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primary:not(:disabled):hover {
+    background: color-mix(in oklch, var(--accent) 88%, var(--ink));
+  }
+
+  .ghost:hover {
+    background: var(--surface);
+  }
 }
 
 .primary:disabled {
@@ -144,7 +158,7 @@ html input:focus-visible {
 .connection-dot {
   width: 7px;
   height: 7px;
-  border-radius: 50%;
+  border-radius: var(--radius-s);
   background: var(--muted);
 }
 
@@ -233,7 +247,7 @@ html input:focus-visible {
 .panel-question {
   font-size: 26px;
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
@@ -263,7 +277,7 @@ html input:focus-visible {
 
 .guess-range::-webkit-slider-runnable-track {
   height: 8px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: linear-gradient(to right, var(--accent) var(--fill), var(--surface-2) var(--fill));
 }
 
@@ -272,14 +286,14 @@ html input:focus-visible {
   width: 32px;
   height: 32px;
   margin-top: -12px;
-  border-radius: 50%;
+  border-radius: var(--radius-s);
   background: var(--ink);
   box-shadow: 0 2px 10px rgb(0 0 0 / 0.5);
 }
 
 .guess-range::-moz-range-track {
   height: 8px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: linear-gradient(to right, var(--accent) var(--fill), var(--surface-2) var(--fill));
 }
 
@@ -287,7 +301,7 @@ html input:focus-visible {
   width: 32px;
   height: 32px;
   border: 0;
-  border-radius: 50%;
+  border-radius: var(--radius-s);
   background: var(--ink);
 }
 
@@ -301,7 +315,7 @@ html input:focus-visible {
 
 .panel .primary {
   min-height: 54px;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .ask {
@@ -315,7 +329,7 @@ html input:focus-visible {
   font-size: 16px;
   line-height: 1.4;
   padding: 14px 16px;
-  border-radius: 16px;
+  border-radius: var(--radius-l);
   border: 0;
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
@@ -346,7 +360,7 @@ html input:focus-visible {
   align-items: center;
   gap: 12px;
   padding: 12px 12px 12px 16px;
-  border-radius: 16px;
+  border-radius: var(--radius-l);
   background: var(--surface);
 }
 
@@ -367,7 +381,7 @@ html input:focus-visible {
   gap: 2px;
   width: 52px;
   min-height: 52px;
-  border-radius: 14px;
+  border-radius: var(--radius-l);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
   font-size: 14px;
   transition:
@@ -397,7 +411,7 @@ html input:focus-visible {
 .ambient-headline {
   font-size: 24px;
   line-height: 1.25;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
@@ -434,7 +448,7 @@ html input:focus-visible {
   gap: 8px;
   min-height: 88px;
   padding: 12px;
-  border-radius: 18px;
+  border-radius: var(--radius-l);
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--rule);
   font-size: 15px;
@@ -523,7 +537,7 @@ html input:focus-visible {
 .thumb {
   aspect-ratio: 16 / 9;
   height: auto;
-  border-radius: 12px;
+  border-radius: var(--radius-l);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
 }
 
@@ -573,7 +587,7 @@ html input:focus-visible {
   display: grid;
   gap: 12px;
   padding: 16px 18px;
-  border-radius: 16px;
+  border-radius: var(--radius-l);
   background: var(--surface);
 }
 
@@ -631,7 +645,7 @@ html input:focus-visible {
   --level: 0;
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: var(--radius-s);
   background: var(--muted);
   box-shadow: 0 0 0 calc(var(--level) * 10px) var(--accent-soft);
 }
@@ -699,7 +713,7 @@ html input:focus-visible {
 
 .voice-mode strong {
   padding: 2px 10px;
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: var(--accent-soft);
   color: var(--accent);
   font-size: 15px;
@@ -738,7 +752,7 @@ html input:focus-visible {
 
 .overview-head h1 {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
@@ -761,7 +775,7 @@ html input:focus-visible {
   display: block;
   padding: 0;
   border: 0;
-  border-radius: 12px;
+  border-radius: var(--radius-l);
   background: none;
   cursor: pointer;
   transition: transform 150ms var(--ease-out);
@@ -811,21 +825,21 @@ html input:focus-visible {
 
 .admin h1 {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .admin-card {
   display: grid;
   gap: 12px;
   padding: 20px;
-  border-radius: 16px;
+  border-radius: var(--radius-l);
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--rule);
 }
 
 .admin-card h2 {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .admin-stats,
@@ -852,7 +866,7 @@ html input:focus-visible {
 
 .admin-links a {
   color: var(--accent);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* /conteudo: the talk as a plain, readable article */
@@ -870,14 +884,14 @@ html input:focus-visible {
 
 .content-head h1 {
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
 
 .content-kicker {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent);
@@ -896,7 +910,7 @@ html input:focus-visible {
 
 .content-slide h2 {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.25;
   text-wrap: balance;
 }
@@ -971,7 +985,7 @@ html input:focus-visible {
   min-height: 48px;
   padding: 0 14px;
   border: 0;
-  border-radius: 12px;
+  border-radius: var(--radius-l);
   background: var(--ground);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
   font-size: 16px;
@@ -987,7 +1001,7 @@ html input:focus-visible {
 .voice-log summary {
   cursor: pointer;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--muted);
 }
 
@@ -1036,7 +1050,7 @@ html input:focus-visible {
 
 .roster-names li {
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: var(--surface-2, var(--surface));
   box-shadow: inset 0 0 0 1px var(--rule);
   font-size: 14px;
@@ -1058,7 +1072,7 @@ html input:focus-visible {
 
 .ambient-slide {
   margin-top: 4px;
-  border-radius: 14px;
+  border-radius: var(--radius-l);
   overflow: hidden;
   box-shadow: inset 0 0 0 1px var(--rule);
 }
@@ -1091,7 +1105,7 @@ html input:focus-visible {
 
 .editor-head h1 {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .editor-slide {
@@ -1134,7 +1148,7 @@ html input:focus-visible {
 
 .editor-label {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--muted);
 }
 
@@ -1142,7 +1156,7 @@ html input:focus-visible {
   width: 100%;
   padding: 10px 12px;
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--radius-l);
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
   font-size: 16px;
@@ -1166,14 +1180,14 @@ html input:focus-visible {
   gap: 4px;
   margin-bottom: 16px;
   padding: 12px 14px;
-  border-radius: 12px;
+  border-radius: var(--radius-l);
   background: color-mix(in oklab, var(--accent) 14%, var(--surface));
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 45%, transparent);
 }
 
 .cue-banner-text {
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.25;
 }
 
@@ -1193,7 +1207,7 @@ html input:focus-visible {
 
 .remote-head h1 {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
 }
 
@@ -1205,9 +1219,9 @@ html input:focus-visible {
 
 .remote-buttons button {
   min-height: 96px;
-  border-radius: 20px;
+  border-radius: var(--radius-l);
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 500;
   transition: transform 100ms var(--ease-out);
 }
 
@@ -1256,7 +1270,7 @@ html input:focus-visible {
 .splash-dot {
   width: 14px;
   height: 14px;
-  border-radius: 50%;
+  border-radius: var(--radius-s);
   background: var(--accent);
   animation: splash-pulse 1s ease-in-out infinite alternate;
 }
@@ -1286,7 +1300,7 @@ html input:focus-visible {
   place-items: center;
   width: 32px;
   height: 32px;
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
   color: var(--muted);
@@ -1314,4 +1328,55 @@ html input:focus-visible {
 
 .content-head .theme-toggle {
   float: right;
+}
+
+/* Captions everywhere: older paragraphs recede, live words end in a terminal cursor */
+
+.live-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35em;
+  overflow: hidden;
+}
+
+.caption-paragraph:not([data-current]) {
+  color: var(--muted);
+}
+
+.caption-draft {
+  opacity: 0.72;
+}
+
+.caption-draft::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 0.12em;
+  vertical-align: -0.14em;
+  background: var(--accent);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caption-draft::after {
+    animation: none;
+  }
+}
+
+.overview-section {
+  grid-column: 1 / -1;
+  padding: 24px 0 8px;
+  border-bottom: 1px solid var(--rule-strong);
+  font-size: 13px;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--accent);
 }

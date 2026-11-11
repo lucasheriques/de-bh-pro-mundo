@@ -12,6 +12,7 @@ const COOLDOWN_MS = 1500;
 const headlines: { [K in Visual["kind"]]: (visual: Extract<Visual, { kind: K }>) => string } = {
   title: (visual) => visual.title,
   statement: (visual) => visual.text,
+  section: (visual) => `Parte ${visual.number} · ${visual.title}`,
   bigNumber: (visual) => `${visual.value} · ${visual.label}`,
   bars: (visual) => visual.title,
   list: (visual) => visual.title,

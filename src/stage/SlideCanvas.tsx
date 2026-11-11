@@ -8,6 +8,7 @@ import {
   BigNumberVisual,
   CompareVisual,
   ListVisual,
+  SectionVisual,
   StatementVisual,
   TitleVisual,
 } from "./visuals/static";
@@ -21,6 +22,7 @@ export type VisualProps<K extends Visual["kind"]> = {
 const visuals: { [K in Visual["kind"]]: (props: VisualProps<K>) => ReactNode } = {
   title: TitleVisual,
   statement: StatementVisual,
+  section: SectionVisual,
   bigNumber: BigNumberVisual,
   bars: BarsVisual,
   list: ListVisual,

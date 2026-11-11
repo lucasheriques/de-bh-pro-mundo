@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "@convex-dev/presence": "^0.4.0",
-    "@fontsource/open-runde": "5.2.1",
+    "@fontsource-variable/geist": "5.3.0",
+    "@fontsource-variable/geist-mono": "5.3.0",
     "convex": "1.46.0",
     "qrcode": "1.5.4",
     "react": "19.3.1",

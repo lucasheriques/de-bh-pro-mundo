@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { LiveCaption } from "../captions/LiveCaption";
 import { slides } from "../talk/slides";
 import type { Slide } from "../talk/types";
@@ -5,17 +6,19 @@ import { audienceHost, StyledQr } from "./StyledQr";
 
 export function ProgressBar({ index }: { index: number }) {
   return (
-    <div className="progress" aria-hidden>
-      <span
-        className="progress-fill"
-        style={{ transform: `scaleX(${(index + 1) / slides.length})` }}
-      />
+    <div
+      className="progress"
+      aria-hidden
+      style={{ "--slides": slides.length, "--share": (index + 1) / slides.length } as CSSProperties}
+    >
+      <span className="progress-fill" />
     </div>
   );
 }
 
 export function SectionLabel({ slide }: { slide: Slide }) {
-  return slide.section ? <p className="section-label">{slide.section}</p> : null;
+  if (!slide.section || slide.visual.kind === "section") return null;
+  return <p className="section-label">{slide.section}</p>;
 }
 
 export function CaptionLine() {

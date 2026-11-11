@@ -7,23 +7,34 @@ import { assertPresenter } from "./presenter";
 const CAPTION_MAX_LENGTH = 500;
 const LIVE_LINES = 8;
 
-async function writeDraft(ctx: MutationCtx, text: string): Promise<void> {
+async function writeDraft(ctx: MutationCtx, text: string, breakBefore: boolean): Promise<void> {
   const draft = await ctx.db.query("captionDraft").first();
-  const doc = { text: text.trim().slice(0, CAPTION_MAX_LENGTH), updatedAt: Date.now() };
+  const doc = {
+    text: text.trim().slice(0, CAPTION_MAX_LENGTH),
+    updatedAt: Date.now(),
+    breakBefore,
+  };
   if (draft) await ctx.db.patch("captionDraft", draft._id, doc);
   else await ctx.db.insert("captionDraft", doc);
 }
 
 export const push = mutation({
-  args: { key: v.string(), text: v.string(), slideIndex: v.number() },
-  handler: async (ctx, { key, text, slideIndex }) => {
+  args: {
+    key: v.string(),
+    text: v.string(),
+    slideIndex: v.number(),
+    afterPause: v.optional(v.boolean()),
+  },
+  handler: async (ctx, { key, text, slideIndex, afterPause }) => {
     assertPresenter(key);
     const trimmed = text.trim().slice(0, CAPTION_MAX_LENGTH);
     if (trimmed.length === 0) return null;
+    const previous = await ctx.db.query("captions").order("desc").first();
     const captionId = await ctx.db.insert("captions", {
       text: trimmed,
       slideIndex,
       createdAt: Date.now(),
+      breakBefore: afterPause === true || previous?.slideIndex !== slideIndex,
     });
     if (process.env.AI_GATEWAY_API_KEY) {
       await ctx.scheduler.runAfter(0, internal.captionPolish.polish, { captionId, text: trimmed });
@@ -33,10 +44,10 @@ export const push = mutation({
 });
 
 export const draft = mutation({
-  args: { key: v.string(), text: v.string() },
-  handler: async (ctx, { key, text }) => {
+  args: { key: v.string(), text: v.string(), afterPause: v.optional(v.boolean()) },
+  handler: async (ctx, { key, text, afterPause }) => {
     assertPresenter(key);
-    await writeDraft(ctx, text);
+    await writeDraft(ctx, text, afterPause === true);
     return null;
   },
 });
@@ -56,8 +67,11 @@ export const live = query({
     const finals = await ctx.db.query("captions").order("desc").take(LIVE_LINES);
     const draft = await ctx.db.query("captionDraft").first();
     return {
-      lines: finals.reverse().map(({ _id, text }) => ({ _id, text })),
+      lines: finals
+        .reverse()
+        .map(({ _id, text, breakBefore }) => ({ _id, text, breakBefore: breakBefore ?? false })),
       draft: draft?.text ?? "",
+      draftBreak: draft?.breakBefore ?? false,
     };
   },
 });

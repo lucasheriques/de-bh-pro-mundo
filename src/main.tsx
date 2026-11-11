@@ -1,13 +1,11 @@
-import "@fontsource/open-runde/400.css";
-import "@fontsource/open-runde/500.css";
-import "@fontsource/open-runde/600.css";
-import "@fontsource/open-runde/700.css";
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
 import "./theme.css";
 import "./styles.css";
 import "./stage/stage.css";
 import "./phone/phone.css";
 import { ConvexProvider } from "convex/react";
-import { StrictMode } from "react";
+import { lazy, StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { AdminPage } from "./admin/AdminPage";
 import { CaptionsPage } from "./captions/CaptionsPage";
@@ -32,6 +30,7 @@ const routes = {
   "/conteudo": ContentPage,
   "/editor": EditorPage,
   "/remote": RemotePage,
+  ...(import.meta.env.DEV ? { "/proto": lazy(() => import("./proto/ProtoPage")) } : {}),
 } as const;
 const path = window.location.pathname.replace(/\/+$/, "") || "/";
 
@@ -45,7 +44,13 @@ if (!root) throw new Error("Missing #root element");
 createRoot(root).render(
   <StrictMode>
     <ConvexProvider client={convex}>
-      <LiveSlides render={() => <Page />} />
+      <LiveSlides
+        render={() => (
+          <Suspense>
+            <Page />
+          </Suspense>
+        )}
+      />
     </ConvexProvider>
   </StrictMode>,
 );

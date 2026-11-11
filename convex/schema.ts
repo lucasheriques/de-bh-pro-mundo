@@ -44,6 +44,7 @@ export default defineSchema({
     text: v.string(),
     slideIndex: v.number(),
     createdAt: v.number(),
+    breakBefore: v.optional(v.boolean()),
   }),
   slideEdits: defineTable({
     slideId: v.string(),
@@ -54,5 +55,6 @@ export default defineSchema({
   captionDraft: defineTable({
     text: v.string(),
     updatedAt: v.number(),
+    breakBefore: v.optional(v.boolean()),
   }),
 });
