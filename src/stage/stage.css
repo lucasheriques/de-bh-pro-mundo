@@ -1580,3 +1580,9 @@
 .slide :is(p, li, span, td, th) {
   text-wrap: pretty;
 }
+
+.wall-footer {
+  padding-top: 28px;
+  font-size: 34px;
+  color: var(--accent-ink);
+}

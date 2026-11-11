@@ -587,7 +587,7 @@ export const slides: Slide[] = [
     visual: {
       kind: "statement",
       text: "Escolha o seu mercado. Treine o seu julgamento.",
-      sub: "De BH pro mundo · nagringa.dev",
+      sub: "nagringa.dev/links",
     },
     presenterOnlyNotes: true,
     notes: ["Frase final, devagar. Pausa", "Obrigado! Agora quero ouvir as perguntas de vocês"],
@@ -596,7 +596,7 @@ export const slides: Slide[] = [
   {
     id: "qa",
     section: "Perguntas",
-    visual: { kind: "questionsWall" },
+    visual: { kind: "questionsWall", footer: "Minhas redes e contatos: nagringa.dev/links" },
     interaction: { kind: "questions" },
     notes: ["As mais votadas sobem; esconde as que não fizerem sentido"],
   },

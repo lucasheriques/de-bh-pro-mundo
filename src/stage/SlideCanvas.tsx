@@ -33,7 +33,7 @@ const visuals: { [K in Visual["kind"]]: (props: VisualProps<K>) => ReactNode } =
   tierTop: TierTopVisual,
   join: JoinVisual,
   results: ResultsVisual,
-  questionsWall: QuestionsWall,
+  questionsWall: ({ visual }) => <QuestionsWall footer={visual.footer} />,
 };
 
 export function SlideCanvas({ slide }: { slide: Slide }) {

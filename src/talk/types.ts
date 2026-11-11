@@ -71,7 +71,7 @@ export type Visual =
     }
   | { kind: "join" }
   | { kind: "results"; eyebrow?: string }
-  | { kind: "questionsWall" };
+  | { kind: "questionsWall"; footer?: string };
 
 export type Slide = {
   id: string;

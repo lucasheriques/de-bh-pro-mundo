@@ -186,7 +186,8 @@ export function ContentPage() {
         <p>
           Dados de salário e vagas:{" "}
           <a href="https://nagringa.dev/salarios">nagringa.dev/salarios</a> e{" "}
-          <a href="https://nagringa.dev/vagas/tier-list">nagringa.dev/vagas/tier-list</a>.
+          <a href="https://nagringa.dev/vagas/tier-list">nagringa.dev/vagas/tier-list</a>. Minhas
+          redes e contatos: <a href="https://nagringa.dev/links">nagringa.dev/links</a>.
         </p>
       </footer>
     </main>

@@ -5,7 +5,7 @@ import { Eyebrow } from "./static";
 
 const WALL_SIZE = 6;
 
-export function QuestionsWall() {
+export function QuestionsWall({ footer }: { footer?: string }) {
   const questions = (useQuery(api.questions.list, {}) ?? []).slice(0, WALL_SIZE);
   const listRef = useFlip<HTMLOListElement>(
     questions.map((question) => `${question._id}:${question.voteCount}`).join(),
@@ -33,6 +33,7 @@ export function QuestionsWall() {
           </li>
         ))}
       </ol>
+      {footer ? <p className="source wall-footer">{footer}</p> : null}
     </div>
   );
 }
