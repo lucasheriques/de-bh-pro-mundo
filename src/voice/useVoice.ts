@@ -1,7 +1,4 @@
-import { useMutation } from "convex/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { api } from "../../convex/_generated/api";
-import { presenterKey } from "../live/env";
 import { clearHeard, initialVoiceState, type VoiceMove, type VoiceState, voiceStep } from "./match";
 import { BIAS_PHRASES, correctTranscript } from "./vocabulary";
 import { appendLog, describeMove, type VoiceLogEntry, type VoiceLogKind } from "./voiceLog";
@@ -42,10 +39,6 @@ export type VoiceMode = "on-device" | "online";
 const LANG = "pt-BR";
 const BLOCKED_ERRORS = new Set(["not-allowed", "service-not-allowed"]);
 
-const CAPTION_FLUSH_MS = 1200;
-const DRAFT_THROTTLE_MS = 400;
-/** Silence longer than this before a phrase starts a new caption line. */
-const CAPTION_PAUSE_MS = 1600;
 const TRANSCRIPT_CHARS = 220;
 const RESTART_DELAY_MS = 300;
 
@@ -175,11 +168,8 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
     (kind: VoiceLogKind, text: string) => setLog((current) => appendLog(current, kind, text)),
     [],
   );
-  const pushCaption = useMutation(api.captions.push);
-  const pushDraft = useMutation(api.captions.draft);
-
-  const latest = useRef({ enabled, slideIndex, cues, nextCues, onMove, pushCaption, pushDraft });
-  latest.current = { enabled, slideIndex, cues, nextCues, onMove, pushCaption, pushDraft };
+  const latest = useRef({ enabled, slideIndex, cues, nextCues, onMove });
+  latest.current = { enabled, slideIndex, cues, nextCues, onMove };
   const voiceState = useRef<VoiceState>(initialVoiceState);
   const heardAt = useRef(slideIndex);
   if (heardAt.current !== slideIndex) {
@@ -187,51 +177,7 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
     voiceState.current = clearHeard(voiceState.current);
   }
   const restart = useRef<(() => void) | null>(null);
-  const captionBuffer = useRef<string[]>([]);
-  const captionTimer = useRef<number | null>(null);
-  const draftText = useRef("");
-  const draftTimer = useRef<number | null>(null);
-  const lastSpokeAt = useRef(0);
-  const phraseAfterPause = useRef<boolean | null>(null);
-  const bufferAfterPause = useRef(false);
-
-  /** Whether the phrase being spoken now began after a long silence; fixed at its first word. */
-  const notePhraseStart = (now: number): boolean => {
-    phraseAfterPause.current ??= now - lastSpokeAt.current > CAPTION_PAUSE_MS;
-    return phraseAfterPause.current;
-  };
-
-  const flushDraft = () => {
-    draftTimer.current = null;
-    void latest.current
-      .pushDraft({
-        key: presenterKey,
-        text: draftText.current,
-        afterPause: draftText.current !== "" && phraseAfterPause.current === true,
-      })
-      .catch(() => undefined);
-  };
-
-  const queueDraft = (text: string) => {
-    draftText.current = text;
-    draftTimer.current ??= window.setTimeout(flushDraft, DRAFT_THROTTLE_MS);
-  };
-
-  const flushCaptions = () => {
-    captionTimer.current = null;
-    const text = captionBuffer.current.join(" ").trim();
-    captionBuffer.current = [];
-    if (!text) return;
-    const { pushCaption, slideIndex } = latest.current;
-    void pushCaption({
-      key: presenterKey,
-      text,
-      slideIndex,
-      afterPause: bufferAfterPause.current,
-    }).catch(() => undefined);
-  };
-
-  const feed = useRef((heard: string, isFinal: boolean, caption = true) => {
+  const feed = useRef((heard: string, isFinal: boolean, spoken = true) => {
     const { enabled, slideIndex, cues, nextCues, onMove } = latest.current;
     const text = correctTranscript(heard);
     if (!enabled) return;
@@ -244,7 +190,7 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
       nextCues,
     });
     voiceState.current = result.state;
-    if (isFinal && text.trim()) note(caption ? "heard" : "typed", text.trim());
+    if (isFinal && text.trim()) note(spoken ? "heard" : "typed", text.trim());
     if (result.steps !== 0 || result.reveal) {
       const move = { steps: result.steps, reveal: result.reveal };
       setLastMatch(text);
@@ -256,19 +202,6 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
         ? { final: `${current.final} ${text}`.trim().slice(-TRANSCRIPT_CHARS), interim: "" }
         : { ...current, interim: text },
     );
-    if (!caption || !text.trim()) return;
-    const now = Date.now();
-    const afterPause = notePhraseStart(now);
-    if (!isFinal) {
-      queueDraft(text);
-      return;
-    }
-    lastSpokeAt.current = now;
-    phraseAfterPause.current = null;
-    queueDraft("");
-    if (captionBuffer.current.length === 0) bufferAfterPause.current = afterPause;
-    captionBuffer.current.push(text.trim());
-    captionTimer.current ??= window.setTimeout(flushCaptions, CAPTION_FLUSH_MS);
   }).current;
 
   useEffect(() => {
@@ -302,14 +235,6 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
       stop();
     };
   }, [enabled, feed, note]);
-
-  useEffect(
-    () => () => {
-      if (captionTimer.current !== null) window.clearTimeout(captionTimer.current);
-      if (draftTimer.current !== null) window.clearTimeout(draftTimer.current);
-    },
-    [],
-  );
 
   const Recognition = recognitionConstructor();
   const installPack = Recognition?.install

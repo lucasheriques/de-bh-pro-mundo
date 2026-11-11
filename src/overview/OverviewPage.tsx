@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import { presenterKey } from "../live/env";
+import { NoteList } from "../live/NoteList";
 import { useDeck } from "../live/useDeck";
 import { useStageTheme } from "../live/useStoredToggle";
 import { Scaled } from "../stage/Scaled";
 import { SlideCanvas } from "../stage/SlideCanvas";
 import { slides } from "../talk/slides";
 import type { Slide } from "../talk/types";
-import { NoteList } from "../live/NoteList";
 
 const canJump = presenterKey.length > 0;
 

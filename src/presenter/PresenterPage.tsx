@@ -3,6 +3,7 @@ import { api } from "../../convex/_generated/api";
 import { ConnectionDot } from "../live/ConnectionDot";
 import { CueBanner } from "../live/CueBanner";
 import { presenterKey } from "../live/env";
+import { NoteList } from "../live/NoteList";
 import { Roster } from "../live/Roster";
 import { Shortcuts } from "../live/Shortcuts";
 import {
@@ -23,7 +24,6 @@ import { countChoices, median, numericValues } from "../talk/stats";
 import type { Interaction, Slide } from "../talk/types";
 import { Timer } from "./Timer";
 import { VoiceHud } from "./VoiceHud";
-import { NoteList } from "../live/NoteList";
 
 function PollSummary({ slide }: { slide: Slide }) {
   const pollId = pollIdOf(slide) ?? "";

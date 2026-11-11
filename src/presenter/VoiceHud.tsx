@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from "react";
+import { type CaptionStreamStatus, useCaptionStream } from "../captions/useCaptionStream";
 import { type Deck, pollIdOf } from "../live/useDeck";
 import { slides } from "../talk/slides";
 import type { VoiceMove } from "../voice/match";
@@ -110,6 +111,14 @@ function VoiceLog({ entries }: { entries: readonly VoiceLogEntry[] }) {
   );
 }
 
+const CAPTION_STATUS_LABEL: Record<CaptionStreamStatus, string> = {
+  off: "desligadas (ligue a voz)",
+  unavailable: "sem chave do AI Gateway no Convex",
+  connecting: "conectando…",
+  live: "ao vivo (Scribe v2)",
+  retrying: "reconectando…",
+};
+
 export function VoiceHud({ deck }: { deck: Deck }) {
   const enabled = deck.session.voiceEnabled;
   const voice = useVoice({
@@ -120,6 +129,7 @@ export function VoiceHud({ deck }: { deck: Deck }) {
     onMove: (from, move) => applyVoiceMove(deck, from, move),
   });
   const meterRef = useMicLevel(enabled && voice.status === "listening");
+  const captionStatus = useCaptionStream(enabled, deck.index);
 
   return (
     <section
@@ -160,6 +170,9 @@ export function VoiceHud({ deck }: { deck: Deck }) {
       {voice.lastMatch ? <p className="mono muted">Último gatilho: "{voice.lastMatch}"</p> : null}
       <VoiceLog entries={voice.log} />
       <TypedSpeech onSubmit={voice.say} disabled={!enabled} />
+      <p className={`caption-status is-${captionStatus}`} data-caption-status={captionStatus}>
+        Legendas: {CAPTION_STATUS_LABEL[captionStatus]}
+      </p>
       <p className="voice-commands">
         Em qualquer slide: "próximo slide", "volta um", "mostra o resultado".
       </p>

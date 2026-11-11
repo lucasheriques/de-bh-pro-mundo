@@ -1,0 +1,154 @@
+import { useAction, useMutation, useQuery } from "convex/react";
+import { useEffect, useRef, useState } from "react";
+import { api } from "../../convex/_generated/api";
+import { presenterKey } from "../live/env";
+import { toPcm16 } from "./pcm";
+
+const MODEL = "elevenlabs/scribe-v2-realtime";
+const SAMPLE_RATE = 24000;
+const FRAME_SIZE = 4096;
+const RETRY_MS = 1500;
+const DRAFT_THROTTLE_MS = 300;
+/** Silence longer than this before a phrase starts a new caption line. */
+const PAUSE_MS = 1600;
+
+export type CaptionStreamStatus = "off" | "unavailable" | "connecting" | "live" | "retrying";
+
+/** Streams mic audio as PCM chunks until stopped. */
+async function openMic(onChunk: (bytes: Uint8Array) => void): Promise<() => void> {
+  const media = await navigator.mediaDevices.getUserMedia({
+    audio: { channelCount: 1, noiseSuppression: true, echoCancellation: true },
+  });
+  const context = new AudioContext({ sampleRate: SAMPLE_RATE });
+  const source = context.createMediaStreamSource(media);
+  const processor = context.createScriptProcessor(FRAME_SIZE, 1, 1);
+  processor.onaudioprocess = (event) => onChunk(toPcm16(event.inputBuffer.getChannelData(0)));
+  source.connect(processor);
+  processor.connect(context.destination);
+  return () => {
+    processor.disconnect();
+    source.disconnect();
+    for (const track of media.getTracks()) track.stop();
+    void context.close();
+  };
+}
+
+type Sink = {
+  partial: (text: string) => void;
+  final: (text: string) => void;
+};
+
+/** One transcription socket: lives until it errors, ends or is aborted. */
+async function runSession(
+  token: string,
+  audio: ReadableStream<Uint8Array>,
+  sink: Sink,
+  signal: AbortSignal,
+): Promise<void> {
+  // Loaded on demand: only the presenter's tab streams, phones never download the SDK.
+  const [{ createGateway }, { experimental_streamTranscribe: streamTranscribe }] =
+    await Promise.all([import("@ai-sdk/gateway"), import("ai")]);
+  const gateway = createGateway({ apiKey: token });
+  const result = streamTranscribe({
+    model: gateway.transcription(MODEL),
+    audio,
+    inputAudioFormat: { type: "audio/pcm", rate: SAMPLE_RATE },
+    abortSignal: signal,
+  });
+  for await (const part of result.fullStream) {
+    if (part.type === "transcript-partial") sink.partial(part.text);
+    else if (part.type === "transcript-final") sink.final(part.text);
+    else if (part.type === "error") throw part.error;
+  }
+}
+
+/**
+ * Live captions from the presenter's mic through ElevenLabs Scribe v2 Realtime on the AI
+ * Gateway. Convex mints a short-lived token per connection, so the Gateway key never reaches
+ * the browser; a dropped socket reconnects with a fresh one.
+ */
+export function useCaptionStream(enabled: boolean, slideIndex: number): CaptionStreamStatus {
+  const available = useQuery(api.captionStream.available, { key: presenterKey });
+  const getToken = useAction(api.captionStream.token);
+  const pushCaption = useMutation(api.captions.push);
+  const pushDraft = useMutation(api.captions.draft);
+  const [status, setStatus] = useState<CaptionStreamStatus>("off");
+  const latest = useRef({ slideIndex, getToken, pushCaption, pushDraft });
+  latest.current = { slideIndex, getToken, pushCaption, pushDraft };
+
+  useEffect(() => {
+    if (!enabled) {
+      setStatus("off");
+      return;
+    }
+    if (available === undefined) return;
+    if (!available) {
+      setStatus("unavailable");
+      return;
+    }
+    const abort = new AbortController();
+    let feed: ReadableStreamDefaultController<Uint8Array> | null = null;
+    let lastFinalAt = 0;
+    let phraseAfterPause: boolean | null = null;
+    let draftTimer: number | null = null;
+    let draftText = "";
+
+    const flushDraft = () => {
+      draftTimer = null;
+      void latest.current
+        .pushDraft({ key: presenterKey, text: draftText, afterPause: phraseAfterPause === true })
+        .catch(() => undefined);
+    };
+    const sink: Sink = {
+      partial: (text) => {
+        phraseAfterPause ??= Date.now() - lastFinalAt > PAUSE_MS;
+        draftText = text;
+        draftTimer ??= window.setTimeout(flushDraft, DRAFT_THROTTLE_MS);
+      },
+      final: (text) => {
+        const afterPause = phraseAfterPause ?? Date.now() - lastFinalAt > PAUSE_MS;
+        lastFinalAt = Date.now();
+        phraseAfterPause = null;
+        draftText = "";
+        if (draftTimer !== null) window.clearTimeout(draftTimer);
+        flushDraft();
+        if (!text.trim()) return;
+        const { pushCaption, slideIndex } = latest.current;
+        void pushCaption({ key: presenterKey, text, slideIndex, afterPause }).catch(
+          () => undefined,
+        );
+      },
+    };
+
+    const loop = async () => {
+      const closeMic = await openMic((bytes) => feed?.enqueue(bytes));
+      abort.signal.addEventListener("abort", closeMic);
+      while (!abort.signal.aborted) {
+        setStatus("connecting");
+        const audio = new ReadableStream<Uint8Array>({
+          start: (controller) => {
+            feed = controller;
+          },
+        });
+        try {
+          const token = await latest.current.getToken({ key: presenterKey });
+          setStatus("live");
+          await runSession(token, audio, sink, abort.signal);
+        } catch {
+          // A dropped socket or an expired token: fall through and reconnect.
+        }
+        feed = null;
+        if (abort.signal.aborted) break;
+        setStatus("retrying");
+        await new Promise((resolve) => setTimeout(resolve, RETRY_MS));
+      }
+    };
+    void loop().catch(() => setStatus("retrying"));
+    return () => {
+      abort.abort();
+      if (draftTimer !== null) window.clearTimeout(draftTimer);
+    };
+  }, [enabled, available]);
+
+  return status;
+}

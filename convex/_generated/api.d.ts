@@ -9,7 +9,7 @@
  */
 
 import type * as audience from "../audience.js";
-import type * as captionPolish from "../captionPolish.js";
+import type * as captionStream from "../captionStream.js";
 import type * as captions from "../captions.js";
 import type * as displayName from "../displayName.js";
 import type * as moderation from "../moderation.js";
@@ -33,7 +33,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   audience: typeof audience;
-  captionPolish: typeof captionPolish;
+  captionStream: typeof captionStream;
   captions: typeof captions;
   displayName: typeof displayName;
   moderation: typeof moderation;

@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
+import { NoteList } from "../live/NoteList";
 import { ThemeToggle } from "../live/ThemeToggle";
 import { formatBrl } from "../talk/format";
 import { slides } from "../talk/slides";
 import type { Interaction, Slide, Visual } from "../talk/types";
-import { NoteList } from "../live/NoteList";
 
 type Render<K extends Visual["kind"]> = (visual: Extract<Visual, { kind: K }>) => ReactNode;
 

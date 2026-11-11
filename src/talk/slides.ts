@@ -235,9 +235,7 @@ export const slides: Slide[] = [
       title: "O que a IA mudou",
       lead: "Escrever software ficou barato. Julgamento, não.",
     },
-    notes: [
-      "Parte dois: o que a IA mudou",
-    ],
+    notes: ["Parte dois: o que a IA mudou"],
     cues: ["parte dois", "parte 2"],
   },
   {
@@ -318,9 +316,7 @@ export const slides: Slide[] = [
       title: "O que o mundo compra",
       lead: "Gente responsável pelo negócio, não pelo ticket.",
     },
-    notes: [
-      "Parte três: o que o mundo compra",
-    ],
+    notes: ["Parte três: o que o mundo compra"],
     cues: ["parte três", "parte 3"],
   },
   {
@@ -383,9 +379,7 @@ export const slides: Slide[] = [
       title: "Como chegar lá",
       lead: "As portas de entrada, todas a partir de BH.",
     },
-    notes: [
-      "Parte quatro: como chegar lá",
-    ],
+    notes: ["Parte quatro: como chegar lá"],
     cues: ["parte quatro", "parte 4"],
   },
   {
@@ -561,10 +555,7 @@ export const slides: Slide[] = [
       sub: "De BH pro mundo · nagringa.dev",
     },
     presenterOnlyNotes: true,
-    notes: [
-      "Frase final, devagar. Pausa",
-      "Obrigado! Agora quero ouvir as perguntas de vocês",
-    ],
+    notes: ["Frase final, devagar. Pausa", "Obrigado! Agora quero ouvir as perguntas de vocês"],
     cues: ["perguntas de vocês", "ouvir as perguntas"],
   },
   {
@@ -572,8 +563,6 @@ export const slides: Slide[] = [
     section: "Perguntas",
     visual: { kind: "questionsWall" },
     interaction: { kind: "questions" },
-    notes: [
-      "As mais votadas sobem; esconde as que não fizerem sentido",
-    ],
+    notes: ["As mais votadas sobem; esconde as que não fizerem sentido"],
   },
 ];

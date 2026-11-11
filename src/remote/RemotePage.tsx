@@ -1,7 +1,7 @@
 import { CueBanner } from "../live/CueBanner";
+import { NoteList } from "../live/NoteList";
 import { pollIdOf, slideAt, useDeck } from "../live/useDeck";
 import { slides } from "../talk/slides";
-import { NoteList } from "../live/NoteList";
 
 function headline(index: number): string {
   const visual = slideAt(index).visual;

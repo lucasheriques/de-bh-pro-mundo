@@ -1516,3 +1516,19 @@ html input:focus-visible {
 .note-list li::marker {
   color: var(--accent);
 }
+
+.caption-status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.caption-status.is-live {
+  color: var(--accent-ink);
+}
+
+.caption-status.is-unavailable,
+.caption-status.is-retrying {
+  color: var(--warning);
+}
