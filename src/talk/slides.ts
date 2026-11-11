@@ -149,17 +149,17 @@ export const slides: Slide[] = [
       eyebrow: "Engenheiro de software sênior no Brasil, mediana mensal por mercado",
       title: "Três mercados, três salários.",
       bars: [
-        { label: "Tier 1 · empresa que compete localmente", value: 13, display: "R$ 13 mil" },
-        { label: "Tier 2 · compete no Brasil inteiro", value: 20.7, display: "R$ 20,7 mil" },
+        { label: "Tier 1 · empresa que compete localmente", value: 13.5, display: "R$ 13,5 mil" },
+        { label: "Tier 2 · compete no Brasil inteiro", value: 21.3, display: "R$ 21,3 mil" },
         {
           label: "Tier 3 · compete com o mundo",
-          value: 64.2,
-          display: "R$ 64,2 mil",
+          value: 65.3,
+          display: "R$ 65,3 mil",
           highlight: true,
         },
       ],
       source:
-        "levels.fyi, 560 salários de engenheiro de software com nível sênior declarado, no Brasil, ofertas desde ago/2024, nos tiers do modelo trimodal de Gergely Orosz (The Pragmatic Engineer). Remuneração total.",
+        "Bases públicas de salários + NaGringa: 687 salários de engenheiro de software sênior no Brasil, desde ago/2024, nos tiers do modelo trimodal de Gergely Orosz (The Pragmatic Engineer). Remuneração total.",
     },
     notes:
       "Esse é o modelo trimodal, do Gergely Orosz. Tier 1 é a empresa que compete por talento na cidade, como consultoria. Tier 2 compete no Brasil inteiro. Tier 3 compete com o mundo. Só sênior, pra comparar igual com igual: a mesma pessoa, com a mesma stack, ganha quase cinco vezes mais dependendo de contra quem a empresa compete. A linguagem que você usa mexe uns 50% no salário. O mercado mexe cinco vezes.",
@@ -257,27 +257,27 @@ export const slides: Slide[] = [
         {
           tier: "1",
           label: "Compete na cidade",
-          median: 13000,
+          median: 13500,
           companies: [
-            { name: "GFT", logo: "/logos/gft.com.webp", median: 14917 },
-            { name: "ThoughtWorks", logo: "/logos/thoughtworks.com.webp", median: 14833 },
-            { name: "CI&T", logo: "/logos/ciandt.com.webp", median: 13000 },
+            { name: "ThoughtWorks", logo: "/logos/thoughtworks.com.webp", median: 15500 },
+            { name: "GFT", logo: "/logos/gft.com.webp", median: 14900 },
+            { name: "CI&T", logo: "/logos/ciandt.com.webp", median: 13500 },
           ],
         },
         {
           tier: "2",
           label: "Compete no Brasil",
-          median: 20667,
+          median: 21278,
           companies: [
-            { name: "Nubank", logo: "/logos/nubank.com.br.webp", median: 25833 },
-            { name: "Itaú", logo: "/logos/itau.com.br.webp", median: 19208 },
-            { name: "BTG Pactual", logo: "/logos/btgpactual.com.webp", median: 19000 },
+            { name: "Nubank", logo: "/logos/nubank.com.br.webp", median: 26000 },
+            { name: "BTG Pactual", logo: "/logos/btgpactual.com.webp", median: 20083 },
+            { name: "Itaú", logo: "/logos/itau.com.br.webp", median: 19417 },
           ],
         },
         {
           tier: "3",
           label: "Compete com o mundo",
-          median: 64167,
+          median: 65313,
           companies: [
             { name: "Uber", logo: "/logos/uber.com.webp", median: 67500 },
             { name: "Google", logo: "/logos/google.com.webp", median: 62500 },
@@ -286,10 +286,10 @@ export const slides: Slide[] = [
         },
       ],
       source:
-        "levels.fyi, engenheiro de software com nível sênior declarado, no Brasil, ofertas desde ago/2024, remuneração total mensal. 560 salários; cada empresa com 7 ou mais.",
+        "Bases públicas de salários + NaGringa, engenheiro de software sênior no Brasil, desde ago/2024, remuneração total mensal. 687 salários; cada empresa com 11 ou mais.",
     },
     notes:
-      "Os mesmos números, agora com empresas que vocês conhecem. Nubank, Itaú e BTG pagam bem, e ainda assim ficam a um terço de quem compete com o mundo. Do tier 1 pro tier 2 são uns sessenta por cento. Do 2 pro 3, três vezes. Mesma pessoa, mesmo código, outra liga.",
+      "Os mesmos números, agora com empresas que vocês conhecem. Nubank, BTG e Itaú pagam bem, e ainda assim ficam a um terço de quem compete com o mundo. Do tier 1 pro tier 2 são uns sessenta por cento. Do 2 pro 3, três vezes. Mesma pessoa, mesmo código, outra liga.",
     cues: ["outra liga"],
   },
   {
