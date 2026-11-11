@@ -798,3 +798,40 @@
   font-size: 13px;
   transform: translateX(-50%);
 }
+
+/* Content slides on the phone: the slide's words at a readable size */
+
+.slide-text {
+  display: grid;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.slide-text h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.slide-text ol,
+.slide-text ul {
+  display: grid;
+  gap: 8px;
+  margin: 4px 0 0;
+  padding-left: 20px;
+}
+
+.slide-text .content-lead {
+  font-size: 17px;
+  color: var(--muted);
+}
+
+.slide-text .content-source {
+  font-size: 13px;
+}
+
+.slide-text .content-table {
+  margin-top: 4px;
+}

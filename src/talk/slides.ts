@@ -181,7 +181,7 @@ export const slides: Slide[] = [
     visual: {
       kind: "tierList",
       eyebrow: "Exemplos pela remuneração de sênior no NaGringa",
-      title: "O Nubank compete no Brasil. A Uber, com o mundo.",
+      title: "Nubank compete no Brasil. Uber, com o mundo.",
       rows: [
         {
           tier: "3",
@@ -480,8 +480,8 @@ export const slides: Slide[] = [
     section: "4. Como chegar lá",
     visual: {
       kind: "list",
-      eyebrow: "Mensagem direta pra founder ou CTO",
-      title: "Em startup pequena, fale direto com quem decide.",
+      eyebrow: "Mensagem direta pra founder ou CTO de startup",
+      title: "Fale direto com quem decide.",
       items: [
         {
           title: "Gancho específico",

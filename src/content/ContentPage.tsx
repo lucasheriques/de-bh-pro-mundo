@@ -117,6 +117,12 @@ function showsNotes(slide: Slide): boolean {
   return !slide.interaction && !slide.presenterOnlyNotes;
 }
 
+/** The slide's words as plain, phone-sized text: same renderer as /conteudo, no notes. */
+export function SlideText({ slide }: { slide: Slide }) {
+  const render = visuals[slide.visual.kind] as (visual: Visual) => ReactNode;
+  return <div className="slide-text">{render(slide.visual)}</div>;
+}
+
 function SlideSection({ slide }: { slide: Slide }) {
   const render = visuals[slide.visual.kind] as (visual: Visual) => ReactNode;
   const body = render(slide.visual);
