@@ -92,10 +92,17 @@ export type VoiceMove = { steps: Steps; reveal: boolean };
 
 const NO_MOVE: VoiceMove = { steps: 0, reveal: false };
 
+/**
+ * Two-word cores: small words in between are skipped (MAX_GAP) and one-letter slips are fuzzy,
+ * so "mostra resultado" also hears "mostrar o resultados".
+ */
 const COMMANDS: readonly { phrases: readonly string[]; move: VoiceMove }[] = [
-  { phrases: ["proximo slide", "pra frente", "slide seguinte"], move: { steps: 1, reveal: false } },
+  {
+    phrases: ["proximo slide", "pra frente", "slide seguinte", "passa slide", "avanca slide"],
+    move: { steps: 1, reveal: false },
+  },
   { phrases: ["volta um", "volta slide", "slide anterior"], move: { steps: -1, reveal: false } },
-  { phrases: ["mostra o resultado", "mostrar o resultado"], move: { steps: 0, reveal: true } },
+  { phrases: ["mostra resultado", "revela resultado"], move: { steps: 0, reveal: true } },
 ];
 
 function commandHeard(window: readonly string[]): VoiceMove | null {

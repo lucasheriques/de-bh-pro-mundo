@@ -24,8 +24,14 @@ const TALK_TERMS = [
   "PUC Minas",
   "Coração Eucarístico",
   "próximo slide",
+  "slide seguinte",
+  "passa o slide",
   "volta um",
+  "volta o slide",
+  "slide anterior",
   "mostra o resultado",
+  "mostrar resultado",
+  "revela o resultado",
 ];
 
 export const BIAS_PHRASES: readonly string[] = [

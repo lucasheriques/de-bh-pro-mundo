@@ -386,7 +386,19 @@ describe("spoken commands", () => {
     ["slide anterior", "me dá o slide anterior", -1, false],
     ["mostra o resultado", "beleza, mostra o resultado", 0, true],
     ["accent-free transcription", "proximo slide", 1, false],
+    ["mostrar resultado", "mostrar resultado", 0, true],
+    ["mostrar resultados", "pode mostrar resultados", 0, true],
+    ["mostra resultado", "mostra resultado aí", 0, true],
+    ["revela o resultado", "revela o resultado", 0, true],
+    ["voltar slide", "voltar slide", -1, false],
+    ["volta pro slide anterior", "volta pro slide anterior", -1, false],
+    ["voltar um", "voltar um", -1, false],
+    ["próximo, plural", "próximos slides", 1, false],
+    ["passa o slide", "passa o slide", 1, false],
+    ["avança o slide", "avança o slide", 1, false],
     ["ordinary speech", "a frente de trabalho voltou", 0, false],
+    ["ordinary speech about results", "o resultado do negócio é o que importa", 0, false],
+    ["ordinary speech with próximo", "o próximo passo é mandar mensagem", 0, false],
   ])("%s", (_label, spoken, steps, reveal) => {
     const move = moveFor(spoken);
     expect({ steps: move.steps, reveal: move.reveal }).toEqual({ steps, reveal });

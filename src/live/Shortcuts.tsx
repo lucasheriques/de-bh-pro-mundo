@@ -45,7 +45,7 @@ export function Shortcuts({ className }: { className: string }) {
       </dl>
       <p className="muted shortcuts-note">
         Clique no telão uma vez antes, pra ele receber o teclado. Pela voz, em qualquer slide:
-        "próximo slide", "volta um", "mostra o resultado".
+        "próximo slide" ou "passa o slide", "volta um" ou "slide anterior", "mostra o resultado".
       </p>
     </section>
   );
