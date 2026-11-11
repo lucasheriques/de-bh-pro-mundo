@@ -69,19 +69,43 @@ export function QuestionsSheet({ open, onClose }: { open: boolean; onClose: () =
   );
 }
 
+/** The captions' own label and switch, right where the captions appear. */
+function CaptionsHead({ on, onToggle }: { on: boolean; onToggle: () => void }) {
+  return (
+    <div className="captions-head-row">
+      <span className="captions-head-label">
+        <span className="captions-live-dot" data-on={on || undefined} aria-hidden="true" />
+        {on ? "Legendas ao vivo" : "Legendas desligadas"}
+      </span>
+      <button
+        type="button"
+        role="switch"
+        aria-checked={on}
+        aria-label="Legendas"
+        className="captions-switch"
+        onClick={onToggle}
+      >
+        {on ? "Esconder" : "Mostrar"}
+      </button>
+    </div>
+  );
+}
+
 export function PhoneDock({
   captions,
   showQuestions,
   onOpenQuestions,
+  onToggleCaptions,
 }: {
   captions: boolean;
   showQuestions: boolean;
   onOpenQuestions: () => void;
+  onToggleCaptions: () => void;
 }) {
   const desktop = useMediaQuery(DESKTOP_QUERY);
-  if (!captions && !showQuestions) return null;
   return (
     <div className="phone-dock">
+      <CaptionsHead on={captions} onToggle={onToggleCaptions} />
       {captions ? <LiveCaption className="caption-strip" history={8} /> : null}
       {showQuestions && desktop ? (
         <section className="dock-questions" aria-label="Perguntas da sala">

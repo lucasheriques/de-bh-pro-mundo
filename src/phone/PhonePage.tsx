@@ -35,28 +35,16 @@ const panels: { [K in Interaction["kind"]]: (props: PanelProps<K>) => ReactNode 
 function PhoneHeader({
   name,
   onEditName,
-  captions,
-  onToggleCaptions,
   position,
 }: {
   name: string | null | undefined;
   onEditName: () => void;
-  captions: "on" | "off";
-  onToggleCaptions: () => void;
   position: string;
 }) {
   return (
     <header className="phone-header">
       <NameChip name={name} onEdit={onEditName} />
       <p className="phone-position mono">{position}</p>
-      <button
-        type="button"
-        className="caption-toggle"
-        aria-pressed={captions === "on"}
-        onClick={onToggleCaptions}
-      >
-        Legendas
-      </button>
       <ThemeToggle />
       <ConnectionDot className="phone-connection" />
     </header>
@@ -89,8 +77,6 @@ export function PhonePage() {
       <PhoneHeader
         name={myName}
         onEditName={() => setNameOpen(true)}
-        captions={captions}
-        onToggleCaptions={toggleCaptions}
         position={`${session.slideIndex + 1}/${slides.length}${slide.section ? ` · ${slide.section.replace(/^\d+\.\s*/, "")}` : ""}`}
       />
       {showNameForm ? <NameForm current={myName} onDone={() => setNameOpen(false)} /> : null}
@@ -106,6 +92,7 @@ export function PhonePage() {
       </div>
       <PhoneDock
         captions={captions === "on"}
+        onToggleCaptions={toggleCaptions}
         showQuestions={!onQuestionsSlide}
         onOpenQuestions={() => setQuestionsOpen(true)}
       />

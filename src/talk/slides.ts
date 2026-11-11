@@ -551,7 +551,7 @@ export const slides: Slide[] = [
     section: "Fechamento",
     visual: {
       kind: "statement",
-      text: "IA deixa julgamento fraco mais alto e julgamento forte mais rápido.",
+      text: "Escolha o seu mercado. Treine o seu julgamento.",
       sub: "De BH pro mundo · nagringa.dev",
     },
     presenterOnlyNotes: true,
