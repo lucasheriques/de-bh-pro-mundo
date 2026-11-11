@@ -7,6 +7,7 @@ import { ConnectionDot } from "../live/ConnectionDot";
 import { clientId } from "../live/env";
 import { slideAt, useSession } from "../live/useDeck";
 import { useStoredToggle } from "../live/useStoredToggle";
+import { slides } from "../talk/slides";
 import type { Interaction } from "../talk/types";
 import { AmbientPanel } from "./AmbientPanel";
 import { ChoicePanel } from "./ChoicePanel";
@@ -34,15 +35,18 @@ function PhoneHeader({
   onEditName,
   captions,
   onToggleCaptions,
+  position,
 }: {
   name: string | null | undefined;
   onEditName: () => void;
   captions: "on" | "off";
   onToggleCaptions: () => void;
+  position: string;
 }) {
   return (
     <header className="phone-header">
       <NameChip name={name} onEdit={onEditName} />
+      <p className="phone-position mono">{position}</p>
       <button
         type="button"
         className="caption-toggle"
@@ -51,7 +55,7 @@ function PhoneHeader({
       >
         Legendas
       </button>
-      <ConnectionDot />
+      <ConnectionDot className="phone-connection" />
     </header>
   );
 }
@@ -84,6 +88,7 @@ export function PhonePage() {
         onEditName={() => setNameOpen(true)}
         captions={captions}
         onToggleCaptions={toggleCaptions}
+        position={`${session.slideIndex + 1}/${slides.length}${slide.section ? ` · ${slide.section.replace(/^\d+\.\s*/, "")}` : ""}`}
       />
       {showNameForm ? <NameForm current={myName} onDone={() => setNameOpen(false)} /> : null}
       <div className="phone-body" key={slide.id}>
