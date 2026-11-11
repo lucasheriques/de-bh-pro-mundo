@@ -856,9 +856,12 @@
 @media (min-width: 1024px) {
   .phone {
     max-width: 1180px;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 400px;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto minmax(0, 1fr);
     column-gap: 56px;
     align-items: start;
     padding: 32px 40px 48px;
@@ -878,16 +881,19 @@
     grid-column: 1;
     grid-row: 3;
     max-width: 680px;
+    min-height: 0;
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding-top: 40px;
   }
 
   .phone-dock {
     grid-column: 2;
     grid-row: 2 / span 2;
-    position: sticky;
-    top: 24px;
     gap: 24px;
-    max-height: calc(100dvh - 180px);
+    min-height: 0;
+    height: 100%;
     margin: 0;
     padding-top: 40px;
     padding-right: 0;
@@ -901,7 +907,8 @@
   }
 
   .caption-strip {
-    height: calc(9 * 1.45em);
+    height: calc(12 * 1.45em);
+    font-size: 18px;
   }
 
   .dock-questions {
@@ -938,15 +945,24 @@
   }
 
   .caption-strip {
-    height: calc(3 * 1.45em);
+    height: calc(5 * 1.45em);
+    font-size: 17px;
   }
 
   .panel {
-    gap: 14px;
+    gap: 12px;
   }
 
   .panel-question {
     font-size: 22px;
+  }
+
+  .choice {
+    padding: 13px 16px;
+  }
+
+  .choice-list {
+    gap: 8px;
   }
 
   .reaction {
@@ -1073,8 +1089,9 @@
   }
 
   .caption-strip {
-    height: calc(2 * 1.45em);
+    height: calc(4 * 1.4em);
     font-size: 16px;
+    line-height: 1.4;
   }
 
   .questions-bar {
