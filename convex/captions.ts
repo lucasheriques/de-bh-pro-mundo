@@ -73,3 +73,18 @@ export const live = query({
     };
   },
 });
+
+const CLEAR_CAP = 4000;
+
+/** Deletes every caption line and the live draft; votes, questions and reactions stay. */
+export const clear = mutation({
+  args: { key: v.string() },
+  handler: async (ctx, { key }) => {
+    assertPresenter(key);
+    const lines = await ctx.db.query("captions").take(CLEAR_CAP);
+    await Promise.all(lines.map((line) => ctx.db.delete("captions", line._id)));
+    const drafts = await ctx.db.query("captionDraft").take(CLEAR_CAP);
+    await Promise.all(drafts.map((draft) => ctx.db.delete("captionDraft", draft._id)));
+    return lines.length;
+  },
+});

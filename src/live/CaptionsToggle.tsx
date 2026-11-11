@@ -1,4 +1,5 @@
 import { useMutation } from "convex/react";
+import { useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import { presenterKey } from "./env";
 import { useCaptionsEnabled } from "./features";
@@ -14,20 +15,52 @@ export function CaptionsToggle() {
     },
   );
   return (
-    <label className="captions-toggle-row">
-      <input
-        type="checkbox"
-        checked={on}
-        onChange={(event) =>
-          void setCaptions({ key: presenterKey, captionsEnabled: event.target.checked })
-        }
-      />
-      <span>
-        Mostrar legendas ao vivo
-        <small className="muted">
-          {on ? "Nos celulares e no telão (C)." : "Desligadas. A voz continua passando slides."}
-        </small>
-      </span>
-    </label>
+    <div className="captions-controls">
+      <label className="captions-toggle-row">
+        <input
+          type="checkbox"
+          checked={on}
+          onChange={(event) =>
+            void setCaptions({ key: presenterKey, captionsEnabled: event.target.checked })
+          }
+        />
+        <span>
+          Mostrar legendas ao vivo
+          <small className="muted">
+            {on ? "Nos celulares e no telão (C)." : "Desligadas. A voz continua passando slides."}
+          </small>
+        </span>
+      </label>
+      <ClearCaptions />
+    </div>
+  );
+}
+
+const CLEAR_STATE_MS = 3000;
+
+/** Wipes the caption history (two clicks: the first asks, the second deletes). */
+function ClearCaptions() {
+  const clear = useMutation(api.captions.clear);
+  const [state, setState] = useState<"idle" | "confirm" | "done">("idle");
+  useEffect(() => {
+    if (state === "idle") return;
+    const timer = setTimeout(() => setState("idle"), CLEAR_STATE_MS);
+    return () => clearTimeout(timer);
+  }, [state]);
+  const onClick = () => {
+    if (state !== "confirm") {
+      setState("confirm");
+      return;
+    }
+    void clear({ key: presenterKey }).then(() => setState("done"));
+  };
+  return (
+    <button type="button" className="ghost captions-clear" onClick={onClick}>
+      {state === "confirm"
+        ? "Clique de novo pra apagar"
+        : state === "done"
+          ? "Legendas apagadas"
+          : "Apagar legendas"}
+    </button>
   );
 }

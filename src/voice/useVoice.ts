@@ -197,7 +197,7 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
   };
   const restart = useRef<(() => void) | null>(null);
   const feed = useRef((heard: string, isFinal: boolean, spoken = true) => {
-    const { enabled, slideIndex, cues, nextCues, onMove } = latest.current;
+    const { enabled, slideIndex, cues, nextCues } = latest.current;
     const text = correctTranscript(heard);
     if (!enabled) return;
     const result = voiceStep(voiceState.current, {

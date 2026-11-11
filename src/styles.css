@@ -1560,3 +1560,14 @@ html input:focus-visible {
   font-size: 13px;
   font-weight: 400;
 }
+
+.captions-controls {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.captions-clear {
+  padding: 6px 12px;
+  font-size: 12px;
+}
