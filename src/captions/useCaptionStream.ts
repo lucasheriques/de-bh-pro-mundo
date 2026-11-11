@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import { presenterKey } from "../live/env";
 import { toPcm16 } from "./pcm";
+import { splitLongPartial } from "./segments";
 
 const MODEL = "elevenlabs/scribe-v2-realtime";
 const SAMPLE_RATE = 24000;
@@ -11,6 +12,21 @@ const RETRY_MS = 1500;
 const DRAFT_THROTTLE_MS = 300;
 /** Silence longer than this before a phrase starts a new caption line. */
 const PAUSE_MS = 1600;
+
+/**
+ * Scribe commits a phrase when the speaker pauses, with Portuguese first and English words
+ * understood. (Keyterm prompting is rejected by the Gateway; names transcribe fine without it.)
+ */
+const SCRIBE_OPTIONS = {
+  elevenlabs: {
+    languageCode: "pt",
+    streaming: {
+      commitStrategy: "vad",
+      vadSilenceThresholdSecs: 0.8,
+      secondaryLanguages: ["en"],
+    },
+  },
+} as const;
 
 export type CaptionStreamStatus = "off" | "unavailable" | "connecting" | "live" | "retrying";
 
@@ -53,6 +69,7 @@ async function runSession(
     model: gateway.transcription(MODEL),
     audio,
     inputAudioFormat: { type: "audio/pcm", rate: SAMPLE_RATE },
+    providerOptions: SCRIBE_OPTIONS,
     abortSignal: signal,
   });
   for await (const part of result.fullStream) {
@@ -92,6 +109,7 @@ export function useCaptionStream(enabled: boolean, slideIndex: number): CaptionS
     let phraseAfterPause: boolean | null = null;
     let draftTimer: number | null = null;
     let draftText = "";
+    let consumed = 0;
 
     const flushDraft = () => {
       draftTimer = null;
@@ -99,24 +117,30 @@ export function useCaptionStream(enabled: boolean, slideIndex: number): CaptionS
         .pushDraft({ key: presenterKey, text: draftText, afterPause: phraseAfterPause === true })
         .catch(() => undefined);
     };
+    const publish = (text: string) => {
+      const afterPause = phraseAfterPause ?? Date.now() - lastFinalAt > PAUSE_MS;
+      lastFinalAt = Date.now();
+      phraseAfterPause = null;
+      if (!text) return;
+      const { pushCaption, slideIndex } = latest.current;
+      void pushCaption({ key: presenterKey, text, slideIndex, afterPause }).catch(() => undefined);
+    };
     const sink: Sink = {
       partial: (text) => {
         phraseAfterPause ??= Date.now() - lastFinalAt > PAUSE_MS;
-        draftText = text;
+        const split = splitLongPartial(text, consumed);
+        consumed = split.consumed;
+        if (split.commit) publish(split.commit);
+        draftText = split.rest;
         draftTimer ??= window.setTimeout(flushDraft, DRAFT_THROTTLE_MS);
       },
       final: (text) => {
-        const afterPause = phraseAfterPause ?? Date.now() - lastFinalAt > PAUSE_MS;
-        lastFinalAt = Date.now();
-        phraseAfterPause = null;
+        const rest = text.slice(consumed).trim();
+        consumed = 0;
         draftText = "";
         if (draftTimer !== null) window.clearTimeout(draftTimer);
         flushDraft();
-        if (!text.trim()) return;
-        const { pushCaption, slideIndex } = latest.current;
-        void pushCaption({ key: presenterKey, text, slideIndex, afterPause }).catch(
-          () => undefined,
-        );
+        publish(rest);
       },
     };
 
@@ -134,8 +158,9 @@ export function useCaptionStream(enabled: boolean, slideIndex: number): CaptionS
           const token = await latest.current.getToken({ key: presenterKey });
           setStatus("live");
           await runSession(token, audio, sink, abort.signal);
-        } catch {
-          // A dropped socket or an expired token: fall through and reconnect.
+        } catch (error) {
+          // A dropped socket or an expired token: log it, then reconnect.
+          if (!abort.signal.aborted) console.warn("Legendas: conexão caiu, reconectando", error);
         }
         feed = null;
         if (abort.signal.aborted) break;
