@@ -41,14 +41,46 @@ export const slides: Slide[] = [
     id: "me",
     section: "Abertura",
     visual: {
-      kind: "list",
+      kind: "journey",
       eyebrow: "Quem está falando",
       title: "Formei aqui. Trabalho pro mundo daqui.",
-      items: [
-        { title: "PUC Minas, 2019", body: "Engenharia de Software" },
-        { title: "Coinbase e Brex", body: "Times globais, remoto daqui" },
-        { title: "PostHog", body: "Senior Product Engineer, remoto de BH desde 2024" },
-        { title: "NaGringa", body: "Comunidade e dados de carreira pra dev brasileiro" },
+      stops: [
+        {
+          name: "PUC Minas",
+          logo: "/logos/pucminas.br.png",
+          tag: "2019",
+          body: "Engenharia de Software",
+        },
+        {
+          name: "UFMG",
+          logo: "/logos/ufmg.br.png",
+          tag: "2020",
+          body: "Mestrado que larguei",
+        },
+        {
+          name: "Coinbase",
+          logo: "/logos/coinbase.com.webp",
+          tag: "Contractor",
+          body: "Pela G2i, remoto de BH",
+        },
+        {
+          name: "Brex",
+          logo: "/logos/brex.com.webp",
+          tag: "CLT",
+          body: "Salário de fora, sem sair daqui",
+        },
+        {
+          name: "PostHog",
+          logo: "/logos/posthog.com.webp",
+          tag: "Desde 2024",
+          body: "Senior Product Engineer",
+        },
+        {
+          name: "NaGringa",
+          logo: "/logos/nagringa.dev.png",
+          tag: "Meu projeto",
+          body: "Dados de carreira pra dev brasileiro",
+        },
       ],
     },
     notes: [

@@ -89,6 +89,27 @@ export function BarsVisual({ visual }: VisualProps<"bars">) {
   );
 }
 
+export function JourneyVisual({ visual }: VisualProps<"journey">) {
+  return (
+    <div className="v-journey">
+      <Eyebrow>{visual.eyebrow}</Eyebrow>
+      <h2>{visual.title}</h2>
+      <ol>
+        {visual.stops.map((stop, i) => (
+          <li key={stop.name} style={{ "--i": i } as CSSProperties}>
+            <span className="journey-logo">
+              <img src={stop.logo} alt="" />
+            </span>
+            <span className="journey-tag">{stop.tag}</span>
+            <p className="journey-name">{stop.name}</p>
+            <p className="journey-body">{stop.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
 export function ListVisual({ visual }: VisualProps<"list">) {
   return (
     <div className="v-list">

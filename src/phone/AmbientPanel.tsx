@@ -28,6 +28,7 @@ const headlines: { [K in Visual["kind"]]: (visual: Extract<Visual, { kind: K }>)
   bigNumber: (visual) => `${visual.value} · ${visual.label}`,
   bars: (visual) => visual.title,
   list: (visual) => visual.title,
+  journey: (visual) => visual.title,
   compare: (visual) => visual.title,
   tierList: (visual) => visual.title,
   tierTop: (visual) => visual.title,

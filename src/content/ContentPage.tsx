@@ -64,6 +64,18 @@ const visuals: { [K in Visual["kind"]]: Render<K> } = {
       </ol>
     </>
   ),
+  journey: (visual) => (
+    <>
+      <h2>{visual.title}</h2>
+      <ol>
+        {visual.stops.map((stop) => (
+          <li key={stop.name}>
+            <strong>{stop.name}</strong> ({stop.tag}): {stop.body}
+          </li>
+        ))}
+      </ol>
+    </>
+  ),
   compare: (visual) => (
     <>
       <h2>{visual.title}</h2>

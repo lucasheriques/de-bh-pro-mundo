@@ -39,6 +39,9 @@ export type TierTop = {
   companies: { name: string; logo: string; median: number }[];
 };
 
+/** One place on the speaker's path: a logo, how they got there, and one line on it. */
+export type JourneyStop = { name: string; logo: string; tag: string; body: string };
+
 export type Visual =
   | { kind: "title"; eyebrow?: string; title: string; subtitle?: string }
   | { kind: "statement"; eyebrow?: string; text: string; sub?: string }
@@ -46,6 +49,7 @@ export type Visual =
   | { kind: "bigNumber"; eyebrow?: string; value: string; label: string; source?: string }
   | { kind: "bars"; eyebrow?: string; title: string; bars: Bar[]; source?: string }
   | { kind: "list"; eyebrow?: string; title: string; items: { title: string; body?: string }[] }
+  | { kind: "journey"; eyebrow?: string; title: string; stops: JourneyStop[] }
   | {
       kind: "compare";
       eyebrow?: string;
