@@ -22,6 +22,7 @@
     "e2e": "node scripts/e2e.mjs"
   },
   "dependencies": {
+    "@convex-dev/presence": "^0.4.0",
     "@fontsource/open-runde": "5.2.1",
     "convex": "1.46.0",
     "qrcode": "1.5.4",

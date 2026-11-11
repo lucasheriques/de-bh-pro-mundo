@@ -1,6 +1,7 @@
 import { LiveCaption } from "../captions/LiveCaption";
 import { slides } from "../talk/slides";
 import type { Slide } from "../talk/types";
+import { audienceHost, useQrSrc } from "./useQrSrc";
 
 export function ProgressBar({ index }: { index: number }) {
   return (
@@ -18,17 +19,16 @@ export function SectionLabel({ slide }: { slide: Slide }) {
 }
 
 export function CaptionLine() {
-  return <LiveCaption className="caption-line" />;
+  return <LiveCaption className="caption-line" history={1} />;
 }
 
-const COMMAND_HINT = "“mostra o resultado” · “próximo slide”";
-
-export function CueHint({ slide }: { slide: Slide }) {
-  const cue = slide.cues?.[0];
-  const text = cue ? `“${cue}”` : slide.interaction ? COMMAND_HINT : "“próximo slide”";
+export function CornerQr({ slide }: { slide: Slide }) {
+  const src = useQrSrc();
+  if (slide.visual.kind === "join" || !src) return null;
   return (
-    <p className="cue-hint" aria-hidden="true">
-      {text}
-    </p>
+    <div className="corner-qr" aria-hidden="true">
+      <img src={src} alt="" />
+      <span>{audienceHost}</span>
+    </div>
   );
 }

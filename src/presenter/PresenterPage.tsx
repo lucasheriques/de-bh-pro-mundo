@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { ConnectionDot } from "../live/ConnectionDot";
+import { CueBanner } from "../live/CueBanner";
 import { presenterKey } from "../live/env";
 import { Roster } from "../live/Roster";
 import {
@@ -145,7 +146,7 @@ function Moderation() {
 const pad = (n: number) => String(n).padStart(2, "0");
 
 function TopBar({ deck }: { deck: Deck }) {
-  const audience = useQuery(api.audience.count) ?? 0;
+  const audience = useQuery(api.presence.onlineCount) ?? 0;
   const section = deck.slide.section ? ` · ${deck.slide.section}` : "";
   return (
     <header className="presenter-top">
@@ -199,13 +200,9 @@ function NextPreview({ index, theme }: { index: number; theme: StageTheme }) {
 function Notes({ slide }: { slide: Slide }) {
   return (
     <section className="presenter-notes">
+      <CueBanner slide={slide} />
       <p className="eyebrow">Notas</p>
       <p className="notes">{slide.notes}</p>
-      {slide.cues?.length ? (
-        <p className="cues mono">
-          Fala pra avançar: {slide.cues.map((cue) => `"${cue}"`).join(" ou ")}
-        </p>
-      ) : null}
     </section>
   );
 }

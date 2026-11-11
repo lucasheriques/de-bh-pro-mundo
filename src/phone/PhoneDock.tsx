@@ -80,14 +80,7 @@ export function PhoneDock({
   if (!captions && !showQuestions) return null;
   return (
     <div className="phone-dock">
-      {captions ? (
-        <div className="caption-strip">
-          <LiveCaption className="caption-strip-text" />
-          <a href="/legendas" className="caption-strip-link" aria-label="Legendas em tela cheia">
-            Tela cheia
-          </a>
-        </div>
-      ) : null}
+      {captions ? <LiveCaption className="caption-strip" history={3} /> : null}
       {showQuestions ? <QuestionsBar onOpen={onOpenQuestions} /> : null}
     </div>
   );

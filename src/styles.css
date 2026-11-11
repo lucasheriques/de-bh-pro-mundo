@@ -1157,3 +1157,122 @@ html input:focus-visible {
   justify-self: start;
   font-size: 13px;
 }
+
+/* Spoken cue, presenter-only */
+
+.cue-banner {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--accent) 14%, var(--surface));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 45%, transparent);
+}
+
+.cue-banner-text {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* /remote: the presenter's phone as a clicker */
+
+.remote {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  max-width: 560px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: max(20px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+  background: var(--ground);
+  color: var(--ink);
+}
+
+.remote-head h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.remote-buttons {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+}
+
+.remote-buttons button {
+  min-height: 96px;
+  border-radius: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  transition: transform 100ms var(--ease-out);
+}
+
+.remote-buttons button:active {
+  transform: scale(0.97);
+}
+
+.remote-buttons button:disabled {
+  opacity: 0.35;
+}
+
+.remote-prev {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+
+.remote-next {
+  background: var(--accent);
+  color: var(--on-hue);
+}
+
+.remote-reveal {
+  grid-column: 1 / -1;
+  background: color-mix(in oklab, var(--hue-3) 30%, var(--surface));
+  box-shadow: inset 0 0 0 1px var(--hue-3);
+}
+
+.remote-notes {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* First load: hold until the live slide and edits arrive, so nothing jumps */
+
+.splash {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  min-height: 100dvh;
+  background: var(--ground);
+  color: var(--muted);
+}
+
+.splash-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: splash-pulse 1s ease-in-out infinite alternate;
+}
+
+.splash-text {
+  font-size: 15px;
+}
+
+@keyframes splash-pulse {
+  from {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-dot {
+    animation: none;
+  }
+}

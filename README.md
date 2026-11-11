@@ -28,7 +28,6 @@ Funciona no stage e no presenter. Passadores de slide (clickers) enviam essas te
 | Esquerda, Cima, PageUp | Slide anterior |
 | R | Mostrar ou esconder a votação atual |
 | V | Ligar ou desligar a voz |
-| G | Mostrar ou esconder a dica falada no canto do stage |
 | C | Linha de legenda no stage |
 | F | Tela cheia |
 | T | Tema escuro ou claro do stage, lembrado por janela (o celular fica escuro) |

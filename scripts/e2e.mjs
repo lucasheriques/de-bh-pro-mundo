@@ -151,7 +151,8 @@ try {
   await stage.goto(`${base}/stage?key=${key}`);
   await presenter.goto(`${base}/presenter?key=${key}`);
   for (const phone of phones) await phone.goto(base);
-  for (const page of [stage, presenter, ...phones]) {
+  await stage.locator("[data-slide-index]").first().waitFor({ timeout: 15000 });
+  for (const page of [presenter, ...phones]) {
     await page.locator(".connection.is-online").first().waitFor({ timeout: 15000 });
   }
   assert(true, "stage, presenter and 3 phones connected");
@@ -239,8 +240,13 @@ try {
     .waitFor();
   await presenter.locator('.voice-log li[data-kind="heard"]').first().waitFor();
   assert(true, "the presenter's voice log shows what was heard and what it triggered");
-  await stage.locator(".cue-hint").waitFor();
-  assert(true, "with voice on, the stage shows the current slide's spoken cue");
+  await presenter.locator(".cue-banner").waitFor();
+  assert(
+    (await stage.locator(".cue-hint").count()) === 0,
+    "the spoken cue shows on the presenter, never on the stage",
+  );
+  await stage.locator(".corner-qr img").waitFor();
+  assert(true, "the stage keeps a small QR in the corner for late arrivals");
 
   await presenter.evaluate((text) => window.__voiceFeed(text, true), nextSlide.cues[0]);
   await presenter.waitForTimeout(500);

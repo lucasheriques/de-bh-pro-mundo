@@ -1,4 +1,5 @@
 import { v } from "convex/values";
+import { internal } from "./_generated/api";
 import type { MutationCtx } from "./_generated/server";
 import { mutation, query } from "./_generated/server";
 import { assertPresenter } from "./presenter";
@@ -19,7 +20,14 @@ export const push = mutation({
     assertPresenter(key);
     const trimmed = text.trim().slice(0, CAPTION_MAX_LENGTH);
     if (trimmed.length === 0) return null;
-    await ctx.db.insert("captions", { text: trimmed, slideIndex, createdAt: Date.now() });
+    const captionId = await ctx.db.insert("captions", {
+      text: trimmed,
+      slideIndex,
+      createdAt: Date.now(),
+    });
+    if (process.env.AI_GATEWAY_API_KEY) {
+      await ctx.scheduler.runAfter(0, internal.captionPolish.polish, { captionId, text: trimmed });
+    }
     return null;
   },
 });

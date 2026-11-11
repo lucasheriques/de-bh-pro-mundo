@@ -16,7 +16,9 @@ export function CaptionsPage() {
   return (
     <main className="captions-page" style={{ fontSize: SIZES[size] }}>
       <header className="captions-head">
-        <h1>Legendas ao vivo</h1>
+        <a href="/" className="captions-back">
+          Voltar pra talk
+        </a>
         <div className="captions-size">
           <button
             type="button"
@@ -44,7 +46,7 @@ export function CaptionsPage() {
           <p key={line._id}>{line.text}</p>
         ))}
       </div>
-      {draft ? <p className="caption-draft">{draft}</p> : null}
+      {draft ? <p className="captions-draft">{draft}</p> : null}
       <div ref={endRef} />
       <p className="captions-note muted">
         Gerada automaticamente pelo reconhecimento de voz. Pode ter erros.

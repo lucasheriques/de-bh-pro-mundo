@@ -17,6 +17,8 @@ const surfaces = [
   { path: "/stage", label: "Telão", hint: "Abra no projetor e aperte F" },
   { path: "/presenter", label: "Apresentador", hint: "Notas, timer e voz" },
   { path: "/overview", label: "Todos os slides", hint: "Clique pra pular o telão" },
+  { path: "/remote", label: "Controle remoto", hint: "Abra no seu celular pra passar os slides" },
+  { path: "/editor", label: "Editar slides", hint: "Texto de qualquer slide, salva na hora" },
 ] as const;
 
 const absolute = (path: string) => `${window.location.origin}${path}`;
@@ -32,7 +34,7 @@ function PollCount({ pollId, question }: { pollId: string; question: string }) {
 }
 
 function RoomStats() {
-  const audience = useQuery(api.audience.count) ?? 0;
+  const audience = useQuery(api.presence.onlineCount) ?? 0;
   const questions = useQuery(api.questions.list, {}) ?? [];
   return (
     <section className="admin-card">

@@ -17,6 +17,7 @@ import { convex } from "./live/env";
 import { OverviewPage } from "./overview/OverviewPage";
 import { PhonePage } from "./phone/PhonePage";
 import { PresenterPage } from "./presenter/PresenterPage";
+import { RemotePage } from "./remote/RemotePage";
 import { StagePage } from "./stage/StagePage";
 import { LiveSlides } from "./talk/LiveSlides";
 
@@ -29,6 +30,7 @@ const routes = {
   "/legendas": CaptionsPage,
   "/conteudo": ContentPage,
   "/editor": EditorPage,
+  "/remote": RemotePage,
 } as const;
 const path = window.location.pathname.replace(/\/+$/, "") || "/";
 const Page = routes[path as keyof typeof routes] ?? PhonePage;

@@ -1,6 +1,8 @@
+import usePresence from "@convex-dev/presence/react";
 import { useMutation } from "convex/react";
 import { type ReactNode, useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
+import { PRESENCE_ROOM } from "../../convex/validators";
 import { ConnectionDot } from "../live/ConnectionDot";
 import { clientId } from "../live/env";
 import { slideAt, useSession } from "../live/useDeck";
@@ -68,6 +70,7 @@ export function PhonePage() {
   useEffect(() => {
     void join({ clientId }).catch(() => undefined);
   }, [join]);
+  usePresence(api.presence, PRESENCE_ROOM, clientId);
 
   const interaction = slide.interaction;
   const Panel = interaction

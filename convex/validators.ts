@@ -23,3 +23,6 @@ export function parsePollId(pollId: string): string {
   if (!POLL_ID_PATTERN.test(pollId)) throw new ConvexError("pollId inválido");
   return pollId;
 }
+
+/** The single presence room every phone joins. */
+export const PRESENCE_ROOM = "sala";

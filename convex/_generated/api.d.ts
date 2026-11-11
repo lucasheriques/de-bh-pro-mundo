@@ -9,8 +9,10 @@
  */
 
 import type * as audience from "../audience.js";
+import type * as captionPolish from "../captionPolish.js";
 import type * as captions from "../captions.js";
 import type * as displayName from "../displayName.js";
+import type * as presence from "../presence.js";
 import type * as presenter from "../presenter.js";
 import type * as questions from "../questions.js";
 import type * as reactions from "../reactions.js";
@@ -28,8 +30,10 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   audience: typeof audience;
+  captionPolish: typeof captionPolish;
   captions: typeof captions;
   displayName: typeof displayName;
+  presence: typeof presence;
   presenter: typeof presenter;
   questions: typeof questions;
   reactions: typeof reactions;
@@ -66,4 +70,6 @@ export declare const internal: FilterApi<
   FunctionReference<any, "internal">
 >;
 
-export declare const components: {};
+export declare const components: {
+  presence: import("@convex-dev/presence/_generated/component.js").ComponentApi<"presence">;
+};

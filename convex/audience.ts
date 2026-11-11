@@ -2,6 +2,7 @@ import { ConvexError, v } from "convex/values";
 import type { QueryCtx } from "./_generated/server";
 import { mutation, query } from "./_generated/server";
 import { checkDisplayName } from "./displayName";
+import { presence, ROOM } from "./presence";
 import { isPresenterKey } from "./presenter";
 import { parseClientId } from "./validators";
 
@@ -67,8 +68,12 @@ export const roster = query({
   args: { key: v.string() },
   handler: async (ctx, { key }) => {
     if (!isPresenterKey(key)) return null;
-    const members = await ctx.db.query("audience").order("desc").take(AUDIENCE_COUNT_CAP);
-    const names = members.flatMap((member) => (member.name ? [member.name] : []));
-    return { count: members.length, names };
+    const online = await presence.listRoom(ctx, ROOM, true, AUDIENCE_COUNT_CAP);
+    const names: string[] = [];
+    for (const { userId } of online) {
+      const name = await nameOf(ctx, userId);
+      if (name) names.push(name);
+    }
+    return { count: online.length, names };
   },
 });

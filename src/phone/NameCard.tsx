@@ -68,6 +68,8 @@ export function NameForm({
       <input
         id="display-name"
         className="name-input"
+        // biome-ignore lint/a11y/noAutofocus: the form only opens when the person is about to type their name
+        autoFocus
         value={draft}
         maxLength={NAME_MAX_LENGTH}
         autoComplete="given-name"
