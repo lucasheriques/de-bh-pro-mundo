@@ -5,6 +5,7 @@ import { forgetPresenterKey, presenterKey, savePresenterKey } from "../live/env"
 import { Roster } from "../live/Roster";
 import { pollIdOf, useDeck } from "../live/useDeck";
 import { slides } from "../talk/slides";
+import { Shortcuts } from "../live/Shortcuts";
 
 const polls = slides.flatMap((slide) => {
   const pollId = pollIdOf(slide);
@@ -156,6 +157,7 @@ export function AdminPage() {
       <RoomStats />
       <Roster />
       <Links />
+      <Shortcuts className="admin-card" />
       <button type="button" className="ghost" onClick={forgetPresenterKey}>
         Sair deste navegador
       </button>

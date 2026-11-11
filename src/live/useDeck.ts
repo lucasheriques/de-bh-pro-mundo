@@ -95,9 +95,9 @@ export function useDeck() {
 
 export type Deck = ReturnType<typeof useDeck>;
 
-type DeckAction = "next" | "prev" | "reveal" | "voice" | "captions" | "fullscreen" | "theme";
+export type DeckAction = "next" | "prev" | "reveal" | "voice" | "captions" | "fullscreen" | "theme";
 
-const KEYMAP: Record<string, DeckAction> = {
+export const KEYMAP: Record<string, DeckAction> = {
   ArrowRight: "next",
   ArrowDown: "next",
   PageDown: "next",

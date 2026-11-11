@@ -12,6 +12,7 @@ import {
   useDeck,
   useDeckKeys,
 } from "../live/useDeck";
+import { Shortcuts } from "../live/Shortcuts";
 import { type StageTheme, useStageTheme } from "../live/useStoredToggle";
 import { Scaled } from "../stage/Scaled";
 import { SlideCanvas } from "../stage/SlideCanvas";
@@ -242,6 +243,7 @@ export function PresenterPage() {
           <PollSummary slide={deck.slide} />
           <Roster />
           <Moderation />
+          <Shortcuts className="presenter-card" />
         </div>
       </div>
     </main>
