@@ -431,6 +431,81 @@ export const slides: Slide[] = [
     cues: ["prova pública ganha de currículo", "ganha de currículo"],
   },
   {
+    id: "referral",
+    section: "4. Como chegar lá",
+    visual: {
+      kind: "bigNumber",
+      eyebrow: "Indicação vs. aplicar online, com o mesmo currículo",
+      value: "11x",
+      label: "mais chance de ser contratado quando alguém te indica.",
+      source:
+        "Gem, 165 milhões de aplicações (2021 a 2025). Na Ashby, indicação é 1% das aplicações e 17 a 18% das contratações.",
+    },
+    notes:
+      "Aplicar online é jogar na loteria. Na PostHog foram mais de 9 mil aplicações em 12 meses, uns 460 candidatos por vaga. Indicação é 1% das aplicações e quase um quinto das contratações. Então a pergunta não é onde aplicar. É quem pode te indicar.",
+    cues: ["quem pode te indicar"],
+  },
+  {
+    id: "who-refers",
+    section: "4. Como chegar lá",
+    visual: {
+      kind: "list",
+      eyebrow: "Quem pode te indicar, do mais forte pro mais fraco",
+      title: "Sua rede já começou aqui na PUC.",
+      items: [
+        {
+          title: "Colegas e ex-colegas",
+          body: "Projeto de faculdade e estágio contam",
+        },
+        {
+          title: "Professores e orientadores",
+          body: "Conhecem ex-alunos no mercado inteiro",
+        },
+        {
+          title: "Amigo de amigo",
+          body: "Peça a apresentação com contexto",
+        },
+        {
+          title: "Conexão fria com algo em comum",
+          body: "Ex-aluno da PUC responde ex-aluno da PUC",
+        },
+      ],
+    },
+    notes:
+      "Quem trabalhou com você e gostou de você é seu melhor recurso pras próximas oportunidades. Foi assim comigo: no layoff da Coinbase, quem me salvou foi a Increment. Cada trabalho em grupo daqui é a sua rede começando. E professor é atalho: eles conhecem gente do mercado inteiro.",
+    cues: ["professor é atalho"],
+  },
+  {
+    id: "cold-founder",
+    section: "4. Como chegar lá",
+    visual: {
+      kind: "list",
+      eyebrow: "Mensagem direta pra founder ou CTO",
+      title: "Em startup pequena, fale direto com quem decide.",
+      items: [
+        {
+          title: "Gancho específico",
+          body: "Por que essa empresa, por que agora",
+        },
+        {
+          title: "Valor antes de pedir",
+          body: "Use o produto e mande uma melhoria real",
+        },
+        {
+          title: "Pedido pequeno",
+          body: "Uma conversa de 15 minutos, não um emprego",
+        },
+        {
+          title: "Até 3 mensagens",
+          body: "Follow-up educado funciona",
+        },
+      ],
+    },
+    notes:
+      "Em 2019, júnior, eu queria trabalhar na Microsoft. Li um post de um engenheiro principal de lá e mandei uma mensagem contando a minha história de verdade, desde o servidor de Ragnarok aos 12 anos. Ele respondeu: love it, me manda um email. Founder de startup pequena lê o próprio LinkedIn. Quem usou o produto e chegou com feedback real vale mais que qualquer currículo.",
+    cues: ["vale mais que qualquer currículo"],
+  },
+  {
     id: "homework",
     section: "Fechamento",
     visual: {
@@ -439,7 +514,10 @@ export const slides: Slide[] = [
       title: "O que eu faria este semestre.",
       items: [
         { title: "Coloque algo no ar", body: "Com usuários de verdade, nem que sejam dez" },
-        { title: "Use IA pra ir mais longe", body: "Não pra pular o entendimento" },
+        {
+          title: "Mande uma mensagem por semana",
+          body: "Pra um colega, um professor ou um founder. Peça indicação antes de aplicar",
+        },
         {
           title: "Aumente suas opções",
           body: "Local, nacional ou global: quanto mais empresas podem te contratar, melhor",
