@@ -1,7 +1,7 @@
 import { LiveCaption } from "../captions/LiveCaption";
 import { slides } from "../talk/slides";
 import type { Slide } from "../talk/types";
-import { audienceHost, useQrSrc } from "./useQrSrc";
+import { audienceHost, StyledQr } from "./StyledQr";
 
 export function ProgressBar({ index }: { index: number }) {
   return (
@@ -23,12 +23,14 @@ export function CaptionLine() {
 }
 
 export function CornerQr({ slide }: { slide: Slide }) {
-  const src = useQrSrc();
-  if (slide.visual.kind === "join" || !src) return null;
+  if (slide.visual.kind === "join") return null;
   return (
     <div className="corner-qr" aria-hidden="true">
-      <img src={src} alt="" />
-      <span>{audienceHost}</span>
+      <StyledQr className="qr" />
+      <span className="corner-qr-copy">
+        Entre e participe
+        <strong>{audienceHost}</strong>
+      </span>
     </div>
   );
 }

@@ -1277,3 +1277,41 @@ html input:focus-visible {
     animation: none;
   }
 }
+
+/* Audience theme switch (phone header, /conteudo) */
+
+.theme-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  color: var(--muted);
+}
+
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+}
+
+.theme-toggle:active {
+  transform: scale(0.97);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.content-head .theme-toggle {
+  float: right;
+}

@@ -5,6 +5,7 @@ import { api } from "../../convex/_generated/api";
 import { PRESENCE_ROOM } from "../../convex/validators";
 import { ConnectionDot } from "../live/ConnectionDot";
 import { clientId } from "../live/env";
+import { ThemeToggle } from "../live/ThemeToggle";
 import { slideAt, useSession } from "../live/useDeck";
 import { useStoredToggle } from "../live/useStoredToggle";
 import { slides } from "../talk/slides";
@@ -55,6 +56,7 @@ function PhoneHeader({
       >
         Legendas
       </button>
+      <ThemeToggle />
       <ConnectionDot className="phone-connection" />
     </header>
   );

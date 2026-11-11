@@ -1,11 +1,10 @@
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { audienceHost, useQrSrc } from "../useQrSrc";
+import { audienceHost, StyledQr } from "../StyledQr";
 import { CountUp } from "./CountUp";
 
 export function JoinVisual() {
   const count = useQuery(api.presence.onlineCount) ?? 0;
-  const qrSrc = useQrSrc();
 
   return (
     <div className="v-join">
@@ -19,7 +18,7 @@ export function JoinVisual() {
         </p>
       </div>
       <div className="v-join-qr">
-        {qrSrc ? <img src={qrSrc} alt={`QR code para ${audienceHost}`} /> : null}
+        <StyledQr className="qr" label={`QR code para ${audienceHost}`} />
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import { AdminPage } from "./admin/AdminPage";
 import { CaptionsPage } from "./captions/CaptionsPage";
 import { ContentPage } from "./content/ContentPage";
 import { EditorPage } from "./editor/EditorPage";
+import { startAudienceTheme } from "./live/audienceTheme";
 import { convex } from "./live/env";
 import { OverviewPage } from "./overview/OverviewPage";
 import { PhonePage } from "./phone/PhonePage";
@@ -34,16 +35,8 @@ const routes = {
 } as const;
 const path = window.location.pathname.replace(/\/+$/, "") || "/";
 
-/** Phone and helper pages follow the system theme; stage and presenter keep their own T toggle. */
-const followsSystemTheme = path !== "/stage" && path !== "/presenter";
-if (followsSystemTheme) {
-  const light = window.matchMedia("(prefers-color-scheme: light)");
-  const apply = () => {
-    document.documentElement.dataset.theme = light.matches ? "light" : "dark";
-  };
-  apply();
-  light.addEventListener("change", apply);
-}
+/** Stage and presenter keep their own T toggle; every other page is an audience page. */
+if (path !== "/stage" && path !== "/presenter") startAudienceTheme();
 const Page = routes[path as keyof typeof routes] ?? PhonePage;
 
 const root = document.getElementById("root");

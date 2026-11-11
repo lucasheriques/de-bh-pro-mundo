@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ThemeToggle } from "../live/ThemeToggle";
 import { slides } from "../talk/slides";
 import type { Interaction, Slide, Visual } from "../talk/types";
 
@@ -140,6 +141,7 @@ export function ContentPage() {
   return (
     <main className="content">
       <header className="content-head">
+        <ThemeToggle />
         <p className="content-kicker">
           Turbinando sua carreira internacional · PUC Minas · 11 nov 2026
         </p>
