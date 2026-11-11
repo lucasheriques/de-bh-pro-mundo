@@ -12,11 +12,13 @@ import { createRoot } from "react-dom/client";
 import { AdminPage } from "./admin/AdminPage";
 import { CaptionsPage } from "./captions/CaptionsPage";
 import { ContentPage } from "./content/ContentPage";
+import { EditorPage } from "./editor/EditorPage";
 import { convex } from "./live/env";
 import { OverviewPage } from "./overview/OverviewPage";
 import { PhonePage } from "./phone/PhonePage";
 import { PresenterPage } from "./presenter/PresenterPage";
 import { StagePage } from "./stage/StagePage";
+import { LiveSlides } from "./talk/LiveSlides";
 
 const routes = {
   "/": PhonePage,
@@ -26,6 +28,7 @@ const routes = {
   "/admin": AdminPage,
   "/legendas": CaptionsPage,
   "/conteudo": ContentPage,
+  "/editor": EditorPage,
 } as const;
 const path = window.location.pathname.replace(/\/+$/, "") || "/";
 const Page = routes[path as keyof typeof routes] ?? PhonePage;
@@ -36,7 +39,7 @@ if (!root) throw new Error("Missing #root element");
 createRoot(root).render(
   <StrictMode>
     <ConvexProvider client={convex}>
-      <Page />
+      <LiveSlides render={() => <Page />} />
     </ConvexProvider>
   </StrictMode>,
 );

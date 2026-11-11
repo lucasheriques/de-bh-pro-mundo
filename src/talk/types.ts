@@ -1,5 +1,7 @@
 export type PollOption = { id: string; label: string };
 
+export type MatchItem = { id: string; name: string; logo: string; answer: string };
+
 export type Interaction =
   | { kind: "choice"; pollId: string; question: string; options: PollOption[] }
   | {
@@ -12,11 +14,18 @@ export type Interaction =
       answer: number;
       format: "brl-month" | "percent" | "number";
     }
+  | {
+      kind: "match";
+      pollId: string;
+      question: string;
+      targets: PollOption[];
+      items: MatchItem[];
+    }
   | { kind: "questions" };
 
 export type Bar = { label: string; value: number; display: string; highlight?: boolean };
 
-export type Tier = "S" | "A" | "B";
+export type Tier = "1" | "2" | "3";
 
 export type TierCompany = { name: string; logo: string };
 

@@ -9,6 +9,7 @@ import type { Interaction } from "../talk/types";
 import { AmbientPanel } from "./AmbientPanel";
 import { ChoicePanel } from "./ChoicePanel";
 import { GuessPanel } from "./GuessPanel";
+import { MatchPanel } from "./MatchPanel";
 import { NameChip, NameForm, useMyName } from "./NameCard";
 import { PhoneDock, QuestionsSheet } from "./PhoneDock";
 import { QuestionsPanel } from "./QuestionsPanel";
@@ -22,6 +23,7 @@ export type PanelProps<K extends Interaction["kind"]> = {
 const panels: { [K in Interaction["kind"]]: (props: PanelProps<K>) => ReactNode } = {
   choice: ChoicePanel,
   guess: GuessPanel,
+  match: MatchPanel,
   questions: QuestionsPanel,
 };
 

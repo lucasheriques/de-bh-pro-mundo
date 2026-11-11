@@ -797,18 +797,31 @@
 
 .caption-line {
   position: absolute;
-  left: 160px;
-  right: 160px;
-  bottom: 40px;
-  font-size: 34px;
+  left: 50%;
+  bottom: 44px;
+  max-width: 1500px;
+  padding: 14px 28px;
+  border-radius: 18px;
+  background: rgb(0 0 0 / 0.72);
+  color: #fff;
+  font-size: 38px;
   font-weight: 600;
   line-height: 1.3;
-  color: var(--muted);
   text-align: center;
-  white-space: nowrap;
+  transform: translateX(-50%);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  direction: rtl;
+}
+
+.caption-line:empty,
+.caption-line:has(> span:first-child:empty):not(:has(.caption-draft)) {
+  display: none;
+}
+
+.caption-line .caption-draft {
+  color: rgb(255 255 255 / 0.6);
 }
 
 .reactions-layer {
@@ -1036,4 +1049,102 @@
   text-align: right;
   color: var(--muted);
   opacity: 0.7;
+}
+
+/* Ligue os pontos: one column per company, the room's picks per tier */
+
+.match-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.match-column {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+}
+
+.match-column-logo {
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  border-radius: 30px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.match-column-logo img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+}
+
+.match-column-name {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.match-bars {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.match-bar {
+  display: grid;
+  grid-template-columns: 150px 1fr 56px;
+  align-items: center;
+  gap: 16px;
+  font-size: 32px;
+  font-weight: 600;
+  transition: opacity 300ms var(--ease-out);
+}
+
+.match-bar-track {
+  height: 34px;
+  border-radius: 999px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.match-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--hue);
+  transform-origin: left;
+  transition: transform 600ms var(--ease-out);
+}
+
+.match-bar-value {
+  text-align: right;
+}
+
+.match-bar[data-state="dimmed"] {
+  opacity: 0.45;
+}
+
+.match-bar[data-state="answer"] .match-bar-label {
+  color: var(--hue);
+}
+
+.match-verdict {
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--accent);
+  animation: fade-in 400ms var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .match-bar-fill {
+    transition: none;
+  }
 }

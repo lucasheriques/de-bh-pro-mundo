@@ -3,7 +3,7 @@ import type { TierCompany, TierRow } from "../../talk/types";
 import type { VisualProps } from "../SlideCanvas";
 import { Eyebrow } from "./static";
 
-const TIER_HUE: Record<TierRow["tier"], number> = { S: 1, A: 3, B: 4 };
+const TIER_HUE: Record<TierRow["tier"], number> = { "3": 1, "2": 3, "1": 4 };
 
 function CompanyTile({
   company,

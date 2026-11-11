@@ -510,7 +510,8 @@
 
 .caption-strip-text {
   height: 2.7em;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1.35;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -633,4 +634,93 @@
   .questions-sheet[open] {
     animation: none;
   }
+}
+
+/* Ligue os pontos */
+
+.match-list {
+  display: grid;
+  gap: 14px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.match-row {
+  display: grid;
+  gap: 8px;
+}
+
+.match-company {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.match-logo {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.match-logo img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.match-targets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.match-target {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  min-height: 48px;
+  padding: 8px 4px;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    transform 120ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.match-target:active {
+  transform: scale(0.97);
+}
+
+.match-target.is-picked {
+  background: color-mix(in oklab, var(--accent) 24%, var(--surface));
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.match-target.is-answer {
+  background: color-mix(in oklab, var(--hue-4) 28%, var(--surface));
+  box-shadow: inset 0 0 0 2px var(--hue-4);
+}
+
+.match-target.is-wrong {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.match-count {
+  font-size: 12px;
+  color: var(--muted);
 }

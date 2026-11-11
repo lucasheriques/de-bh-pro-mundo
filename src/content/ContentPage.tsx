@@ -101,6 +101,11 @@ function InteractionText({ interaction }: { interaction: Interaction }) {
         <p className="content-quiet">
           Votação ao vivo: {interaction.options.map((option) => option.label).join(" · ")}
         </p>
+      ) : interaction.kind === "match" ? (
+        <p className="content-quiet">
+          Ligue os pontos ao vivo: {interaction.items.map((item) => item.name).join(", ")}.
+          Resposta: {interaction.items.map((item) => `${item.name} ${item.answer}`).join(", ")}.
+        </p>
       ) : (
         <p className="content-quiet">Chute ao vivo no celular.</p>
       )}

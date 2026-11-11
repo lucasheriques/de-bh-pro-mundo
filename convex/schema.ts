@@ -45,6 +45,12 @@ export default defineSchema({
     slideIndex: v.number(),
     createdAt: v.number(),
   }),
+  slideEdits: defineTable({
+    slideId: v.string(),
+    path: v.string(),
+    value: v.string(),
+    updatedAt: v.number(),
+  }).index("by_slideId_and_path", ["slideId", "path"]),
   captionDraft: defineTable({
     text: v.string(),
     updatedAt: v.number(),

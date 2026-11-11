@@ -3,6 +3,7 @@ import type { Interaction } from "../../talk/types";
 import type { VisualProps } from "../SlideCanvas";
 import { ChoiceResults } from "./ChoiceResults";
 import { GuessResults } from "./GuessResults";
+import { MatchResults } from "./MatchResults";
 import { QuestionsWall } from "./QuestionsWall";
 import { Eyebrow } from "./static";
 
@@ -14,6 +15,7 @@ type ResultProps<K extends Interaction["kind"]> = {
 const results: { [K in Interaction["kind"]]: (props: ResultProps<K>) => ReactNode } = {
   choice: ChoiceResults,
   guess: GuessResults,
+  match: MatchResults,
   questions: () => <QuestionsWall />,
 };
 

@@ -15,6 +15,7 @@ import { type StageTheme, useStageTheme } from "../live/useStoredToggle";
 import { Scaled } from "../stage/Scaled";
 import { SlideCanvas } from "../stage/SlideCanvas";
 import { formatValue } from "../talk/format";
+import { tallyMatch } from "../talk/match";
 import { slides } from "../talk/slides";
 import { countChoices, median, numericValues } from "../talk/stats";
 import type { Interaction, Slide } from "../talk/types";
@@ -44,14 +45,33 @@ function PollSummary({ slide }: { slide: Slide }) {
       </header>
       {interaction.kind === "choice" ? (
         <ChoiceTally interaction={interaction} tally={tally} />
-      ) : (
-        <GuessTally interaction={interaction} tally={tally} />
-      )}
+      ) : null}
+      {interaction.kind === "guess" ? <GuessTally interaction={interaction} tally={tally} /> : null}
+      {interaction.kind === "match" ? <MatchTally interaction={interaction} tally={tally} /> : null}
     </section>
   );
 }
 
 type Tally = Parameters<typeof numericValues>[0];
+
+function MatchTally({
+  interaction,
+  tally,
+}: {
+  interaction: Extract<Interaction, { kind: "match" }>;
+  tally: Tally;
+}) {
+  return (
+    <ul className="poll-summary">
+      {tallyMatch(tally, interaction).map((row) => (
+        <li key={row.item.id}>
+          <span>{row.item.name}</span>
+          <span className="mono">{Math.round(row.correctShare * 100)}% acertando</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 function ChoiceTally({
   interaction,

@@ -1070,3 +1070,90 @@ html input:focus-visible {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* /editor: every slide's text, saved per field */
+
+.editor {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  padding: 32px 16px 96px;
+  background: var(--ground);
+  color: var(--ink);
+}
+
+.editor-head {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.editor-head h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.editor-slide {
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.editor-slide-head {
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.editor-slide-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .editor-slide-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editor-thumb {
+  position: sticky;
+  top: 16px;
+}
+
+.editor-fields {
+  display: grid;
+  gap: 12px;
+}
+
+.editor-field {
+  display: grid;
+  gap: 6px;
+}
+
+.editor-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.editor-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 16px;
+  line-height: 1.4;
+  resize: vertical;
+}
+
+.editor-field.is-edited textarea {
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.editor-revert {
+  justify-self: start;
+  font-size: 13px;
+}

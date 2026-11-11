@@ -16,6 +16,7 @@ import type * as questions from "../questions.js";
 import type * as reactions from "../reactions.js";
 import type * as reset from "../reset.js";
 import type * as session from "../session.js";
+import type * as slideEdits from "../slideEdits.js";
 import type * as validators from "../validators.js";
 import type * as votes from "../votes.js";
 
@@ -34,6 +35,7 @@ declare const fullApi: ApiFromModules<{
   reactions: typeof reactions;
   reset: typeof reset;
   session: typeof session;
+  slideEdits: typeof slideEdits;
   validators: typeof validators;
   votes: typeof votes;
 }>;

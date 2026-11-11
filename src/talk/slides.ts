@@ -79,6 +79,27 @@ export const slides: Slide[] = [
     cues: ["respondo as que sobrarem"],
   },
   {
+    id: "outline",
+    section: "Abertura",
+    visual: {
+      kind: "list",
+      eyebrow: "O roteiro de hoje",
+      title: "Quatro partes, uns 25 minutos.",
+      items: [
+        {
+          title: "Mercado global",
+          body: "Contra quem a empresa compete por talento define o seu teto",
+        },
+        { title: "O que a IA mudou", body: "Escrever software ficou barato. Julgamento, não" },
+        { title: "O que o mundo compra", body: "Gente responsável pelo negócio, não pelo ticket" },
+        { title: "Como chegar lá", body: "As portas de entrada, todas a partir de BH" },
+      ],
+    },
+    notes:
+      "Esse é o roteiro. Primeiro o mercado, com dados de salário de verdade. Depois o que a IA mudou nesse jogo, o que as empresas de fora compram agora, e por fim como sair daqui e chegar lá. Começando pelo mercado.",
+    cues: ["começando pelo mercado"],
+  },
+  {
     id: "s2",
     section: "1. Mercado global",
     visual: {
@@ -113,96 +134,104 @@ export const slides: Slide[] = [
     section: "1. Mercado global",
     visual: {
       kind: "bars",
-      eyebrow: "Dev sênior no Brasil, mediana mensal, por tier da empresa",
-      title: "O tier é o mercado, não a marca.",
+      eyebrow: "Dev no Brasil, de pleno pra cima, média mensal por mercado",
+      title: "Três mercados, três salários.",
       bars: [
-        { label: "Sem tier · mercado local", value: 17.7, display: "R$ 17,7 mil" },
-        { label: "Tier B · US$ 50 a 89 mil/ano", value: 26.5, display: "R$ 26,5 mil" },
-        { label: "Tier A · US$ 90 a 120 mil/ano", value: 51, display: "R$ 51 mil" },
-        { label: "Tier S · US$ 120 mil+ remoto", value: 91, display: "R$ 91 mil", highlight: true },
+        { label: "Tier 1 · empresa que compete localmente", value: 14.8, display: "R$ 14,8 mil" },
+        { label: "Tier 2 · compete no Brasil inteiro", value: 30.7, display: "R$ 30,7 mil" },
+        {
+          label: "Tier 3 · compete com o mundo",
+          value: 55.5,
+          display: "R$ 55,5 mil",
+          highlight: true,
+        },
       ],
       source:
-        "Remuneração total/12, dez/2025 a nov/2026. Sem tier n=466, B n=104, A n=20, S n=7 (amostra pequena).",
+        "NaGringa, 1.161 salários de engenharia, dez/2025 a nov/2026, nas faixas do modelo trimodal de Gergely Orosz (The Pragmatic Engineer). Remuneração total.",
     },
     notes:
-      "A mesma pessoa, com a mesma stack, ganha várias vezes mais dependendo de contra quem a empresa compete por talento. E marca não é tier: tem empresa famosa pagando mercado local, e empresa que ninguém conhece pagando como as maiores do mundo. Aliás, a linguagem que você usa mexe uns 50% no salário. O tier mexe cinco vezes.",
-    cues: ["mexe cinco vezes", "tier mexe cinco"],
+      "Esse é o modelo trimodal, do Gergely Orosz. Tier 1 é a empresa que compete por talento na cidade, como consultoria. Tier 2 compete no Brasil inteiro. Tier 3 compete com o mundo. A mesma pessoa, com a mesma stack, ganha quase quatro vezes mais dependendo de contra quem a empresa compete. A linguagem que você usa mexe uns 50% no salário. O mercado mexe quatro vezes.",
+    cues: ["o mercado mexe quatro vezes", "mexe quatro vezes"],
   },
   {
-    id: "tier-poll",
+    id: "connect-dots",
     section: "1. Mercado global",
-    visual: { kind: "results", eyebrow: "Chute rápido" },
+    visual: { kind: "results", eyebrow: "Ligue os pontos" },
     interaction: {
-      kind: "choice",
-      pollId: "google-tier",
-      question: "Em que tier o NaGringa coloca o Google?",
-      options: [
-        { id: "S", label: "Tier S" },
-        { id: "A", label: "Tier A" },
-        { id: "B", label: "Tier B" },
-        { id: "none", label: "Sem tier" },
+      kind: "match",
+      pollId: "connect-dots",
+      question: "Contra quem cada uma compete por talento?",
+      targets: [
+        { id: "1", label: "Tier 1" },
+        { id: "2", label: "Tier 2" },
+        { id: "3", label: "Tier 3" },
+      ],
+      items: [
+        { id: "dti", name: "dti digital", logo: "/logos/dtidigital.com.br.webp", answer: "1" },
+        { id: "nubank", name: "Nubank", logo: "/logos/nubank.com.br.webp", answer: "2" },
+        { id: "google", name: "Google", logo: "/logos/google.com.webp", answer: "3" },
       ],
     },
     notes:
-      "Deixa votar uns 15 segundos e aperta R. A maioria vai cravar S. Não fala a resposta, ela aparece logo depois.",
+      "Uma daqui de BH, uma brasileira gigante e uma global. Liga cada uma no tier dela. Deixa uns 20 segundos e fala mostra o resultado. A dti compete por talento aqui, o Nubank no Brasil inteiro, o Google com o mundo. Pelos nossos dados, sênior na dti fica perto de 14 mil por mês, no Nubank perto de 31 mil, e no Google bem acima de 50 mil.",
   },
   {
     id: "tier-list",
     section: "1. Mercado global",
     visual: {
       kind: "tierList",
-      eyebrow: "Tier list do NaGringa · empresas que contratam quem mora no Brasil",
-      title: "O Google é tier A. O Spotify é tier S.",
+      eyebrow: "Exemplos pela remuneração de sênior no NaGringa",
+      title: "O Nubank compete no Brasil. A Uber, com o mundo.",
       rows: [
         {
-          tier: "S",
-          label: "US$ 120 mil+ e 100% remoto",
+          tier: "3",
+          label: "Compete com o mundo",
           companies: [
-            { name: "NVIDIA", logo: "/logos/nvidia.com.webp" },
-            { name: "GitHub", logo: "/logos/github.com.webp" },
-            { name: "Spotify", logo: "/logos/spotify.com.webp" },
-            { name: "Airbnb", logo: "/logos/airbnb.com.webp" },
-            { name: "Shopify", logo: "/logos/shopify.com.webp" },
-            { name: "Coinbase", logo: "/logos/coinbase.com.webp" },
-            { name: "PostHog", logo: "/logos/posthog.com.webp" },
-            { name: "Vercel", logo: "/logos/vercel.com.webp" },
-          ],
-        },
-        {
-          tier: "A",
-          label: "US$ 90 a 120 mil ou presencial",
-          companies: [
-            { name: "Google", logo: "/logos/google.com.webp" },
-            { name: "Apple", logo: "/logos/apple.com.webp" },
-            { name: "Meta", logo: "/logos/meta.com.webp" },
-            { name: "Microsoft", logo: "/logos/microsoft.com.webp" },
-            { name: "Netflix", logo: "/logos/netflix.com.webp" },
-            { name: "Amazon", logo: "/logos/amazon.com.webp" },
-            { name: "Stripe", logo: "/logos/stripe.com.webp" },
             { name: "Uber", logo: "/logos/uber.com.webp" },
+            { name: "Google", logo: "/logos/google.com.webp" },
+            { name: "Coinbase", logo: "/logos/coinbase.com.webp" },
+            { name: "Spotify", logo: "/logos/spotify.com.webp" },
+            { name: "Shopify", logo: "/logos/shopify.com.webp" },
+            { name: "GitHub", logo: "/logos/github.com.webp" },
+            { name: "Airbnb", logo: "/logos/airbnb.com.webp" },
+            { name: "PostHog", logo: "/logos/posthog.com.webp" },
           ],
         },
         {
-          tier: "B",
-          label: "US$ 50 a 89 mil",
+          tier: "2",
+          label: "Compete no Brasil",
           companies: [
             { name: "Nubank", logo: "/logos/nubank.com.br.webp" },
             { name: "Mercado Livre", logo: "/logos/mercadolivre.com.br.webp" },
             { name: "iFood", logo: "/logos/ifood.com.br.webp" },
+            { name: "Itaú", logo: "/logos/itau.com.br.webp" },
+            { name: "Bradesco", logo: "/logos/bradesco.com.br.webp" },
+            { name: "Stone", logo: "/logos/stone.com.br.webp" },
             { name: "QuintoAndar", logo: "/logos/quintoandar.com.br.webp" },
-            { name: "XP", logo: "/logos/xpi.com.br.webp" },
-            { name: "BTG Pactual", logo: "/logos/btgpactual.com.webp" },
             { name: "VTEX", logo: "/logos/vtex.com.webp" },
-            { name: "BairesDev", logo: "/logos/bairesdev.com.webp" },
+          ],
+        },
+        {
+          tier: "1",
+          label: "Compete na cidade",
+          companies: [
+            { name: "CI&T", logo: "/logos/ciandt.com.webp" },
+            { name: "Accenture", logo: "/logos/accenture.com.webp" },
+            { name: "Avanade", logo: "/logos/avanade.com.webp" },
+            { name: "ThoughtWorks", logo: "/logos/thoughtworks.com.webp" },
+            { name: "Zup", logo: "/logos/zup.com.br.webp" },
+            { name: "Compass UOL", logo: "/logos/compass.uol.webp" },
+            { name: "NTT DATA", logo: "/logos/nttdata.com.webp" },
+            { name: "dti digital", logo: "/logos/dtidigital.com.br.webp" },
           ],
         },
       ],
-      highlight: "Google",
+      highlight: "Nubank",
       source:
-        "nagringa.dev/vagas/tier-list. Hoje são 464 vagas abertas em tier S, 534 em A e 1.183 em B.",
+        "Sênior, mediana mensal, dez/2025 a nov/2026: consultorias R$ 11 a 19 mil, bancos e grandes nacionais R$ 23 a 31 mil, globais R$ 50 a 66 mil.",
     },
     notes:
-      "Google, Apple, Meta e Microsoft são tier A, porque pra quem mora no Brasil as vagas são híbridas ou presenciais. Tier S é 100% remoto e paga US$ 120 mil ou mais. E Nubank, Mercado Livre e iFood estão no B: ótimas empresas pra começar e aprender, competindo no mercado nacional. São 464 vagas tier S abertas hoje, que dá pra fazer morando em Belo Horizonte.",
+      "O Nubank é ótimo e paga bem, mas compete com o mercado brasileiro: tier 2. Consultoria compete na cidade: tier 1. E as globais competem com o mundo inteiro, e várias contratam quem mora aqui. Marca não é tier: tem empresa famosa pagando mercado local. E isso dá pra fazer morando em Belo Horizonte.",
     cues: ["morando em belo horizonte"],
   },
   {
@@ -287,7 +316,7 @@ export const slides: Slide[] = [
       },
     },
     notes:
-      "Se escrever código ficou barato, a empresa lá fora paga por quem sabe o que construir. No meu cargo isso tem nome: product engineer. Na PostHog, cada time pequeno de engenheiros é dono de um produto: fala com cliente, olha os dados de uso, decide o que construir e responde pelo resultado. Das vagas de product engineer abertas hoje no NaGringa, 14 de 17 são em tier S ou A. Com IA, quem só executa ticket compete com a máquina. Quem é responsável pelo negócio fica mais valioso.",
+      "Se escrever código ficou barato, a empresa lá fora paga por quem sabe o que construir. No meu cargo isso tem nome: product engineer. Na PostHog, cada time pequeno de engenheiros é dono de um produto: fala com cliente, olha os dados de uso, decide o que construir e responde pelo resultado. Quem mais contrata product engineer são justamente as empresas tier 3. Com IA, quem só executa ticket compete com a máquina. Quem é responsável pelo negócio fica mais valioso.",
     cues: ["responsável pelo negócio fica mais valioso", "negócio fica mais valioso"],
   },
   {
@@ -348,7 +377,7 @@ export const slides: Slide[] = [
         "Vagas ativas em 10/11/2026: 52 júnior + 125 pleno de 1.064 com nível informado (1.111 sem nível).",
     },
     notes:
-      "Tá, mas como sai de BH e chega lá? Começo com um dado que pouca gente fala pra estudante: o mercado global contrata quem já provou. Isso não é pra desanimar. É pra vocês não aplicarem só pra vaga tier S e acharem que o problema é vocês. O caminho honesto é começar onde se aprende rápido, acumular prova e subir de tier.",
+      "Tá, mas como sai de BH e chega lá? Começo com um dado que pouca gente fala pra estudante: o mercado global contrata quem já provou. Isso não é pra desanimar. É pra vocês não aplicarem só pra vaga tier 3 e acharem que o problema é vocês. O caminho honesto é começar onde se aprende rápido, acumular prova e subir de tier.",
     cues: ["acumular prova e subir de tier", "subir de tier"],
   },
   {
@@ -365,11 +394,11 @@ export const slides: Slide[] = [
         },
         {
           title: "Contractor, direto ou por marketplace",
-          body: "Paga em dólar, sem 13º nem FGTS. Eu: Coinbase pela G2i e PostHog, tier S, direto",
+          body: "Paga em dólar, sem 13º nem FGTS. Eu: Coinbase pela G2i e PostHog direto",
         },
         {
           title: "CLT numa empresa global",
-          body: "Padrão de fora sem sair do país. Eu: Brex, tier A",
+          body: "Padrão de fora sem sair do país. Eu: Brex",
         },
       ],
     },
