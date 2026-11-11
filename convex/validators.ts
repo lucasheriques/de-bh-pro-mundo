@@ -10,7 +10,8 @@ export const DEFAULT_SESSION = {
   voiceEnabled: false,
 };
 
-export const QUESTION_MAX_LENGTH = 240;
+export { QUESTION_MAX_LENGTH } from "./moderation";
+
 const ID_PATTERN = /^[A-Za-z0-9-]{8,64}$/;
 const POLL_ID_PATTERN = /^[a-z0-9][a-z0-9-]{0,63}$/;
 

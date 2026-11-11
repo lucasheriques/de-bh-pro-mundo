@@ -11,6 +11,9 @@ importers:
       '@convex-dev/presence':
         specifier: ^0.4.0
         version: 0.4.0(convex@1.46.0(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@convex-dev/rate-limiter':
+        specifier: 0.4.2
+        version: 0.4.2(convex@1.46.0(react@19.3.1))(prettier@3.9.10)(react@19.3.1)(typescript@6.0.2)
       '@fontsource-variable/geist':
         specifier: 5.3.0
         version: 5.3.0
@@ -126,6 +129,11 @@ packages:
       convex: ^1.36.1
       react: ^18.3.1 || ^19.0.0
 
+  '@convex-dev/batch-worker@0.3.5':
+    resolution: {integrity: sha512-kTxLGy1TXRN6WLcENcoRWWnvPshv1sIZp2EpPqGqCB4FxDI7m8tEHUr+jCLdhGtSZT1UHkWtb1w8YYuEzTxHWQ==}
+    peerDependencies:
+      convex: ^1.43.0
+
   '@convex-dev/presence@0.4.0':
     resolution: {integrity: sha512-T1f2aHyS2D2dxvMnvY+qSJBIRG0W7ph8+mgOvZif52JLlLNscCHTangAgNWR4VLYGhXFFDxwSSpdh7vxzA/hPQ==}
     peerDependencies:
@@ -138,6 +146,15 @@ packages:
       expo-crypto:
         optional: true
       react-native:
+        optional: true
+
+  '@convex-dev/rate-limiter@0.4.2':
+    resolution: {integrity: sha512-njheoDd//MZgxtw+0PP3LL47PVMkvOKZmXDjYglDKSu5IdrfJtGmz/EHd6px9UcALuk/w7LTo83YwQ3bTGsMIg==}
+    peerDependencies:
+      convex: ^1.43.0
+      react: ^18.2.0 || ^19.0.0
+    peerDependenciesMeta:
+      react:
         optional: true
 
   '@esbuild/aix-ppc64@0.27.0':
@@ -496,6 +513,31 @@ packages:
 
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+
+  convex-helpers@0.1.134:
+    resolution: {integrity: sha512-GPVj5HmRMOyd2PF/OxUYQlNS/HdmOo3pZ4iTyPXyEOxuXwvNeQcx7OUlvNFTTYnHhcuonsMx8UuqjVo5gCqpZA==}
+    hasBin: true
+    peerDependencies:
+      '@standard-schema/spec': ^1.0.0
+      convex: ^1.46.0
+      hono: ^4.0.5
+      prettier: ^3.0.0
+      react: ^17.0.2 || ^18.0.0 || ^19.0.0
+      typescript: ^5.5 || ^6.0.0 || ^7.0.0
+      zod: ^3.25.0 || ^4.0.0
+    peerDependenciesMeta:
+      '@standard-schema/spec':
+        optional: true
+      hono:
+        optional: true
+      prettier:
+        optional: true
+      react:
+        optional: true
+      typescript:
+        optional: true
+      zod:
+        optional: true
 
   convex@1.46.0:
     resolution: {integrity: sha512-dhBwDQTZDOhi5SUGAX17EWNehCdNq6/UFrSL0eLZuGfMkdsQbCVWVRZCzbZ5CF+/pgvoGxtApbEoTSipqL4JTw==}
@@ -947,12 +989,37 @@ snapshots:
       convex: 1.46.0(react@19.3.1)
       react: 19.3.1
 
+  '@convex-dev/batch-worker@0.3.5(convex@1.46.0(react@19.3.1))(prettier@3.9.10)(react@19.3.1)(typescript@6.0.2)':
+    dependencies:
+      convex: 1.46.0(react@19.3.1)
+      convex-helpers: 0.1.134(convex@1.46.0(react@19.3.1))(prettier@3.9.10)(react@19.3.1)(typescript@6.0.2)
+    transitivePeerDependencies:
+      - '@standard-schema/spec'
+      - hono
+      - prettier
+      - react
+      - typescript
+      - zod
+
   '@convex-dev/presence@0.4.0(convex@1.46.0(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       '@convex-dev/batch-worker': 0.2.2(convex@1.46.0(react@19.3.1))(react@19.3.1)
       convex: 1.46.0(react@19.3.1)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
+
+  '@convex-dev/rate-limiter@0.4.2(convex@1.46.0(react@19.3.1))(prettier@3.9.10)(react@19.3.1)(typescript@6.0.2)':
+    dependencies:
+      '@convex-dev/batch-worker': 0.3.5(convex@1.46.0(react@19.3.1))(prettier@3.9.10)(react@19.3.1)(typescript@6.0.2)
+      convex: 1.46.0(react@19.3.1)
+    optionalDependencies:
+      react: 19.3.1
+    transitivePeerDependencies:
+      - '@standard-schema/spec'
+      - hono
+      - prettier
+      - typescript
+      - zod
 
   '@esbuild/aix-ppc64@0.27.0':
     optional: true
@@ -1162,6 +1229,14 @@ snapshots:
       color-name: 1.1.4
 
   color-name@1.1.4: {}
+
+  convex-helpers@0.1.134(convex@1.46.0(react@19.3.1))(prettier@3.9.10)(react@19.3.1)(typescript@6.0.2):
+    dependencies:
+      convex: 1.46.0(react@19.3.1)
+    optionalDependencies:
+      prettier: 3.9.10
+      react: 19.3.1
+      typescript: 6.0.2
 
   convex@1.46.0(react@19.3.1):
     dependencies:

@@ -39,6 +39,23 @@ textarea {
   color: inherit;
 }
 
+input[type="text"],
+input[type="password"],
+input:not([type]) {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--ground);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+  font-size: 16px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+}
+
 button {
   cursor: pointer;
   border: 0;
@@ -89,6 +106,15 @@ html input:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.eyebrow::after {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 7px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
 .primary,
@@ -360,8 +386,9 @@ html input:focus-visible {
   align-items: center;
   gap: 12px;
   padding: 12px 12px 12px 16px;
-  border-radius: var(--radius-l);
+  border-radius: var(--radius);
   background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--rule);
 }
 
 .question-list p {
@@ -543,7 +570,6 @@ html input:focus-visible {
 
 .thumb-next {
   width: 55%;
-  opacity: 0.75;
 }
 
 .next-wrap {
@@ -838,8 +864,12 @@ html input:focus-visible {
 }
 
 .admin-card h2 {
-  font-size: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .admin-stats,
@@ -851,11 +881,21 @@ html input:focus-visible {
   list-style: none;
 }
 
+.admin-stats {
+  gap: 0;
+}
+
 .admin-stats li {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  font-size: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 15px;
+}
+
+.admin-stats li:first-child {
+  border-top: 0;
 }
 
 .admin-links li {
@@ -865,8 +905,10 @@ html input:focus-visible {
 }
 
 .admin-links a {
-  color: var(--accent);
+  color: var(--ink);
   font-weight: 500;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
 }
 
 /* /conteudo: the talk as a plain, readable article */
@@ -890,9 +932,10 @@ html input:focus-visible {
 }
 
 .content-kicker {
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
 }
@@ -916,7 +959,11 @@ html input:focus-visible {
 }
 
 .content-slide h3 {
-  font-size: 15px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
@@ -924,6 +971,15 @@ html input:focus-visible {
 .content-slide ul {
   margin: 12px 0 0;
   padding-left: 20px;
+}
+
+.content-slide ul {
+  list-style: square;
+}
+
+.content-slide li::marker {
+  color: var(--accent);
+  font-family: var(--font-mono);
 }
 
 .content-quiet,
@@ -956,7 +1012,9 @@ html input:focus-visible {
 }
 
 .content-table td {
+  font-family: var(--font-mono);
   text-align: right;
+  white-space: nowrap;
 }
 
 .content-compare {
@@ -973,7 +1031,9 @@ html input:focus-visible {
 }
 
 .content a {
-  color: var(--accent);
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
 }
 
 .voice-commands {
@@ -985,7 +1045,7 @@ html input:focus-visible {
   min-height: 48px;
   padding: 0 14px;
   border: 0;
-  border-radius: var(--radius-l);
+  border-radius: var(--radius);
   background: var(--ground);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
   font-size: 16px;
@@ -1000,8 +1060,11 @@ html input:focus-visible {
 
 .voice-log summary {
   cursor: pointer;
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
@@ -1147,8 +1210,11 @@ html input:focus-visible {
 }
 
 .editor-label {
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
@@ -1156,7 +1222,7 @@ html input:focus-visible {
   width: 100%;
   padding: 10px 12px;
   border: 0;
-  border-radius: var(--radius-l);
+  border-radius: var(--radius);
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
   font-size: 16px;
@@ -1180,9 +1246,9 @@ html input:focus-visible {
   gap: 4px;
   margin-bottom: 16px;
   padding: 12px 14px;
-  border-radius: var(--radius-l);
-  background: color-mix(in oklab, var(--accent) 14%, var(--surface));
-  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 45%, transparent);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 .cue-banner-text {
@@ -1219,9 +1285,12 @@ html input:focus-visible {
 
 .remote-buttons button {
   min-height: 96px;
-  border-radius: var(--radius-l);
-  font-size: 22px;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 18px;
   font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   transition: transform 100ms var(--ease-out);
 }
 
@@ -1245,8 +1314,9 @@ html input:focus-visible {
 
 .remote-reveal {
   grid-column: 1 / -1;
-  background: color-mix(in oklab, var(--hue-3) 30%, var(--surface));
+  background: var(--hue-3-soft);
   box-shadow: inset 0 0 0 1px var(--hue-3);
+  color: var(--hue-3-ink);
 }
 
 .remote-notes {
@@ -1335,9 +1405,13 @@ html input:focus-visible {
 .live-caption {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 0.35em;
   overflow: hidden;
+}
+
+/* Bottom-anchored without flex-end, so older lines stay reachable by scrolling */
+.live-caption > :first-child {
+  margin-top: auto;
 }
 
 .caption-paragraph:not([data-current]) {

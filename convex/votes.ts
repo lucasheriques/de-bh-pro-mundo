@@ -1,6 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { acceptVote } from "./pollRules";
 import { assertPresenter, patchSession, readSession } from "./presenter";
+import { rateLimiter } from "./rateLimits";
 import { parseClientId, parsePollId } from "./validators";
 
 const VOTES_PER_POLL_CAP = 5000;
@@ -10,8 +12,9 @@ export const cast = mutation({
   handler: async (ctx, args) => {
     const pollId = parsePollId(args.pollId);
     const clientId = parseClientId(args.clientId);
-    const value = typeof args.value === "string" ? args.value.slice(0, 64) : args.value;
-    if (typeof value === "number" && !Number.isFinite(value)) return null;
+    const value = acceptVote(pollId, args.value);
+    if (value === null) return null;
+    if (!(await rateLimiter.limit(ctx, "vote", { key: clientId })).ok) return null;
     const existing = await ctx.db
       .query("votes")
       .withIndex("by_pollId_and_clientId", (q) => q.eq("pollId", pollId).eq("clientId", clientId))

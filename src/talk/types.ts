@@ -31,6 +31,14 @@ export type TierCompany = { name: string; logo: string };
 
 export type TierRow = { tier: Tier; label: string; companies: TierCompany[] };
 
+export type TierTop = {
+  tier: Tier;
+  label: string;
+  /** Monthly BRL. */
+  median: number;
+  companies: { name: string; logo: string; median: number }[];
+};
+
 export type Visual =
   | { kind: "title"; eyebrow?: string; title: string; subtitle?: string }
   | { kind: "statement"; eyebrow?: string; text: string; sub?: string }
@@ -51,6 +59,14 @@ export type Visual =
       title: string;
       rows: TierRow[];
       highlight?: string;
+      source?: string;
+    }
+  | {
+      kind: "tierTop";
+      eyebrow?: string;
+      title: string;
+      /** Lowest tier first; each column is the tier median and its best-paying companies. */
+      tiers: TierTop[];
       source?: string;
     }
   | { kind: "join" }

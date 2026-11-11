@@ -80,7 +80,7 @@ export function PhoneDock({
   if (!captions && !showQuestions) return null;
   return (
     <div className="phone-dock">
-      {captions ? <LiveCaption className="caption-strip" history={3} /> : null}
+      {captions ? <LiveCaption className="caption-strip" history={8} /> : null}
       {showQuestions ? <QuestionsBar onOpen={onOpenQuestions} /> : null}
     </div>
   );

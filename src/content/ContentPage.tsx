@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ThemeToggle } from "../live/ThemeToggle";
+import { formatBrl } from "../talk/format";
 import { slides } from "../talk/slides";
 import type { Interaction, Slide, Visual } from "../talk/types";
 
@@ -92,6 +93,25 @@ const visuals: { [K in Visual["kind"]]: Render<K> } = {
           </li>
         ))}
       </ul>
+      {visual.source ? <p className="content-source">Fonte: {visual.source}</p> : null}
+    </>
+  ),
+  tierTop: (visual) => (
+    <>
+      <h2>{visual.title}</h2>
+      <table className="content-table">
+        <tbody>
+          {visual.tiers.map((tier) => (
+            <tr key={tier.tier}>
+              <th scope="row">
+                Tier {tier.tier} ({tier.label}):{" "}
+                {tier.companies.map((company) => company.name).join(", ")}
+              </th>
+              <td>{formatBrl(tier.median)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       {visual.source ? <p className="content-source">Fonte: {visual.source}</p> : null}
     </>
   ),

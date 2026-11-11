@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { rateLimiter } from "./rateLimits";
 import { parseClientId, reactionKind } from "./validators";
 
 const MIN_INTERVAL_MS = 1500;
@@ -17,6 +18,7 @@ export const send = mutation({
       )
       .first();
     if (recent) return false;
+    if (!(await rateLimiter.limit(ctx, "reactionRoom")).ok) return false;
     await ctx.db.insert("reactions", { kind: args.kind, clientId, createdAt: now });
     return true;
   },

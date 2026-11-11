@@ -18,6 +18,7 @@ const headlines: { [K in Visual["kind"]]: (visual: Extract<Visual, { kind: K }>)
   list: (visual) => visual.title,
   compare: (visual) => visual.title,
   tierList: (visual) => visual.title,
+  tierTop: (visual) => visual.title,
   join: () => "Você entrou. Fica com o celular por perto.",
   results: (visual) => visual.eyebrow ?? "Resultados",
   questionsWall: () => "Perguntas",

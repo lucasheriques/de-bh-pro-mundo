@@ -146,24 +146,24 @@ export const slides: Slide[] = [
     section: "1. Mercado global",
     visual: {
       kind: "bars",
-      eyebrow: "Dev no Brasil, de pleno pra cima, média mensal por mercado",
+      eyebrow: "Engenheiro de software sênior no Brasil, mediana mensal por mercado",
       title: "Três mercados, três salários.",
       bars: [
-        { label: "Tier 1 · empresa que compete localmente", value: 14.8, display: "R$ 14,8 mil" },
-        { label: "Tier 2 · compete no Brasil inteiro", value: 30.7, display: "R$ 30,7 mil" },
+        { label: "Tier 1 · empresa que compete localmente", value: 13, display: "R$ 13 mil" },
+        { label: "Tier 2 · compete no Brasil inteiro", value: 20.7, display: "R$ 20,7 mil" },
         {
           label: "Tier 3 · compete com o mundo",
-          value: 55.5,
-          display: "R$ 55,5 mil",
+          value: 64.2,
+          display: "R$ 64,2 mil",
           highlight: true,
         },
       ],
       source:
-        "NaGringa, 1.161 salários de engenharia, dez/2025 a nov/2026, nas faixas do modelo trimodal de Gergely Orosz (The Pragmatic Engineer). Remuneração total.",
+        "levels.fyi, 560 salários de engenheiro de software com nível sênior declarado, no Brasil, ofertas desde ago/2024, nos tiers do modelo trimodal de Gergely Orosz (The Pragmatic Engineer). Remuneração total.",
     },
     notes:
-      "Esse é o modelo trimodal, do Gergely Orosz. Tier 1 é a empresa que compete por talento na cidade, como consultoria. Tier 2 compete no Brasil inteiro. Tier 3 compete com o mundo. A mesma pessoa, com a mesma stack, ganha quase quatro vezes mais dependendo de contra quem a empresa compete. A linguagem que você usa mexe uns 50% no salário. O mercado mexe quatro vezes.",
-    cues: ["o mercado mexe quatro vezes", "mexe quatro vezes"],
+      "Esse é o modelo trimodal, do Gergely Orosz. Tier 1 é a empresa que compete por talento na cidade, como consultoria. Tier 2 compete no Brasil inteiro. Tier 3 compete com o mundo. Só sênior, pra comparar igual com igual: a mesma pessoa, com a mesma stack, ganha quase cinco vezes mais dependendo de contra quem a empresa compete. A linguagem que você usa mexe uns 50% no salário. O mercado mexe cinco vezes.",
+    cues: ["o mercado mexe cinco vezes", "mexe cinco vezes"],
   },
   {
     id: "connect-dots",
@@ -203,7 +203,7 @@ export const slides: Slide[] = [
             { name: "Google", logo: "/logos/google.com.webp" },
             { name: "Coinbase", logo: "/logos/coinbase.com.webp" },
             { name: "Spotify", logo: "/logos/spotify.com.webp" },
-            { name: "Shopify", logo: "/logos/shopify.com.webp" },
+            { name: "Brex", logo: "/logos/brex.com.webp" },
             { name: "GitHub", logo: "/logos/github.com.webp" },
             { name: "Airbnb", logo: "/logos/airbnb.com.webp" },
             { name: "PostHog", logo: "/logos/posthog.com.webp" },
@@ -245,6 +245,52 @@ export const slides: Slide[] = [
     notes:
       "O Nubank é ótimo e paga bem, mas compete com o mercado brasileiro: tier 2. Consultoria compete na cidade: tier 1. E as globais competem com o mundo inteiro, e várias contratam quem mora aqui. Marca não é tier: tem empresa famosa pagando mercado local. E isso dá pra fazer morando em Belo Horizonte.",
     cues: ["morando em belo horizonte"],
+  },
+  {
+    id: "tier-top",
+    section: "1. Mercado global",
+    visual: {
+      kind: "tierTop",
+      eyebrow: "Engenheiro de software sênior no Brasil, mediana mensal",
+      title: "Empresas que vocês conhecem, tier por tier.",
+      tiers: [
+        {
+          tier: "1",
+          label: "Compete na cidade",
+          median: 13000,
+          companies: [
+            { name: "GFT", logo: "/logos/gft.com.webp", median: 14917 },
+            { name: "ThoughtWorks", logo: "/logos/thoughtworks.com.webp", median: 14833 },
+            { name: "CI&T", logo: "/logos/ciandt.com.webp", median: 13000 },
+          ],
+        },
+        {
+          tier: "2",
+          label: "Compete no Brasil",
+          median: 20667,
+          companies: [
+            { name: "Nubank", logo: "/logos/nubank.com.br.webp", median: 25833 },
+            { name: "Itaú", logo: "/logos/itau.com.br.webp", median: 19208 },
+            { name: "BTG Pactual", logo: "/logos/btgpactual.com.webp", median: 19000 },
+          ],
+        },
+        {
+          tier: "3",
+          label: "Compete com o mundo",
+          median: 64167,
+          companies: [
+            { name: "Uber", logo: "/logos/uber.com.webp", median: 67500 },
+            { name: "Google", logo: "/logos/google.com.webp", median: 62500 },
+            { name: "Brex", logo: "/logos/brex.com.webp", median: 61667 },
+          ],
+        },
+      ],
+      source:
+        "levels.fyi, engenheiro de software com nível sênior declarado, no Brasil, ofertas desde ago/2024, remuneração total mensal. 560 salários; cada empresa com 7 ou mais.",
+    },
+    notes:
+      "Os mesmos números, agora com empresas que vocês conhecem. Nubank, Itaú e BTG pagam bem, e ainda assim ficam a um terço de quem compete com o mundo. Do tier 1 pro tier 2 são uns sessenta por cento. Do 2 pro 3, três vezes. Mesma pessoa, mesmo código, outra liga.",
+    cues: ["outra liga"],
   },
   {
     id: "part-2",

@@ -1,20 +1,35 @@
 import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { nameOf } from "./audience";
+import { checkQuestion, fold } from "./moderation";
 import { assertPresenter } from "./presenter";
-import { parseClientId, QUESTION_MAX_LENGTH } from "./validators";
+import { rateLimiter } from "./rateLimits";
+import { parseClientId } from "./validators";
 
 const LIST_LIMIT = 50;
+
+const QUESTIONS_PER_PERSON = 8;
 
 export const ask = mutation({
   args: { clientId: v.string(), text: v.string() },
   handler: async (ctx, args) => {
     const clientId = parseClientId(args.clientId);
-    const text = args.text.trim().replace(/\s+/g, " ");
-    if (text.length === 0) throw new ConvexError("Pergunta vazia");
-    if (text.length > QUESTION_MAX_LENGTH) throw new ConvexError("Pergunta longa demais");
+    const check = checkQuestion(args.text);
+    if (!check.ok) throw new ConvexError(check.reason);
+    const mine = await ctx.db
+      .query("questions")
+      .withIndex("by_clientId", (q) => q.eq("clientId", clientId))
+      .take(QUESTIONS_PER_PERSON + 1);
+    if (mine.length >= QUESTIONS_PER_PERSON)
+      throw new ConvexError(`Até ${QUESTIONS_PER_PERSON} perguntas por pessoa`);
+    if (mine.some((question) => fold(question.text) === fold(check.text)))
+      throw new ConvexError("Você já mandou essa pergunta");
+    const personal = await rateLimiter.limit(ctx, "question", { key: clientId });
+    if (!personal.ok) throw new ConvexError("Calma, espera um pouco pra mandar outra");
+    const room = await rateLimiter.limit(ctx, "questionRoom");
+    if (!room.ok) throw new ConvexError("Muitas perguntas agora, tenta de novo já já");
     return await ctx.db.insert("questions", {
-      text,
+      text: check.text,
       clientId,
       createdAt: Date.now(),
       hidden: false,
@@ -30,6 +45,7 @@ export const toggleVote = mutation({
     const clientId = parseClientId(args.clientId);
     const question = await ctx.db.get("questions", args.questionId);
     if (!question) return null;
+    if (!(await rateLimiter.limit(ctx, "questionVote", { key: clientId })).ok) return null;
     const existing = await ctx.db
       .query("questionVotes")
       .withIndex("by_questionId_and_clientId", (q) =>

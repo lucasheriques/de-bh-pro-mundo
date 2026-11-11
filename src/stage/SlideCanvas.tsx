@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
+import { type ReactNode, useRef } from "react";
 import type { Slide, Visual } from "../talk/types";
+import { useFitHeight } from "./useFitHeight";
 import { JoinVisual } from "./visuals/JoinVisual";
 import { QuestionsWall } from "./visuals/QuestionsWall";
 import { ResultsVisual } from "./visuals/ResultsVisual";
@@ -13,6 +14,7 @@ import {
   TitleVisual,
 } from "./visuals/static";
 import { TierListVisual } from "./visuals/TierListVisual";
+import { TierTopVisual } from "./visuals/TierTopVisual";
 
 export type VisualProps<K extends Visual["kind"]> = {
   visual: Extract<Visual, { kind: K }>;
@@ -28,6 +30,7 @@ const visuals: { [K in Visual["kind"]]: (props: VisualProps<K>) => ReactNode } =
   list: ListVisual,
   compare: CompareVisual,
   tierList: TierListVisual,
+  tierTop: TierTopVisual,
   join: JoinVisual,
   results: ResultsVisual,
   questionsWall: QuestionsWall,
@@ -38,8 +41,10 @@ export function SlideCanvas({ slide }: { slide: Slide }) {
     visual: Visual;
     slide: Slide;
   }) => ReactNode;
+  const ref = useRef<HTMLDivElement>(null);
+  useFitHeight(ref, [slide]);
   return (
-    <div className={`slide slide-${slide.visual.kind}`} key={slide.id}>
+    <div ref={ref} className={`slide slide-${slide.visual.kind}`} key={slide.id}>
       <Render visual={slide.visual} slide={slide} />
     </div>
   );

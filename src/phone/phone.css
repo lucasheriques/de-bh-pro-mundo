@@ -297,13 +297,16 @@
 .caption-toggle {
   position: relative;
   min-height: 32px;
-  padding: 0 12px;
+  padding: 0 10px;
   border-radius: var(--radius);
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
   color: var(--muted);
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .caption-toggle::before {
@@ -317,12 +320,9 @@
 }
 
 .caption-toggle[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--ground);
-}
-
-.caption-draft {
-  color: var(--muted);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  color: var(--accent-ink);
 }
 
 /* /legendas: big text, scrollback, adjustable size */
@@ -360,7 +360,7 @@
 .captions-size button {
   min-width: 48px;
   min-height: 44px;
-  border-radius: var(--radius-l);
+  border-radius: var(--radius);
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
   font-size: 18px;
@@ -520,8 +520,11 @@
 }
 
 .questions-bar-count {
-  font-size: 15px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -563,10 +566,10 @@
   margin: auto auto 0;
   padding: 0;
   border: 0;
-  border-radius: 22px 22px 0 0;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
   background: var(--ground);
   color: var(--ink);
-  box-shadow: 0 -1px 0 var(--rule-strong);
+  box-shadow: inset 0 1px 0 var(--rule-strong);
 }
 
 .questions-sheet[open] {
@@ -664,11 +667,14 @@
   gap: 2px;
   min-height: 48px;
   padding: 8px 4px;
-  border-radius: var(--radius-l);
+  border-radius: var(--radius);
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
   font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   transition:
     transform 120ms var(--ease-out),
     background-color 160ms var(--ease-out);
@@ -679,13 +685,15 @@
 }
 
 .match-target.is-picked {
-  background: color-mix(in oklab, var(--accent) 24%, var(--surface));
+  background: var(--accent-soft);
   box-shadow: inset 0 0 0 2px var(--accent);
+  color: var(--accent-ink);
 }
 
 .match-target.is-answer {
-  background: color-mix(in oklab, var(--hue-4) 28%, var(--surface));
+  background: var(--hue-4-soft);
   box-shadow: inset 0 0 0 2px var(--hue-4);
+  color: var(--hue-4-ink);
 }
 
 .match-target.is-wrong {
@@ -701,9 +709,13 @@
 /* /legendas, refreshed: newest line bright, older lines recede */
 
 .captions-back {
-  font-size: 15px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--accent);
+  text-decoration: none;
 }
 
 .captions-log p {
@@ -722,17 +734,12 @@
   font-weight: 500;
 }
 
-.captions-draft {
-  margin-top: 0.6em;
-  padding-left: 12px;
-  border-left: 3px solid var(--accent);
-  color: var(--ink);
-  opacity: 0.75;
-}
-
 /* Bottom-anchored live captions: newest words always visible */
 
 .caption-strip {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
   height: calc(5 * 1.45em);
   font-size: 17px;
   font-weight: 400;
@@ -816,4 +823,22 @@
 
 .slide-text .content-table {
   margin-top: 4px;
+}
+
+/* 32px chip, 44px touch area */
+.name-chip {
+  position: relative;
+  overflow: visible;
+}
+
+.name-chip-text {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.name-chip::before {
+  content: "";
+  position: absolute;
+  inset: -6px -2px;
 }

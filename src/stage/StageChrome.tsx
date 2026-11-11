@@ -22,7 +22,7 @@ export function SectionLabel({ slide }: { slide: Slide }) {
 }
 
 export function CaptionLine() {
-  return <LiveCaption className="caption-line" history={1} />;
+  return <LiveCaption className="caption-line" history={2} />;
 }
 
 export function CornerQr({ slide }: { slide: Slide }) {

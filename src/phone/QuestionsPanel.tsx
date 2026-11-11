@@ -1,4 +1,5 @@
 import { useMutation } from "convex/react";
+import { ConvexError } from "convex/values";
 import { type KeyboardEvent, useMemo, useState } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
@@ -45,6 +46,7 @@ export function AskForm({ onSent }: { onSent?: () => void }) {
   const ask = useAsk();
   const [text, setText] = useState("");
   const [status, setStatus] = useState<AskStatus>("idle");
+  const [reason, setReason] = useState<string | null>(null);
   const trimmed = text.trim();
   const sending = status === "sending";
 
@@ -56,7 +58,8 @@ export function AskForm({ onSent }: { onSent?: () => void }) {
       setText("");
       setStatus("sent");
       onSent?.();
-    } catch {
+    } catch (error) {
+      setReason(error instanceof ConvexError && typeof error.data === "string" ? error.data : null);
       setStatus("error");
     }
   };
@@ -85,10 +88,12 @@ export function AskForm({ onSent }: { onSent?: () => void }) {
       />
       <div className="ask-row">
         <span className="mono muted">
-          {STATUS_NOTE[status] ?? `${trimmed.length}/${QUESTION_MAX_LENGTH}`}
+          {(status === "error" && reason) ||
+            STATUS_NOTE[status] ||
+            `${trimmed.length}/${QUESTION_MAX_LENGTH}`}
         </span>
         <button type="submit" className="primary" disabled={!trimmed || sending}>
-          {sending ? "Mandando..." : "Mandar pergunta"}
+          {sending ? "Mandando…" : "Mandar pergunta"}
         </button>
       </div>
     </form>

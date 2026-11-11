@@ -17,7 +17,7 @@ export function NameChip({
 }) {
   return (
     <button type="button" className="name-chip" onClick={onEdit} aria-label="Mudar seu nome">
-      {name ? `Oi, ${name}` : "Seu nome"}
+      <span className="name-chip-text">{name ? `Oi, ${name}` : "Seu nome"}</span>
     </button>
   );
 }

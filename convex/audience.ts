@@ -4,6 +4,7 @@ import { mutation, query } from "./_generated/server";
 import { checkDisplayName } from "./displayName";
 import { presence, ROOM } from "./presence";
 import { isPresenterKey } from "./presenter";
+import { rateLimiter } from "./rateLimits";
 import { parseClientId } from "./validators";
 
 const AUDIENCE_COUNT_CAP = 5000;
@@ -45,6 +46,8 @@ export const setName = mutation({
     const clientId = parseClientId(args.clientId);
     const check = checkDisplayName(args.name);
     if (!check.ok) throw new ConvexError(check.reason);
+    if (!(await rateLimiter.limit(ctx, "name", { key: clientId })).ok)
+      throw new ConvexError("Espera um pouco pra trocar de novo");
     const member = await findMember(ctx, clientId);
     const now = Date.now();
     if (member) await ctx.db.patch("audience", member._id, { name: check.name, lastSeenAt: now });
