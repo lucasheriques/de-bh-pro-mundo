@@ -84,14 +84,18 @@ async function runSession(
  * Gateway. Convex mints a short-lived token per connection, so the Gateway key never reaches
  * the browser; a dropped socket reconnects with a fresh one.
  */
-export function useCaptionStream(enabled: boolean, slideIndex: number): CaptionStreamStatus {
+export function useCaptionStream(
+  enabled: boolean,
+  slideIndex: number,
+  onPhrase?: (text: string) => void,
+): CaptionStreamStatus {
   const available = useQuery(api.captionStream.available, { key: presenterKey });
   const getToken = useAction(api.captionStream.token);
   const pushCaption = useMutation(api.captions.push);
   const pushDraft = useMutation(api.captions.draft);
   const [status, setStatus] = useState<CaptionStreamStatus>("off");
-  const latest = useRef({ slideIndex, getToken, pushCaption, pushDraft });
-  latest.current = { slideIndex, getToken, pushCaption, pushDraft };
+  const latest = useRef({ slideIndex, getToken, pushCaption, pushDraft, onPhrase });
+  latest.current = { slideIndex, getToken, pushCaption, pushDraft, onPhrase };
 
   useEffect(() => {
     if (!enabled) {
@@ -135,6 +139,7 @@ export function useCaptionStream(enabled: boolean, slideIndex: number): CaptionS
         draftTimer ??= window.setTimeout(flushDraft, DRAFT_THROTTLE_MS);
       },
       final: (text) => {
+        latest.current.onPhrase?.(text);
         const rest = text.slice(consumed).trim();
         consumed = 0;
         draftText = "";

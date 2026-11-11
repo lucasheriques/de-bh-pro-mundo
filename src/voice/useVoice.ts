@@ -40,6 +40,11 @@ const LANG = "pt-BR";
 const BLOCKED_ERRORS = new Set(["not-allowed", "service-not-allowed"]);
 
 const TRANSCRIPT_CHARS = 220;
+/**
+ * Chrome and Scribe can both hear the same command; whichever moves first wins and the other's
+ * copy, arriving a moment later, is dropped.
+ */
+export const MOVE_GUARD_MS = 3000;
 const RESTART_DELAY_MS = 300;
 
 type VoiceOptions = {
@@ -171,11 +176,25 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
   const latest = useRef({ enabled, slideIndex, cues, nextCues, onMove });
   latest.current = { enabled, slideIndex, cues, nextCues, onMove };
   const voiceState = useRef<VoiceState>(initialVoiceState);
+  const scribeState = useRef<VoiceState>(initialVoiceState);
+  const lastMoveAt = useRef(0);
   const heardAt = useRef(slideIndex);
   if (heardAt.current !== slideIndex) {
     heardAt.current = slideIndex;
     voiceState.current = clearHeard(voiceState.current);
+    scribeState.current = clearHeard(scribeState.current);
   }
+
+  /** Applies a heard move unless the other recognizer just moved for the same words. */
+  const applyMove = (move: VoiceMove, text: string, source: string) => {
+    const now = Date.now();
+    if (now - lastMoveAt.current < MOVE_GUARD_MS) return;
+    lastMoveAt.current = now;
+    const { slideIndex, onMove } = latest.current;
+    setLastMatch(text);
+    note("action", `${describeMove(move, slideIndex)} · ${source} ouviu "${text.trim()}"`);
+    onMove(slideIndex, move);
+  };
   const restart = useRef<(() => void) | null>(null);
   const feed = useRef((heard: string, isFinal: boolean, spoken = true) => {
     const { enabled, slideIndex, cues, nextCues, onMove } = latest.current;
@@ -192,10 +211,7 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
     voiceState.current = result.state;
     if (isFinal && text.trim()) note(spoken ? "heard" : "typed", text.trim());
     if (result.steps !== 0 || result.reveal) {
-      const move = { steps: result.steps, reveal: result.reveal };
-      setLastMatch(text);
-      note("action", `${describeMove(move, slideIndex)} · ouviu "${text.trim()}"`);
-      onMove(slideIndex, move);
+      applyMove({ steps: result.steps, reveal: result.reveal }, text, "Chrome");
     }
     setTranscript((current) =>
       isFinal
@@ -259,6 +275,24 @@ export function useVoice({ enabled, slideIndex, cues, nextCues, onMove }: VoiceO
     lastMatch,
     log,
     say: (text: string) => feed(text, true, false),
+    /** A finished phrase from Scribe: a second chance for commands Chrome missed. */
+    hearScribe: (heard: string) => {
+      const { enabled, slideIndex, cues, nextCues } = latest.current;
+      if (!enabled) return;
+      const text = correctTranscript(heard);
+      const result = voiceStep(scribeState.current, {
+        text,
+        isFinal: true,
+        now: Date.now(),
+        slideIndex,
+        cues,
+        nextCues,
+      });
+      scribeState.current = result.state;
+      if (result.steps !== 0 || result.reveal) {
+        applyMove({ steps: result.steps, reveal: result.reveal }, text, "Scribe");
+      }
+    },
     installPack,
     installing,
   };

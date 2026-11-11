@@ -129,7 +129,7 @@ export function VoiceHud({ deck }: { deck: Deck }) {
     onMove: (from, move) => applyVoiceMove(deck, from, move),
   });
   const meterRef = useMicLevel(enabled && voice.status === "listening");
-  const captionStatus = useCaptionStream(enabled, deck.index);
+  const captionStatus = useCaptionStream(enabled, deck.index, voice.hearScribe);
 
   return (
     <section
