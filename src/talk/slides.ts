@@ -90,6 +90,39 @@ export const slides: Slide[] = [
     cues: ["respondo as que sobrarem"],
   },
   {
+    id: "agenda",
+    section: "Abertura",
+    visual: {
+      kind: "list",
+      eyebrow: "O roteiro de hoje",
+      title: "Hoje eu quero responder quatro perguntas.",
+      items: [
+        {
+          title: "Quanto paga cada mercado?",
+          body: "E por que a mesma pessoa ganha até 5x mais em outro",
+        },
+        {
+          title: "O que a IA mudou?",
+          body: "O que ficou barato, e o que continua sendo com você",
+        },
+        {
+          title: "O que as empresas de fora compram?",
+          body: "Como se apresentar pra elas",
+        },
+        {
+          title: "Como chegar lá, daqui de BH?",
+          body: "Os três caminhos que eu fiz",
+        },
+      ],
+    },
+    notes: [
+      "A promessa da noite: no fim, vocês vão ter uma resposta pra cada uma",
+      "Uns 20 minutos, depois perguntas",
+      "Começando pelo dinheiro: quanto paga cada mercado",
+    ],
+    cues: ["começando pelo dinheiro"],
+  },
+  {
     id: "part-1",
     section: "1. Mercado global",
     visual: {
