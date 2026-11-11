@@ -11,7 +11,7 @@ type Stage = "voting" | "live" | "final";
 const EYEBROWS: Record<Stage, string> = {
   voting: "Vote",
   live: "Ao vivo",
-  final: "Resultado final",
+  final: "Resultado no telão",
 };
 
 const percent = (share: number) => `${Math.round(share * 100)}%`;
@@ -46,7 +46,6 @@ function ChoiceButton({ option, index, stage, mine, dimmed, onVote }: ChoiceButt
       className={`choice ${mine ? "is-selected" : ""}`}
       data-hue={hueOf(index)}
       data-dimmed={dimmed}
-      disabled={stage === "final"}
       onClick={onVote}
     >
       <span className="choice-head">
@@ -62,7 +61,7 @@ function ChoiceButton({ option, index, stage, mine, dimmed, onVote }: ChoiceButt
 function choiceNote(stage: Stage, myOption: ChoiceCount | undefined): string {
   if (stage === "voting") return "Toque numa opção pra ver o que a sala acha.";
   if (stage === "live") return "Mudou de ideia? Toque em outra opção pra trocar.";
-  if (!myOption) return "Você não votou dessa vez.";
+  if (!myOption) return "Ainda dá pra votar: toque numa opção.";
   return `Você votou "${myOption.label}", junto com ${percent(myOption.share)} da sala.`;
 }
 
