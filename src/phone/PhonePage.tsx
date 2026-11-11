@@ -81,6 +81,12 @@ export function PhonePage() {
       />
       {showNameForm ? <NameForm current={myName} onDone={() => setNameOpen(false)} /> : null}
       <div className="phone-body" key={slide.id}>
+        {slide.phoneLink ? (
+          <a className="phone-link" href={slide.phoneLink.href} target="_blank" rel="noreferrer">
+            <span>{slide.phoneLink.label}</span>
+            <strong>{slide.phoneLink.href.replace(/^https?:\/\//, "")}</strong>
+          </a>
+        ) : null}
         {interaction && interaction.kind !== "questions" ? (
           <PhoneCountdown pollId={interaction.pollId} />
         ) : null}

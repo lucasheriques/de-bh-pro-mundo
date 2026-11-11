@@ -590,6 +590,7 @@ export const slides: Slide[] = [
       sub: "nagringa.dev/links",
     },
     presenterOnlyNotes: true,
+    phoneLink: { label: "Minhas redes e contatos", href: "https://nagringa.dev/links" },
     notes: ["Frase final, devagar. Pausa", "Obrigado! Agora quero ouvir as perguntas de vocês"],
     cues: ["perguntas de vocês", "ouvir as perguntas"],
   },
@@ -598,6 +599,7 @@ export const slides: Slide[] = [
     section: "Perguntas",
     visual: { kind: "questionsWall", footer: "Minhas redes e contatos: nagringa.dev/links" },
     interaction: { kind: "questions" },
+    phoneLink: { label: "Minhas redes e contatos", href: "https://nagringa.dev/links" },
     notes: ["As mais votadas sobem; esconde as que não fizerem sentido"],
   },
 ];

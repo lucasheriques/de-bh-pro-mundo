@@ -81,5 +81,7 @@ export type Slide = {
   /** Speaker notes: the points to make on this slide, one per bullet. */
   notes: string[];
   presenterOnlyNotes?: true;
+  /** A tappable link the phones show while this slide is on screen. */
+  phoneLink?: { label: string; href: string };
   cues?: string[];
 };
